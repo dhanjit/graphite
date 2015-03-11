@@ -4,16 +4,24 @@ This is main window.
 import sys
 from PyQt4 import QtGui, QtCore
 
-class plotMain(QtGui.QMainWindow):
+class plotterMain(QtGui.QMainWindow):
 	
 	def __init__(self):
-		super(plotMain, self).__init__()
+		super(plotterMain, self).__init__()
 
 		self.initUI()
 
 
 	def initUI(self):
 		#Creating menubar
+		self.menubar()
+		#
+		#custumize window
+		self.setGeometry(150,150,800,500)
+		self.setWindowTitle("Plotter")
+		self.show()
+
+	def menubar(self):
 		menubar = self.menuBar()
 
 		filemenu = menubar.addMenu('&File')
@@ -78,14 +86,14 @@ class plotMain(QtGui.QMainWindow):
 		#aboutaction.triggered.connect('''implement the function to create new plot''')
 		helpmenu.addAction(aboutaction)
 
-		#custumize window
-		self.setGeometry(300,300,300,150)
-		self.setWindowTitle("Plotter")
-		self.show()
+
+
+# class inputWindow()
+
 
 def main():
 	app = QtGui.QApplication(sys.argv)
-	_plotMain = plotMain()
+	_plotMain = plotterMain()
 	sys.exit(app.exec_())
 
 if __name__ == '__main__':
