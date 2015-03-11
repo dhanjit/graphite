@@ -86,6 +86,8 @@ class plotterMain(QtGui.QMainWindow):
 		#aboutaction.triggered.connect('''implement the function to create new plot''')
 		helpmenu.addAction(aboutaction)
 
+	
+
 
 
 # class inputWindow()
