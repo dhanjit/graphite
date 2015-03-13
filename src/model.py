@@ -1,7 +1,7 @@
 class Model():
 	"""
 	Represents the model of the equation.
-	@string - parse expression
+	@sympyexpression - parse expression
 	@integer - number of variables
 	"""
 	

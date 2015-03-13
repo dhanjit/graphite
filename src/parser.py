@@ -1,18 +1,31 @@
-import sympy
+import sympy as sp
 
 class Parser():
 	"""
 	uses sympy
 	"""
-	input_string = ""
-	errors = []
 
-	def parse(self, string):
+	def __init__(self,string,num):
+		self.parse(string,num)
+
+	def parse(self, string,num):
+		"""
+		assuming string is parsable in sympy
+		"""
+
+		self.numVar = num
+		self.input_string = string
+		self.expr = sp.sympify(self.input_string)
+		self.errors = []
 		
-	def output(self):
-		latex_string = ""
+	def texOutput(self):
+		latex_string = sp.latex(self.expr)
 		return latex_string
-
 	
 
-	
+	def getInput(self):
+		return self.input_string
+
+	def createModel(self):
+		pass
+		return Model()
