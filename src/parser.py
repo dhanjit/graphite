@@ -27,5 +27,16 @@ class Parser():
 		return self.input_string
 
 	def createModel(self):
-		pass
-		return Model()
+		"""
+		call this function to createModel instead of parse
+		"""
+		if num == 2:
+			model = Model2D()
+			model.expression = self.expr
+			#model.settings to be decided
+		else:
+			model = Model2D()
+			model.expression = self.expr
+			#model.settings to be decided
+
+		return model

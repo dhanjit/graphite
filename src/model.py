@@ -30,7 +30,7 @@ class Model2D(Model):
 class Model3D(Model):
 
 	def __init__(self):
-		super(Model2D, self).__init__()
+		super(Model3D, self).__init__()
 		self.numVar = 3
 
 	def eval(self):
