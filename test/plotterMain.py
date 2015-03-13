@@ -15,7 +15,6 @@ class plotterMain(QtGui.QMainWindow):
 	def initUI(self):
 		#Creating menubar
 		self.menubar()
-		self.layout()
 		#
 		#custumize window
 		self.setGeometry(150,150,800,500)
@@ -90,43 +89,7 @@ class plotterMain(QtGui.QMainWindow):
 	
 
 
-	def layout(self):
-		self.inputwidget = inputWidget(self)
-		_widget = QtGui.QWidget()
-		main_layout = QtGui.QHBoxLayout(_widget)
-		main_layout.addWidget(self.inputwidget)
-		self.setCentralWidget(_widget)
-		# self.setLayout(self.main_layout)
-		# self.display_layout = QtGui.QVBoxLayout(self)
-		# self.control_layout = QtGui.QVBoxLayout(self)
-		# self.calc_layout = QtGui.QGridLayout(self)
 
-		#making input layout
-
-class inputWidget(QtGui.QWidget):
-
-	def __init__(self, parent):
-		super(inputWidget, self).__init__(parent)
-	
-		self.input_layout = QtGui.QVBoxLayout()
-		self.inputBox = QtGui.QLineEdit()
-		# self.type2d = QtGui.QCheckBox("Single Variable")
-		# self.type3d = QtGui.QCheckBox("Two Variable")
-		# self.typeC = QtGui.QButtonGroup(self)
-		# self.typeC.addButton(self.type2d)
-		# self.typeC.addButton(self.type3d)
-
-		self.plotButton = QtGui.QPushButton("Plot")
-		self.addButton = QtGui.QPushButton("Add")
-
-		# self.input_layout.addWidget(self.type2d)
-		# self.input_layout.addWidget(self.type3d)
-		self.input_layout.addWidget(self.inputBox)
-		self.input_layout.addWidget(self.plotButton)
-		self.input_layout.addWidget(self.addButton)
-		# self.input_layout.resize(100,150)
-		self.input_layout.addStretch()
-		self.setLayout(self.input_layout)
 # class inputWindow()
 
 
