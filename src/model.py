@@ -3,7 +3,8 @@ from sympy import *
 class Model():
 	"""
 	Represents the model of the equation.
-	@sympyexpression - parse expression
+	@sympyexpression - parse exp
+	ression
 	@integer - number of variables
 	"""
 	def __init__(self):
@@ -15,6 +16,9 @@ class Model():
 		self.numVar = -1
 		self.errors = []
 
+	def eval(self,something):
+		pass
+
 class Model2D(Model):
 	
 	def __init__(self):
@@ -24,7 +28,7 @@ class Model2D(Model):
 	def eval(self,xVal):
 		x = Symbol('x')
 		f = lambdify(x,self.expression,"numpy")
-		self.dataPoints = f(x)
+		self.dataPoints = f(xVal)
 		pass
 
 class Model3D(Model):
@@ -33,7 +37,7 @@ class Model3D(Model):
 		super(Model3D, self).__init__()
 		self.numVar = 3
 
-	def eval(self):
+	def eval(self,xyVal):
 		pass
 	
 

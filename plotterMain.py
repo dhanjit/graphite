@@ -95,6 +95,7 @@ class plotterMain(QtGui.QMainWindow):
 		_widget = QtGui.QWidget()
 		main_layout = QtGui.QHBoxLayout(_widget)
 		main_layout.addWidget(self.inputwidget)
+		main_layout.addWidget(inputWidget(self))
 		self.setCentralWidget(_widget)
 		# self.setLayout(self.main_layout)
 		# self.display_layout = QtGui.QVBoxLayout(self)

@@ -1,4 +1,5 @@
 import sympy as sp
+from model import *
 
 class Parser():
 	"""
@@ -35,7 +36,7 @@ class Parser():
 			model.expression = self.expr
 			#model.settings to be decided
 		else:
-			model = Model2D()
+			model = Model3D()
 			model.expression = self.expr
 			#model.settings to be decided
 
