@@ -3,6 +3,9 @@ This is main window.
 '''
 import sys
 from PyQt4 import QtGui, QtCore
+from src.parser import *
+from src.aggregator import *
+from src.model import *
 
 class plotterMain(QtGui.QMainWindow):
 	
@@ -15,9 +18,22 @@ class plotterMain(QtGui.QMainWindow):
 	def initUI(self):
 		#Creating menubar
 		self.menubar()
-		self.layout()
+		#self.layout()
 		#
 		#custumize window
+		string = "sin(x)*x"
+		myparse = Parser(string,2)
+		myModel = myparse.createModel()
+		
+		_widget = QtGui.QWidget()
+		myAgg = Aggregator(_widget)
+		myAgg.insertModel(myModel)
+		myAgg.compute_graph()
+
+	 	main_layout = QtGui.QHBoxLayout(_widget)
+	 	main_layout.addWidget(myAgg.canvas2D)
+	 	self.setCentralWidget(_widget)
+
 		self.setGeometry(150,150,800,500)
 		self.setWindowTitle("Plotter")
 		self.show()
@@ -90,45 +106,45 @@ class plotterMain(QtGui.QMainWindow):
 	
 
 
-	def layout(self):
-		self.inputwidget = inputWidget(self)
-		_widget = QtGui.QWidget()
-		main_layout = QtGui.QHBoxLayout(_widget)
-		main_layout.addWidget(self.inputwidget)
-		main_layout.addWidget(inputWidget(self))
-		self.setCentralWidget(_widget)
-		# self.setLayout(self.main_layout)
-		# self.display_layout = QtGui.QVBoxLayout(self)
-		# self.control_layout = QtGui.QVBoxLayout(self)
-		# self.calc_layout = QtGui.QGridLayout(self)
+	# def layout(self):
+	# 	self.inputwidget = inputWidget(self)
+	# 	_widget = QtGui.QWidget()
+	# 	main_layout = QtGui.QHBoxLayout(_widget)
+	# 	main_layout.addWidget(self.inputwidget)
+	# 	main_layout.addWidget(inputWidget(self))
+	# 	self.setCentralWidget(_widget)
+	# 	# self.setLayout(self.main_layout)
+	# 	# self.display_layout = QtGui.QVBoxLayout(self)
+	# 	# self.control_layout = QtGui.QVBoxLayout(self)
+	# 	# self.calc_layout = QtGui.QGridLayout(self)
 
-		#making input layout
+	# 	#making input layout
 
-class inputWidget(QtGui.QWidget):
+# class inputWidget(QtGui.QWidget):
 
-	def __init__(self, parent):
-		super(inputWidget, self).__init__(parent)
+# 	def __init__(self, parent):
+# 		super(inputWidget, self).__init__(parent)
 	
-		self.input_layout = QtGui.QVBoxLayout()
-		self.inputBox = QtGui.QLineEdit()
-		# self.type2d = QtGui.QCheckBox("Single Variable")
-		# self.type3d = QtGui.QCheckBox("Two Variable")
-		# self.typeC = QtGui.QButtonGroup(self)
-		# self.typeC.addButton(self.type2d)
-		# self.typeC.addButton(self.type3d)
+# 		self.input_layout = QtGui.QVBoxLayout()
+# 		self.inputBox = QtGui.QLineEdit()
+# 		# self.type2d = QtGui.QCheckBox("Single Variable")
+# 		# self.type3d = QtGui.QCheckBox("Two Variable")
+# 		# self.typeC = QtGui.QButtonGroup(self)
+# 		# self.typeC.addButton(self.type2d)
+# 		# self.typeC.addButton(self.type3d)
 
-		self.plotButton = QtGui.QPushButton("Plot")
-		self.addButton = QtGui.QPushButton("Add")
+# 		self.plotButton = QtGui.QPushButton("Plot")
+# 		self.addButton = QtGui.QPushButton("Add")
 
-		# self.input_layout.addWidget(self.type2d)
-		# self.input_layout.addWidget(self.type3d)
-		self.input_layout.addWidget(self.inputBox)
-		self.input_layout.addWidget(self.plotButton)
-		self.input_layout.addWidget(self.addButton)
-		# self.input_layout.resize(100,150)
-		self.input_layout.addStretch()
-		self.setLayout(self.input_layout)
-# class inputWindow()
+# 		# self.input_layout.addWidget(self.type2d)
+# 		# self.input_layout.addWidget(self.type3d)
+# 		self.input_layout.addWidget(self.inputBox)
+# 		self.input_layout.addWidget(self.plotButton)
+# 		self.input_layout.addWidget(self.addButton)
+# 		# self.input_layout.resize(100,150)
+# 		self.input_layout.addStretch()
+# 		self.setLayout(self.input_layout)
+# # class inputWindow()
 
 
 def main():

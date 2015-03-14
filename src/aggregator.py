@@ -1,6 +1,6 @@
 from model import *
 from ui.canvas import *
-
+from numpy import arange
 class Aggregator():
 	"""
 	Database of the mixture of 2d and 3d models with settings of each model.
@@ -22,7 +22,12 @@ class Aggregator():
 	def insertModel(self,model):
 		self.models.append((model,True));
 
-	def merger(self, model, model):
+	def compute_graph(self):
+		self.xVal = arange(-3.0,3.0,0.02) ##just for testing
+		(self.models[0][0]).eval(self.xVal)
+		self.canvas2D.axes.plot(self.models[0][0].dataPoints);
+
+	def merger(self, model1, model2):
 		pass
 
 	def update():

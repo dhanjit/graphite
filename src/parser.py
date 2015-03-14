@@ -31,7 +31,7 @@ class Parser():
 		"""
 		call this function to createModel instead of parse
 		"""
-		if num == 2:
+		if self.numVar == 2:
 			model = Model2D()
 			model.expression = self.expr
 			#model.settings to be decided

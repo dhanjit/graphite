@@ -1,6 +1,6 @@
 from sympy import *
 
-class Model():
+class Model(object):
 	"""
 	Represents the model of the equation.
 	@sympyexpression - parse exp
@@ -29,7 +29,6 @@ class Model2D(Model):
 		x = Symbol('x')
 		f = lambdify(x,self.expression,"numpy")
 		self.dataPoints = f(xVal)
-		pass
 
 class Model3D(Model):
 
