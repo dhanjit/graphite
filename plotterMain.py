@@ -6,7 +6,7 @@ from PyQt4 import QtGui, QtCore
 from src.parser import *
 from src.aggregator import *
 from src.model import *
-
+from inputInterface import *
 class plotterMain(QtGui.QMainWindow):
 	
 	def __init__(self):
@@ -21,22 +21,34 @@ class plotterMain(QtGui.QMainWindow):
 		#self.layout()
 		#
 		#custumize window
-		string = "sin(x)*x"
-		myparse = Parser(string,2)
+		string1 = "sin(x)*x"
+		myparse = Parser(string1,2)
 		myModel = myparse.createModel()
 		
+				
 		_widget = QtGui.QWidget()
 		myAgg = Aggregator(_widget)
+		
 		myAgg.insertModel(myModel)
-		myAgg.compute_graph()
+
+		# myAgg.compute_graph()
+
 
 	 	main_layout = QtGui.QHBoxLayout(_widget)
+	 	main_layout.addWidget(myAgg.numpad)
 	 	main_layout.addWidget(myAgg.canvas2D)
+	 	# main_layout.addStretch(1)
 	 	self.setCentralWidget(_widget)
 
-		self.setGeometry(150,150,800,500)
+		self.setGeometry(150,150,850,500)
 		self.setWindowTitle("Plotter")
 		self.show()
+
+		string2 = raw_input()
+	 	myparse.parse(string2,2)
+		mymodel2 = myparse.createModel()
+		myAgg.insertModel(mymodel2)
+
 
 	def menubar(self):
 		menubar = self.menuBar()

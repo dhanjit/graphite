@@ -589,7 +589,7 @@ class Ui_numPad(QtGui.QWidget):
     #     return self.lineEdit.text()
 
 
-'''
+
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
@@ -598,4 +598,4 @@ if __name__ == "__main__":
     # ui.setupUi()
     # ui.show()
     sys.exit(app.exec_())
-'''
+

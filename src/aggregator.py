@@ -1,6 +1,8 @@
 from model import *
 from ui.canvas import *
 from numpy import arange
+from inputInterface import *
+
 class Aggregator():
 	"""
 	Database of the mixture of 2d and 3d models with settings of each model.
@@ -17,15 +19,22 @@ class Aggregator():
 		self.settings['x_range'] = (-3.0,+3.0)
 		self.settings['y_range'] = (-3.0,+3.0)
 
-		self.canvas2D = Canvas2D(parent); 
+		self.canvas2D = Canvas2D(parent);
+		self.numpad = Ui_numPad()
 
 	def insertModel(self,model):
 		self.models.append((model,True));
+		self.canvas2D.axes.clear()
+		self.compute_graph()
 
 	def compute_graph(self):
-		self.xVal = arange(-3.0,3.0,0.02) ##just for testing
-		(self.models[0][0]).eval(self.xVal)
-		self.canvas2D.axes.plot(self.models[0][0].dataPoints);
+		self.xVal = arange(self.settings['x_range'][0],self.settings['x_range'][1],0.02) ##just for testing
+		for model in self.models:
+			if model[1] == True:
+				model[0].eval(self.xVal)
+				self.canvas2D.axes.plot(self.xVal, model[0].dataPoints);
+
+		self.canvas2D.draw()
 
 	def merger(self, model1, model2):
 		pass
