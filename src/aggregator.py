@@ -5,15 +5,12 @@ from inputInterface import *
 
 class Aggregator():
 	"""
-	Database of the mixture of 2d and 3d models with settings of each model.
+	Aggregate of the combinations of 2d and 3d models.
 	"""
 	def __init__(self,parent):
-		self.initAttr(parent)
-
-	def initAttr(self,parent):
-		self.models = [] #list of tuples, a model and boolean to know if it is selected for plotting
-		self.settings = {}
-		#initialise default settings
+		self.models = [] 	# list of tuples, a model and boolean to know if it is selected for plotting
+		self.settings = {}	# initialise default settings
+		
 		self.settings['backcolor'] = 'gray'
 		self.settings['dpi'] = 100
 		self.settings['x_range'] = (-3.0,+3.0)

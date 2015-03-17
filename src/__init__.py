@@ -1,3 +1,1 @@
-from parser import *
-from aggregator import *
-from model import *
+from src.session import Session
