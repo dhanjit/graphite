@@ -15,7 +15,6 @@ class plotterApp(QtGui.QMainWindow):
 		super(plotterApp, self).__init__()
 		#self.setIcon()
 		self.initUI()
-		#self.controller = UIController()
 
 	def initUI(self):
 		self.initMenuBar()
@@ -34,10 +33,30 @@ class plotterApp(QtGui.QMainWindow):
 		statusbar.message("Ready....")
 		return
 
-	def new_plot_handler(self):
-		#file_handler = InputFileHandler()
-		#file_handler.input("~/inp.txt")
+	def new_tab(self):
+		print("chut")
+		
+	def close_tab(self):
 		pass
+		
+	def save_tab(self):
+		pass
+	
+	def new_session(self):
+		self.session.close()
+		self.session = Session()
+
+	def open_session(self):
+		session_file_name = QtGui.QFileDialog.getOpenFileName(self, "Open Session", "")
+		self.session.close()
+		self.session.load(session_file_name)
+
+	def save_session(self):
+		session_file_name = QtGui.QFileDialog.getSaveFileName(self, "Save Session", "")
+		self.session.save(session_file_name)
+
+	def close_session(self):
+		self.session.close()
 
 	def initMenuBar(self):
 		menubar = self.menuBar()
@@ -53,26 +72,26 @@ class plotterApp(QtGui.QMainWindow):
 		tab_new_action = QtGui.QAction('New Tab', self)
 		tab_new_action.setShortcut('Ctrl+N') 
 		tab_new_action.setStatusTip('Open New Tab')
-		tab_new_action.triggered.connect(self.session.new_tab)
+		tab_new_action.triggered.connect(self.new_tab)
 		file_menu.addAction(tab_new_action)
 
 		# session menu
 		session_new_action = QtGui.QAction('New Session', self)
 		session_new_action.setShortcut('Ctrl+Shift+N')
 		session_new_action.setStatusTip('Open New Session')
-		session_new_action.triggered.connect(self.session.new_session)
+		session_new_action.triggered.connect(self.new_session)
 		file_menu.addAction(session_new_action)
 
 		tab_save_action = QtGui.QAction('Save Tab', self)
 		tab_save_action.setShortcut('Ctrl+S')
 		tab_save_action.setStatusTip('Save Current Plot')
-		tab_save_action.triggered.connect(self.session.save_tab)
+		tab_save_action.triggered.connect(self.save_tab)
 		file_menu.addAction(tab_save_action)
 
 		tab_close_action = QtGui.QAction('Close Tab', self)
 		tab_close_action.setShortcut('Ctrl+W') 
 		tab_close_action.setStatusTip('Close Tab')
-		tab_close_action.triggered.connect(self.session.close_tab)
+		tab_close_action.triggered.connect(self.close_tab)
 		file_menu.addAction(tab_close_action)
 
 		exit_action = QtGui.QAction('Exit', self)
@@ -92,7 +111,7 @@ class plotterApp(QtGui.QMainWindow):
 		session_open_action = QtGui.QAction('Open Session..', self)
 		#session_open_action.setShortcut('Ctrl+Shift+O')
 		session_open_action.setStatusTip('Open New Session')
-		session_menu.triggered.connect(self.session.open_session)
+		session_open_action.triggered.connect(self.open_session)
 		session_menu.addAction(session_open_action)
 
 		session_recent_action = QtGui.QAction('Open Recent', self)
@@ -104,13 +123,13 @@ class plotterApp(QtGui.QMainWindow):
 		session_save_action = QtGui.QAction('Save Session As..', self)
 		#session_save_action.setShortcut('Ctrl+Shift+S')
 		session_save_action.setStatusTip('Save Current Session')
-		session_menu.triggered.connect(self.session.save_session)
+		session_save_action.triggered.connect(self.save_session)
 		session_menu.addAction(session_save_action)
 
 		session_close_action = QtGui.QAction('Close Session', self)
 		#session_close_action.setShortcut('Ctrl+Shift+S')
 		session_close_action.setStatusTip('Close Current Session')
-		session_menu.triggered.connect(self.session.close_session)
+		session_close_action.triggered.connect(self.close_session)
 		session_menu.addAction(session_close_action)
 
 		# help menu actions
