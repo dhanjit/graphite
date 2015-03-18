@@ -16,7 +16,7 @@ class Parser:
 		"""
 		assuming string is parsable in sympy
 		"""
-		
+		string = str(string)
 		self.expression = sp.sympify(string)
 		model = Model(self.expression)
 		return model
