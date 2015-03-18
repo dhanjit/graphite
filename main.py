@@ -7,20 +7,18 @@ from PyQt4 import QtGui
 from src import *
 
 class plotterApp(QtGui.QMainWindow):
-	
-	session = Session(self)
-	#manager = Manager()
 
 	def __init__(self, *args):
 		super(plotterApp, self).__init__()
 		#self.setIcon()
 		self.initUI()
+		self.session = Session(self)
 
 	def initUI(self):
 		self.initMenuBar()
-		#self.initToolBar()
-		#self.initStatusBar()
-		#self.initView()
+		self.initToolBar()
+		self.initStatusBar()
+		self.initView()
 
 	def initView(self):
 		pass
@@ -31,7 +29,6 @@ class plotterApp(QtGui.QMainWindow):
 	def initStatusBar(self):
 		statusbar = self.statusBar()
 		statusbar.message("Ready....")
-		return
 
 	def new_tab(self):
 		self.session.add_tab()

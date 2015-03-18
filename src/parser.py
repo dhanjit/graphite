@@ -1,5 +1,5 @@
 import sympy as sp
-from model import *
+from src.model import *
 
 class Parser:
 	"""
