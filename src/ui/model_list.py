@@ -11,7 +11,8 @@ class ModelList(QtGui.QWidget):
 		pass
 
 
-	def insert(self, model):
+	def insert(self, ):
+		
 		pass
 
 
