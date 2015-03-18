@@ -20,6 +20,7 @@ class plotterMain(QtGui.QMainWindow):
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 800, 500))
         self.tabWidget.setObjectName("tabWidget")
         self.tabWidget.setTabsClosable(True)
+        self.tabWidget.tabCloseRequested.connect(self.close_handler)
         self.setGeometry(150,150,800,500)
         self.setWindowTitle("Plotter")
         #self.setCentralWidget(self.tabWidget)
@@ -112,7 +113,7 @@ class plotterMain(QtGui.QMainWindow):
         widget = QtGui.QWidget()
         layout = QtGui.QGridLayout(widget)
         self.tabWidget.addTab(widget, name )
-        self.tabWidget.tabCloseRequested.connect(self.close_handler)
+        
 
        
     def close_handler(self, index):
