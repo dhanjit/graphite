@@ -1,38 +1,31 @@
 from sympy import *
 
-class Model(object):
+class Model:
 	"""
 	Represents the model of the equation.
 	@expression - parsed sympy expression
-	@type - 2D or 3D
+	@type 		- 2D or 3D
+	@data 		- the evaluated data of the model
 	"""
-	def __init__(self):
+	def __init__(self, expression):
 		self.settings = {}
-		self.expression = ""
+		self.expression = expression
 		self.type = -1
 		self.errors = []
+		self.visible = True
 
-	def eval(self,something):
-		pass
+	def eval(self, domain):
+		self.eval2d(domain)
+		return self.data
 
-class Model2D(Model):
-	
-	def __init__(self):
-		super(Model2D, self).__init__()
-		self.type = 2
-
-	def eval(self,xVal):
+	def eval2d(self, domain):
 		x = Symbol('x')
-		f = lambdify(x,self.expression,"numpy")
-		self.dataPoints = f(xVal)
+		f = lambdify(x, self.expression, "numpy")
+		self.data = f(domain)
+		return self.data
 
-class Model3D(Model):
-
-	def __init__(self):
-		super(Model3D, self).__init__()
-		self.type = 3
-
-	def eval(self,xyVal):
-		pass
-	
-
+	def eval3d(self, domain):
+		x = Symbol('x')
+		f = lambdify(x, self.expression, "numpy")
+		self.data = f(domain)
+		return self.data

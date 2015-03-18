@@ -1,43 +1,33 @@
-from model import *
 from ui.canvas import *
 from numpy import arange
-from inputInterface import *
 
-class Aggregator():
+class Aggregator:
 	"""
 	Aggregate of the combinations of 2d and 3d models.
 	"""
-	def __init__(self,parent):
+	def __init__(self, parent):
 		self.models = [] 	# list of tuples, a model and boolean to know if it is selected for plotting
-		self.settings = {}	# initialise default settings
+		self.canvas = Canvas2D(parent);
+		self.domain = numpy.arange(-3.0, 3.0, 0.2);
 		
+		self.settings = {}	# initialise default settings
 		self.settings['backcolor'] = 'gray'
 		self.settings['dpi'] = 100
 		self.settings['x_range'] = (-3.0,+3.0)
 		self.settings['y_range'] = (-3.0,+3.0)
 
-		self.canvas2D = Canvas2D(parent);
-		self.numpad = Ui_numPad()
+	def insert_model(self, model):
+		self.models.append((model, True));
+		self.canvas.axes.clear()
+		self.draw()
 
-	def insertModel(self,model):
-		self.models.append((model,True));
-		self.canvas2D.axes.clear()
-		self.compute_graph()
-
-	def compute_graph(self):
-		self.xVal = arange(self.settings['x_range'][0],self.settings['x_range'][1],0.02) ##just for testing
+	def draw(self):
 		for model in self.models:
-			if model[1] == True:
-				model[0].eval(self.xVal)
-				self.canvas2D.axes.plot(self.xVal, model[0].dataPoints);
+			if(model.visible):
+				model.eval(self.domain)
+				self.canvas.axes.plot(self.domain, model.data);
 
-		self.canvas2D.draw()
-
-	def merger(self, model1, model2):
-		pass
-
-	def update():
-		pass
+		self.canvas.draw()
 
 	def save():
 		pass

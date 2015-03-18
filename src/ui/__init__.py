@@ -1,1 +1,1 @@
-from UIController import *
+from ui.canvas import Canvas
