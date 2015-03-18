@@ -2,6 +2,16 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from PyQt4 import QtGui, QtCore
 
+class Canvas(QtGui.QWidget):
+	def __init__(self, aggregator):
+		super(Canvas,self).__init__()
+		self.initUI()
+
+		self.aggregator = aggregator
+
+	def initUI(self):
+		pass
+
 class Canvas2D(FigureCanvas):
 	""" this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 	def __init__(self, parent=None, width=5, height=4, dpi=100):

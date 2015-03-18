@@ -5,23 +5,28 @@ Main Application Start
 import sys
 from PyQt4 import QtGui
 from src import *
+from src.ui import *
 
 class plotterApp(QtGui.QMainWindow):
 
 	def __init__(self, *args):
 		super(plotterApp, self).__init__()
-		#self.setIcon()
 		self.initUI()
 		self.session = Session(self)
 
 	def initUI(self):
+		self.setWindowTitle('Graphite')				 	# Window Title
+		self.setWindowIcon(QtGui.QIcon('icon.png')) 	# App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
 		self.initView()
 
 	def initView(self):
-		pass
+		self.tabs = QtGui.QTabWidget(self)
+		display = Display()
+		self.tabs.addTab(display, "Unsaved...")
+		self.setCentralWidget(self.tabs)
 
 	def initToolBar(self):
 		pass
