@@ -8,7 +8,7 @@ from src import *
 
 class plotterApp(QtGui.QMainWindow):
 	
-	session = Session()
+	session = Session(self)
 	#manager = Manager()
 
 	def __init__(self, *args):
@@ -34,13 +34,13 @@ class plotterApp(QtGui.QMainWindow):
 		return
 
 	def new_tab(self):
-		print("chut")
+		self.session.add_tab()
 		
 	def close_tab(self):
-		pass
-		
+		self.session.close_tab()
+
 	def save_tab(self):
-		pass
+		self.session.save_tab()
 	
 	def new_session(self):
 		self.session.close()
@@ -66,6 +66,7 @@ class plotterApp(QtGui.QMainWindow):
 		view_menu = menubar.addMenu('View')
 		window_menu = menubar.addMenu('Window')
 		session_menu = menubar.addMenu('Session')
+		preferences_menu = menubar.addMenu('Preferences')
 		help_menu = menubar.addMenu('Help')
 
 		# file menu actions
@@ -131,6 +132,13 @@ class plotterApp(QtGui.QMainWindow):
 		session_close_action.setStatusTip('Close Current Session')
 		session_close_action.triggered.connect(self.close_session)
 		session_menu.addAction(session_close_action)
+
+		# preferences menu actions
+		settings_action = QtGui.QAction('Settings', self)
+		#session_close_action.setShortcut('Ctrl+Shift+S')
+		settings_action.setStatusTip('Close Current Session')
+		#settings_action.triggered.connect(self.settings)
+		preferences_menu.addAction(settings_action)
 
 		# help menu actions
 		doc_action = QtGui.QAction('Documentation', self)
