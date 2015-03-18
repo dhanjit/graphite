@@ -18,7 +18,7 @@ class Parser:
 		"""
 		string = str(string)
 		self.expression = sp.sympify(string)
-		model = Model(self.expression)
+		model = Model2D(self.expression)
 		return model
 		
 	def formatted_output(self):

@@ -9,22 +9,26 @@ class Model:
 	"""
 	def __init__(self, expression):
 		self.settings = {}
+		self.data = []
 		self.expression = expression
 		self.type = -1
 		self.errors = []
 		self.visible = True
 
 	def eval(self, domain):
-		self.eval2d(domain)
-		return self.data
+		pass
 
-	def eval2d(self, domain):
+class Model2D(Model):
+	
+	def eval(self, domain):
 		x = Symbol('x')		
 		f = lambdify(x, self.expression, "numpy")
 		self.data = f(domain)
 		return self.data
 
-	def eval3d(self, domain):
+class Model3D(Model):
+	
+	def eval(self, domain):
 		x = Symbol('x')
 		f = lambdify(x, self.expression, "numpy")
 		self.data = f(domain)
