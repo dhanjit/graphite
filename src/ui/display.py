@@ -8,8 +8,13 @@ class Display(QtGui.QWidget):
 		self.calculator = Calculator(self)
 		self.canvas = Canvas(self);
 
-		initUI()
+
+		self.initUI()
 
 	def initUI(self):
-		pass
+		
+		self.hbox_layout = QtGui.QHBoxLayout()
+		self.hbox_layout.addWidget(self.calculator)
+		self.hbox_layout.addWidget(self.canvas)
+		self.setLayout(self.hbox_layout)
 
