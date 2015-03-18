@@ -34,7 +34,7 @@ class Canvas2D(FigureCanvas):
         pass
 
 class Canvas3D(FigureCanvas):
-    def __init__(self, parent=None, width = 6.5, height = 5.5, dpi = 100, sharex = None, sharey = None, fig = None):
+    def __init__(self, parent=None, width = 5, height = 4, dpi = 100, sharex = None, sharey = None, fig = None):
         if fig == None:
             self.fig = Figure(figsize = (width, height), dpi=dpi, facecolor = '#FFFFFF')
             self.ax = self.fig.add_subplot(111, projection='3d')

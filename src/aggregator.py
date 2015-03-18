@@ -23,7 +23,11 @@ class Aggregator():
 		self.numpad = Ui_numPad()
 
 	def insertModel(self,model):
-		self.models.append((model,True));
+		n = self.models.len()
+		for i in range(n):
+			self.models[i][1] = False
+			
+		self.models.append((model,True))
 		self.canvas2D.axes.clear()
 		self.compute_graph()
 
@@ -31,8 +35,11 @@ class Aggregator():
 		self.xVal = arange(self.settings['x_range'][0],self.settings['x_range'][1],0.02) ##just for testing
 		for model in self.models:
 			if model[1] == True:
-				model[0].eval(self.xVal)
-				self.canvas2D.axes.plot(self.xVal, model[0].dataPoints);
+				try:
+					model[0].eval(self.xVal)
+					self.canvas2D.axes.plot(self.xVal, model[0].dataPoints)
+				except:
+					self.canvas2D.axes.plot(model[0].xpoints, model[0].dataPoints)
 
 		self.canvas2D.draw()
 

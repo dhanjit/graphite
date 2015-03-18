@@ -7,3 +7,8 @@ __pycache__/
 *.tar
 *.zip
 
+*~
+*.swp
+*.swo
+.#*
+\#*\#
