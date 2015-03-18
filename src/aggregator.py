@@ -1,4 +1,5 @@
 #from ui.canvas import Canvas2D, Canvas3D
+from src.ui import Calculator
 from numpy import arange
 
 class Aggregator:
@@ -7,7 +8,7 @@ class Aggregator:
 	"""
 	def __init__(self, window):
 		self.models = []						# list of model tuples
-#		self.calc = UI_numpad()
+		self.calculator = Calculator()
 		#self.canvas = 
 #		self.canvas = Canvas2D(window);
 		self.domain = arange(-3.0, 3.0, 0.2);
