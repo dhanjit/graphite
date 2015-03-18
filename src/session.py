@@ -1,14 +1,12 @@
 from PyQt4 import QtGui
-from src.aggregator import Aggregator
 import pickle
 import os
 
 class Session:
 
-	def __init__(self, window):
-		self.window = window
-		self.aggregators = []
-		self.add_tab()
+    def __init__(self, window):
+        self.window = window
+        self.displays = []		
 
 	def load(self, filename):
 		if os.path.exists(filename):
@@ -24,12 +22,12 @@ class Session:
 				pickle.dump(self, output, pickle.HIGHEST_PROTOCOL)
 			print("session saved.", filename)
 
+	def add(self):
+		self.displays.append(Display())
+	
 	def close(self):
 		pass
 
-
-	def add_tab(self):
-		self.aggregators.append(Aggregator(self.window))
-
 	def close_tab(self):
-		self.aggregators.append(Aggregator(self.window))
+		pass
+		#self.aggregators.append(Aggregator(self.window))

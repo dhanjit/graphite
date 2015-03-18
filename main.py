@@ -4,15 +4,15 @@ Main Application Start
 
 import sys
 from PyQt4 import QtGui
-from src import *
+from src import Session
 from src.ui import *
 
 class plotterApp(QtGui.QMainWindow):
 
 	def __init__(self, *args):
 		super(plotterApp, self).__init__()
-		self.initUI()
 		self.session = Session(self)
+		self.initUI()
 
 	def initUI(self):
 		self.setWindowTitle('Graphite')				 	# Window Title
@@ -24,8 +24,8 @@ class plotterApp(QtGui.QMainWindow):
 
 	def initView(self):
 		self.tabs = QtGui.QTabWidget(self)
-		display = Display()
-		self.tabs.addTab(display, "Unsaved...")
+		print(self.session.window)
+		self.new_tab()
 		self.setCentralWidget(self.tabs)
 
 	def initToolBar(self):
@@ -36,7 +36,7 @@ class plotterApp(QtGui.QMainWindow):
 		statusbar.message("Ready....")
 
 	def new_tab(self):
-		self.session.add_tab()
+		self.session.add()
 		
 	def close_tab(self):
 		self.session.close_tab()

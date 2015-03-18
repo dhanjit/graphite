@@ -6,9 +6,8 @@ class Aggregator:
 	"""
 	Aggregate of the combinations of 2d and 3d models.
 	"""
-	def __init__(self, display):
+	def __init__(self):
 		self.models = []						# list of model tuples
-		self.display = display
 		self.domain = arange(-3.0, 3.0, 0.2);
 		
 		# initialise default settings
@@ -18,11 +17,6 @@ class Aggregator:
 		self.settings['x_range'] = (-3.0,+3.0)
 		self.settings['y_range'] = (-3.0,+3.0)
 
-		#self.initUI()
-
-	def initUI(self):
-		self.window.addWidget(self.calculator)
-		self.window.addWidget(self.canvas)
 
 	def insert_model(self, model):
 		self.models.append((model, True));
