@@ -5,11 +5,10 @@ from PyQt4.QtCore import *
 
 class Calculator(QWidget):
 
-	def __init__(self, aggregator):
+	def __init__(self, display):
 		super(Calculator,self).__init__()
+		self.display = display
 		self.initUI()
-
-		self.aggregator = aggregator
 
 	def initUI(self):
 
@@ -208,11 +207,13 @@ class Calculator(QWidget):
 		self.connect(self.mult, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.power, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.e, SIGNAL("clicked()"), self.buttonEvent)
-		#self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_handler)
+		self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_btn_handler)
 
+	def plot_btn_handler(self):
+		function = self.lineedit.text()
+		self.display.insert_model(function)
 
 	def comboEvent(self,text):
-		pass
 		# if(self.sender()==self.linearbtn):
 		#     try:
 		#         dialogbox=dialog.Dialog()

@@ -24,7 +24,8 @@ class plotterApp(QtGui.QMainWindow):
 
 	def initView(self):
 		self.tabs = QtGui.QTabWidget(self)
-		print(self.session.window)
+		self.tabs.setTabsClosable(True)
+		self.tabs.tabCloseRequested.connect(self.close_tab)
 		self.new_tab()
 		self.setCentralWidget(self.tabs)
 
@@ -36,17 +37,17 @@ class plotterApp(QtGui.QMainWindow):
 		statusbar.message("Ready....")
 
 	def new_tab(self):
-		self.session.add()
+		self.session.add(self.tabs)
 		
-	def close_tab(self):
-		self.session.close_tab()
+	def close_tab(self, index):
+		self.session.close_tab(self.tabs, index)
 
 	def save_tab(self):
 		self.session.save_tab()
 	
 	def new_session(self):
 		self.session.close()
-		self.session = Session()
+		self.session = Session(self)
 
 	def open_session(self):
 		session_file_name = QtGui.QFileDialog.getOpenFileName(self, "Open Session", "")

@@ -19,7 +19,7 @@ class Model:
 		return self.data
 
 	def eval2d(self, domain):
-		x = Symbol('x')
+		x = Symbol('x')		
 		f = lambdify(x, self.expression, "numpy")
 		self.data = f(domain)
 		return self.data

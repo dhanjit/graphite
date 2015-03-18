@@ -1,4 +1,5 @@
 import sympy as sp
+import sys
 from src.model import *
 
 class Parser:
@@ -15,6 +16,7 @@ class Parser:
 		"""
 		assuming string is parsable in sympy
 		"""
+		
 		self.expression = sp.sympify(string)
 		model = Model(self.expression)
 		return model
