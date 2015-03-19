@@ -9,7 +9,6 @@ class Model:
 	"""
 	def __init__(self, expression):
 		self.settings = {}
-		self.data = []
 		self.expression = expression
 		self.type = -1
 		self.errors = []
@@ -29,7 +28,7 @@ class Model2D(Model):
 class Model3D(Model):
 	
 	def eval(self, domain):
-		x = Symbol('x')
-		f = lambdify(x, self.expression, "numpy")
-		self.data = f(domain)
+		x,y = Symbol('x y')
+		f = lambdify((x,y), self.expression, "numpy")
+		self.data = f(domain[0],domain[1])
 		return self.data
