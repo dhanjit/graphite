@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import numpy as np
 from numpy import arange
 from src.ui import Calculator
 from src.ui import Canvas2D, Canvas3D
@@ -13,11 +14,13 @@ class Display(QtGui.QWidget):
 	def __init__(self):
 		super(Display,self).__init__()
 		self.models = []						# list of model tuples
-		self.domain = arange(-3.0, 3.0, 0.2);
-		self.type = '2d'
+		self.domain = arange(0, 3.0, 0.1),  arange(0, 3.0, 0.1)
+		self.type = '3d'
 
+		self.table = None
 		self.calculator = Calculator(self)
-		self.canvas = Canvas2D()
+		#self.canvas = Canvas2D()
+		self.canvas = Canvas3D()
 
 		self.initUI()
 
@@ -42,12 +45,40 @@ class Display(QtGui.QWidget):
 		self.draw_canvas()
 
 	def insert_data_model(self, filename):
-		
+		with open(filename, 'rb') as input:			
+			lines = input.read().decode(encoding='UTF-8').split('\n')[:-1]
+		data = []
+		for line in lines:
+			tokens = line.split(' ')
+			d = [float(token) for token in tokens]
+			data.append(d)
+		model = Model()
+		model.data = data
+		self.models.append(model)
+		self.canvas.axes.clear()
+		self.draw_canvas()
 
 	def draw_canvas(self):
 		for model in self.models:
 			if model.visible:
-				data = model.eval(self.domain)
-				self.canvas.axes.plot(self.domain, data);
+				if model.type == 'data':
+					data = model.data
+					x = [d[0] for d in data]
+					y = [d[1] for d in data]
+					print(x, y)
+					self.canvas.axes.plot(x, y)
+				else:
+					#data = model.eval(self.domain)
+					#self.canvas.axes.plot(self.domain, data)
+					#data = np.arange(20).reshape([4, 5]).copy()
+					#self.canvas.axes.imshow(data, interpolation='nearest')
+					#self.canvas.axes.plot(self.domain, data)
+					self.scatter_plot()
 
 		self.canvas.draw()
+
+	def scatter_plot(self):
+		xs = np.random.random_sample(100)
+		ys = np.random.random_sample(100)
+		zs = np.random.random_sample(100)
+		self.canvas.axes.scatter(xs, ys, zs, c='r', marker='o')

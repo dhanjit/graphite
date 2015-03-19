@@ -7,10 +7,13 @@ class Model:
 	@type 		- 2D or 3D
 	@data 		- the evaluated data of the model
 	"""
-	def __init__(self, expression):
+	def __init__(self, expression=None):
 		self.settings = {}
 		self.expression = expression
-		self.type = -1
+		if expression == None:
+			self.type = 'data'
+		else:
+			self.type = 'expression'
 		self.errors = []
 		self.visible = True
 
@@ -20,7 +23,7 @@ class Model:
 class Model2D(Model):
 	
 	def eval(self, domain):
-		x = Symbol('x')		
+		x = Symbol('x')
 		f = lambdify(x, self.expression, "numpy")
 		self.data = f(domain)
 		return self.data
@@ -28,7 +31,9 @@ class Model2D(Model):
 class Model3D(Model):
 	
 	def eval(self, domain):
-		x,y = Symbol('x y')
-		f = lambdify((x,y), self.expression, "numpy")
-		self.data = f(domain[0],domain[1])
+		x = Symbol('x')
+		y = Symbol('y')
+		f = lambdify((x, y), self.expression, "numpy")
+		self.data = f(domain[0], domain[1])
+		print(self.data)
 		return self.data

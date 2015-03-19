@@ -214,7 +214,6 @@ class Calculator(QWidget):
 
 	def open_btn_handler(self):
 		plot_data_file = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")
-		print(plot_data_file)
 		self.display.insert_data_model(plot_data_file)
 
 	def plot_btn_handler(self):
