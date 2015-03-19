@@ -46,5 +46,4 @@ class Display(QtGui.QWidget):
 			if model.visible:
 				data = model.eval(self.domain)
 				self.canvas.axes.plot(self.domain, data,color=model.settings['LineColor'], label=str(model.expression),linewidth=model.settings['LineWidth']);
-
 		self.canvas.draw()
