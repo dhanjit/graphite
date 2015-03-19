@@ -18,10 +18,11 @@ class Display(QtGui.QWidget):
 
 		self.calculator = Calculator(self)
 		self.canvas = Canvas2D()
-
+		defaultSettings()
 		self.initUI()
 
 		# initialise default settings
+	def defaultSettings(self):
 		self.settings = {}
 		self.settings['backcolor'] = 'gray'
 		self.settings['dpi'] = 100
