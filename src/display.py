@@ -35,11 +35,14 @@ class Display(QtGui.QWidget):
 		hbox_layout.addStretch()
 		self.setLayout(hbox_layout)
 
-	def insert_model(self, function):
+	def insert_function_model(self, function):
 		model = Display.parser.parse(function)
 		self.models.append(model)
 		self.canvas.axes.clear()
 		self.draw_canvas()
+
+	def insert_data_model(self, filename):
+		
 
 	def draw_canvas(self):
 		for model in self.models:
