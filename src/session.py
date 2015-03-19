@@ -33,5 +33,10 @@ class Session(object):
 		pass
 
 	def close_tab(self, tabs, index):
-		#self.displays.
+		del self.displays[index]
 		tabs.removeTab(index)
+
+	def save_tab(self,index,filename):
+		self.displays[index].canvas.save_figure(filename)
+
+

@@ -1,5 +1,4 @@
 from PyQt4 import QtGui, QtCore
-import numpy as np
 from numpy import arange
 from src.ui import Calculator
 from src.ui import Canvas2D, Canvas3D
@@ -14,17 +13,22 @@ class Display(QtGui.QWidget):
 	def __init__(self):
 		super(Display,self).__init__()
 		self.models = []						# list of model tuples
-		self.domain = arange(0, 3.0, 0.1),  arange(0, 3.0, 0.1)
-		self.type = '3d'
+		#self.domain = arange(0, 3.0, 0.1),  arange(0, 3.0, 0.1)
+		#self.type = '3d'
+		self.domain = arange(-3.0, 3.0, 0.1)
+		self.type = '2d'
 
 		self.table = None
 		self.calculator = Calculator(self)
-		#self.canvas = Canvas2D()
-		self.canvas = Canvas3D()
+
+		self.canvas = Canvas2D()
+		#self.canvas = Canvas3D()
+		self.defaultSettings()
 
 		self.initUI()
 
 		# initialise default settings
+	def defaultSettings(self):
 		self.settings = {}
 		self.settings['backcolor'] = 'gray'
 		self.settings['dpi'] = 100
@@ -61,19 +65,23 @@ class Display(QtGui.QWidget):
 	def draw_canvas(self):
 		for model in self.models:
 			if model.visible:
-				if model.type == 'data':
-					data = model.data
-					x = [d[0] for d in data]
-					y = [d[1] for d in data]
-					print(x, y)
-					self.canvas.axes.plot(x, y)
-				else:
+				data = model.eval(self.domain)				
+				self.canvas.axes.plot(self.domain, data)
+				#self.canvas.axes.plot(self.domain, data,color=model.settings['LineColor'], label=str(model.expression),linewidth=model.settings['LineWidth']);
+				self.canvas.draw()
+
+				#if model.type == 'data':
+					#data = model.data
+					#x = [d[0] for d in data]
+					#y = [d[1] for d in data]
+					#self.canvas.axes.plot(x, y)
+				#else:
 					#data = model.eval(self.domain)
 					#self.canvas.axes.plot(self.domain, data)
 					#data = np.arange(20).reshape([4, 5]).copy()
 					#self.canvas.axes.imshow(data, interpolation='nearest')
 					#self.canvas.axes.plot(self.domain, data)
-					self.scatter_plot()
+				#	self.scatter_plot()
 
 		self.canvas.draw()
 

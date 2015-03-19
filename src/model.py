@@ -9,6 +9,9 @@ class Model:
 	"""
 	def __init__(self, expression=None):
 		self.settings = {}
+		self.settings['LineColor']='black'
+		self.settings['LineStyle']='dashed'
+		self.settings['LineWidth']=1.5
 		self.expression = expression
 		if expression == None:
 			self.type = 'data'
