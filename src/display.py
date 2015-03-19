@@ -1,5 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from numpy import arange
+import numpy as np
+from matplotlib import cm
 from src.ui import Calculator
 from src.ui import Canvas2D, Canvas3D
 from src import Model
@@ -15,14 +17,14 @@ class Display(QtGui.QWidget):
 		self.models = []						# list of model tuples
 		#self.domain = arange(0, 3.0, 0.1),  arange(0, 3.0, 0.1)
 		#self.type = '3d'
-		self.domain = arange(-3.0, 3.0, 0.1)
-		self.type = '2d'
+		#self.domain = arange(-3.0, 3.0, 0.1)
+		#self.type = '2d'
 
 		self.table = None
 		self.calculator = Calculator(self)
 
-		self.canvas = Canvas2D()
-		#self.canvas = Canvas3D()
+		#self.canvas = Canvas2D()
+		self.canvas = Canvas3D()
 		self.defaultSettings()
 
 		self.initUI()
@@ -45,7 +47,6 @@ class Display(QtGui.QWidget):
 	def insert_function_model(self, function):
 		model = Display.parser.parse(function)
 		self.models.append(model)
-		self.canvas.axes.clear()
 		self.draw_canvas()
 
 	def insert_data_model(self, filename):
@@ -59,16 +60,17 @@ class Display(QtGui.QWidget):
 		model = Model()
 		model.data = data
 		self.models.append(model)
-		self.canvas.axes.clear()
 		self.draw_canvas()
 
 	def draw_canvas(self):
+		self.canvas.axes.clear()
+		self.canvas.axes.mouse_init()
 		for model in self.models:
 			if model.visible:
-				data = model.eval(self.domain)				
-				self.canvas.axes.plot(self.domain, data)
+				#data = model.eval(self.domain)				
+				#self.canvas.axes.plot(self.domain, data)
 				#self.canvas.axes.plot(self.domain, data,color=model.settings['LineColor'], label=str(model.expression),linewidth=model.settings['LineWidth']);
-				self.canvas.draw()
+				#self.canvas.draw()
 
 				#if model.type == 'data':
 					#data = model.data
@@ -83,7 +85,18 @@ class Display(QtGui.QWidget):
 					#self.canvas.axes.plot(self.domain, data)
 				#	self.scatter_plot()
 
+		self.surface_plot()
+		#self.scatter_plot()
 		self.canvas.draw()
+
+	def surface_plot(self):
+		X = np.arange(-5, 5, 0.25)
+		Y = np.arange(-5, 5, 0.25)
+		X, Y = np.meshgrid(X, Y)
+		R = np.sqrt(X**2 + Y**2)
+		Z = np.sin(R)
+		surf = self.canvas.axes.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		self.canvas.axes.set_zlim(-1.01, 1.01)
 
 	def scatter_plot(self):
 		xs = np.random.random_sample(100)

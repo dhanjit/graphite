@@ -38,5 +38,4 @@ class Model3D(Model):
 		y = Symbol('y')
 		f = lambdify((x, y), self.expression, "numpy")
 		self.data = f(domain[0], domain[1])
-		print(self.data)
 		return self.data
