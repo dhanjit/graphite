@@ -13,7 +13,7 @@ class Display(QtGui.QWidget):
 	def __init__(self):
 		super(Display,self).__init__()
 		self.models = []						# list of model tuples
-		self.domain = arange(-3.0, 3.0, 0.2);
+		self.domain = arange(-3.0, 3.0, 0.1);
 		self.type = '2d'
 
 		self.calculator = Calculator(self)
@@ -45,6 +45,6 @@ class Display(QtGui.QWidget):
 		for model in self.models:
 			if model.visible:
 				data = model.eval(self.domain)
-				self.canvas.axes.plot(self.domain, data);
+				self.canvas.axes.plot(self.domain, data,color=model.settings['LineColor'], label=str(model.expression),linewidth=model.settings['LineWidth']);
 
 		self.canvas.draw()
