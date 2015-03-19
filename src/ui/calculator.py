@@ -121,8 +121,10 @@ class Calculator(QWidget):
 		self.grid_func.addWidget(self.calbtn,4,1)
 
 		self.hbox_select = QHBoxLayout()
+		self.openbtn = QPushButton("OPEN")
 		self.plotbtn = QPushButton("PLOT")
 		self.clrbtn = QPushButton("CLEAR")
+		self.hbox_select.addWidget(self.openbtn)
 		self.hbox_select.addWidget(self.plotbtn)
 		self.hbox_select.addWidget(self.clrbtn)
 
@@ -208,11 +210,16 @@ class Calculator(QWidget):
 		self.connect(self.power, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.e, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_btn_handler)
+		self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
+
+	def open_btn_handler(self):
+		plot_data_file = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")
+		self.display.insert_data_model(plot_data_file)
 
 	def plot_btn_handler(self):
 		function = self.lineedit.text()
 		function.replace("^","**")
-		self.display.insert_model(function)
+		self.display.insert_function_model(function)
 
 	def comboEvent(self,text):
 		# if(self.sender()==self.linearbtn):
