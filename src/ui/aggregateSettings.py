@@ -2,7 +2,6 @@ import sys
 from numpy import arange
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from PyQt4.QtGui import QPushButton, QComboBox, QPushButton, QHBoxLayout
 
 
 class Customize(QWidget):
@@ -39,15 +38,30 @@ class Customize(QWidget):
         self.facecolourbtn.setStyleSheet("background-color:red")
         self.gridset = QCheckBox("Show Grid")
         self.autolayoutbox = QCheckBox("Apply AutoLayout")
-        self.xscalecheck = QCheckBox("X Scale")
-        self.yscalecheck = QCheckBox("Y Scale")
-        self.zscalecheck = QCheckBox("Z Scale")
-        self.logbtn = QRadioButton("Log Scale")
-        self.linearbtn = QRadioButton("Linear Scale")
-        self.linearbtn.setChecked(True)
+        self.xscalelbl = QLabel("X Scale")
+        self.yscalelbl = QLabel("Y Scale")
+        self.zscalelbl = QLabel("Z Scale")
+        self.xscalebtn = QComboBox()
+        self.xscalebtn.addItem("Log")
+        self.xscalebtn.addItem("Linear")
+        self.yscalebtn = QComboBox()
+        self.yscalebtn.addItem("Log")
+        self.yscalebtn.addItem("Linear")
+        self.zscalebtn = QComboBox()
+        self.zscalebtn.addItem("Log")
+        self.zscalebtn.addItem("Linear")
         self.exportbtn = QPushButton("Export")
         self.applybtn = QPushButton("Apply Settings")
         self.defaultbtn = QPushButton("Deafult Settings")
+        self.xrangelbl=QLabel("X Range")
+        self.xmin = QLineEdit("X MIN")
+        self.xmax = QLineEdit("X MAX")
+        self.yrangelbl=QLabel("Y Range")
+        self.ymin = QLineEdit("Y MIN")
+        self.ymax = QLineEdit("Y MAX")
+        self.zrangelbl=QLabel("Z Range")
+        self.zmin = QLineEdit("Z MIN")
+        self.zmax = QLineEdit("Z MAX")
 
         grid = QGridLayout()
         grid.addWidget(self.axislbl,0,0)
@@ -56,34 +70,47 @@ class Customize(QWidget):
         grid.addWidget(self.facecolourbtn,1,1)
         grid.addWidget(self.gridset,2,0)
         grid.addWidget(self.autolayoutbox,2,1)
-        lblvbox = QVBoxLayout()
-        lblvbox.addWidget(self.xscalecheck)
-        lblvbox.addWidget(self.yscalecheck)
-        lblvbox.addWidget(self.zscalecheck)
-        btnvbox = QVBoxLayout()
-        btngroup  = QButtonGroup()
-        btngroup.addButton(self.logbtn)
-        btngroup.addButton(self.linearbtn)
-        btnvbox.addWidget(self.logbtn)
-        btnvbox.addWidget(self.linearbtn)
-        hbox = QHBoxLayout()
-        hbox.addLayout(lblvbox)
-        hbox.addLayout(btnvbox)
-        hbox.setMargin(10)
+        xhbox = QHBoxLayout()
+        xhbox.addWidget(self.xrangelbl)
+        xhbox.addWidget(self.xmin)
+        xhbox.addWidget(self.xmax)
+        yhbox = QHBoxLayout()
+        yhbox.addWidget(self.yrangelbl)
+        yhbox.addWidget(self.ymin)
+        yhbox.addWidget(self.ymax)
+        zhbox = QHBoxLayout()
+        zhbox.addWidget(self.zrangelbl)
+        zhbox.addWidget(self.zmin)
+        zhbox.addWidget(self.zmax)
+        scalegrid = QGridLayout()
+        scalegrid.addWidget(self.xscalelbl,0,0)
+        scalegrid.addWidget(self.xscalebtn,0,1)
+        scalegrid.addWidget(self.yscalelbl,1,0)
+        scalegrid.addWidget(self.yscalebtn,1,1)
+        scalegrid.addWidget(self.zscalelbl,2,0)
+        scalegrid.addWidget(self.zscalebtn,2,1)
         hboxpushbtn = QHBoxLayout()
         hboxpushbtn.addWidget(self.exportbtn)
         hboxpushbtn.addWidget(self.defaultbtn)
         hboxpushbtn.addWidget(self.applybtn)
         layout = QVBoxLayout()
         layout.addLayout(grid)
-        layout.addLayout(hbox)
+        layout.addLayout(xhbox)
+        layout.addLayout(yhbox)
+        layout.addLayout(zhbox)
+        layout.addLayout(scalegrid)
         layout.addLayout(hboxpushbtn)
         self.setLayout(layout)
 
         self.connect(self.facecolourbtn,SIGNAL("clicked()"),self.setColor)
-        self.connect(self.axisbtn,SIGNAL("currentIndexChanged(int)"),self.setCombo)
-        self.connect(self.gridset,SIGNAL("stateChanged()"),self.setCheck)
-        self.connect(self.gridset,SIGNAL("stateChanged()"),self.setCheck)
+        self.connect(self.axisbtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.gridset,SIGNAL(" stateChanged(int)"),self.setCheck)
+        self.connect(self.autolayoutbox,SIGNAL(" stateChanged(int)"),self.setCheck)
+        self.connect(self.xscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.yscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.zscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.applybtn,SIGNAL("clicked()"),self.applySettings)
+        self.connect(self.defaultbtn,SIGNAL("clicked()"),self.defaultSettings)
 
     def setColor(self):
         colordialog = QColorDialog.getColor()
@@ -92,25 +119,75 @@ class Customize(QWidget):
             btn.setStyleSheet("background-color:"+colordialog.name())
             self.facecolour = QColor(colordialog.name())
 
-
     def setCombo(self):
-        self.axis = self.axisbtn.currentText()
+        sender = self.sender()
+        if(sender==self.axisbtn):
+            self.axis = str(self.sender().text())
+        elif(sender==self.xscalebtn):
+            self.xscaletype = str(self.sender().text())
+        elif(sender==self.yscalebtn):
+            self.xscaletype = str(self.sender().text())
+        else:
+            self.xscaletype = str(self.sender().text())
+
 
     def setCheck(self,state):
-        if(self.sender()==self.gridset):
-            if (state == Qt.Checked):
-                self.grid = True
-            else:
-                self.grid = False
+        if(state==Qt.Checked):
+            curr_state = True
         else:
-            if (state == Qt.Checked):
-                self.autolayout = True
-            else:
-                self.autolayout = False
+            curr_state = False
+        if(self.sender()==self.gridset):
+            self.grid = curr_state
+        else:
+            self.autolayout = curr_state
+            
+
+
+    def applySettings(self):
+        settings={}
+        settings["axis"] = self.axis
+        try:
+            min_x = float(str(self.xmin.text()))
+            max_x = float(str(self.xmax.text()))
+            settings["xrange"] = arange(min_x,max_x)
+        except ValueError:
+            settings["xrange"] = self.range_x
+        try:
+            min_y = float(str(self.ymin.text()))
+            max_y = float(str(self.ymax.text()))
+            settings["yrange"] = arange(min_y,max_y)
+        except ValueError:
+            settings["yrange"] = self.range_y
+        try:
+            min_z = float(str(self.zmin.text()))
+            max_z = float(str(self.zmax.text()))
+            settings["zrange"] = arange(min_z,max_z)
+        except ValueError:
+            settings["zrange"] = self.range_z
+        settings["facecolour"] = self.facecolour
+        settings["grid"] = self.grid
+        settings["autolayout"] = self.autolayout
+        settings["xscale"] = self.xscaletype
+        settings["yscale"] = self.yscaletype
+        settings["zscale"] = self.zscaletype
+
+    def defaultSettings(self):
+        self.axis = "x"
+        self.range_x = arange(-3.0,3.0,0.2)
+        self.range_y = arange(-3.0,3.0,0.2)
+        self.range_z = arange(-0.0,0.0,0.1)
+        self.facecolour = QColor("red")
+        self.grid = False
+        self.xscaletype = "linear"
+        self.yscaletype = "linear"
+        self.zscaletype = "linear"
+        self.autolayout = True
+        self.applySettings()
+
 
 
 app = QApplication(sys.argv)
-setting = Customize();
+setting = Customize()
 app.exec_()
 
 
