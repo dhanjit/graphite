@@ -9,6 +9,9 @@ class Model:
 	"""
 	def __init__(self, expression):
 		self.settings = {}
+		self.settings['LineColor']='black'
+		self.settings['LineStyle']='dashed'
+		self.settings['LineWidth']=1.5
 		self.expression = expression
 		self.type = -1
 		self.errors = []
@@ -20,7 +23,7 @@ class Model:
 class Model2D(Model):
 	
 	def eval(self, domain):
-		x = Symbol('x')		
+		x = Symbol('x')	
 		f = lambdify(x, self.expression, "numpy")
 		self.data = f(domain)
 		return self.data
