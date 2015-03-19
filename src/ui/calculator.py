@@ -57,26 +57,26 @@ class Calculator(QWidget):
 		self.grid.addWidget(self.n2,0,1)
 		self.grid.addWidget(self.n3,0,2)
 		self.grid.addWidget(self.n4,0,3)
-		self.grid.addWidget(self.n5,0,4)
-		self.grid.addWidget(self.n6,1,0)
-		self.grid.addWidget(self.n7,1,1)
-		self.grid.addWidget(self.n8,1,2)
-		self.grid.addWidget(self.n9,1,3)
-		self.grid.addWidget(self.n0,1,4)
-		self.grid.addWidget(self.e,2,0)
-		self.grid.addWidget(self.back,2,1)
-		self.grid.addWidget(self.greater,2,2)
-		self.grid.addWidget(self.less,2,3)
-		self.grid.addWidget(self.point,2,4)
-		self.grid.addWidget(self.equal,3,0)
-		self.grid.addWidget(self.left_p,3,1)
-		self.grid.addWidget(self.right_p,3,2)
-		self.grid.addWidget(self.add,3,3)
-		self.grid.addWidget(self.subtract,3,4)
-		self.grid.addWidget(self.mult,4,0)
-		self.grid.addWidget(self.divide,4,1)
-		self.grid.addWidget(self.power,4,2)
-		self.grid.addWidget(self.unknown,4,3)
+		self.grid.addWidget(self.n5,1,0)
+		self.grid.addWidget(self.n6,1,1)
+		self.grid.addWidget(self.n7,1,2)
+		self.grid.addWidget(self.n8,1,3)
+		self.grid.addWidget(self.n9,2,0)
+		self.grid.addWidget(self.n0,2,1)
+		self.grid.addWidget(self.e,2,2)
+		self.grid.addWidget(self.back,2,3)
+		self.grid.addWidget(self.greater,3,0)
+		self.grid.addWidget(self.less,3,1)
+		self.grid.addWidget(self.point,3,2)
+		self.grid.addWidget(self.equal,3,3)
+		self.grid.addWidget(self.left_p,4,0)
+		self.grid.addWidget(self.right_p,4,1)
+		self.grid.addWidget(self.add,4,2)
+		self.grid.addWidget(self.subtract,4,3)
+		self.grid.addWidget(self.mult,5,0)
+		self.grid.addWidget(self.divide,5,1)
+		self.grid.addWidget(self.power,5,2)
+		self.grid.addWidget(self.unknown,5,3)
 
 		self.grid_func = QGridLayout()
 		self.trlbl = QLabel("Trigonometry")
@@ -95,7 +95,7 @@ class Calculator(QWidget):
 		self.logbtn.addItem("logb(x)")
 		self.explbl = QLabel("Exponential")
 		self.expbtn = QComboBox()
-		self.expbtn.addItem("e^x")
+		self.expbtn.addItem("exp(x)")
 		self.expbtn.addItem("sqrt(x)")
 		self.expbtn.addItem("x^y")
 		self.expbtn.addItem("x^2")
@@ -211,6 +211,7 @@ class Calculator(QWidget):
 
 	def plot_btn_handler(self):
 		function = self.lineedit.text()
+		function.replace("^","**")
 		self.display.insert_model(function)
 
 	def comboEvent(self,text):
@@ -230,9 +231,4 @@ class Calculator(QWidget):
 		self.lineedit.setText(curr)
 
 	def buttonEvent(self):
-		if(self.sender().text()=="^"):
-			curr = self.lineedit.text()+"**"
-		else:
-			curr = self.lineedit.text()+self.sender().text()
-		self.lineedit.setText(curr)
-
+		self.lineedit.insert(self.sender().text())
