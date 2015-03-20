@@ -4,8 +4,8 @@ Main Application Start
 
 import sys
 from PyQt4 import QtGui
-from src import Session
-from src.ui import *
+from src.session.Session import Session
+
 
 class plotterApp(QtGui.QMainWindow):
 
@@ -36,7 +36,7 @@ class plotterApp(QtGui.QMainWindow):
 		statusbar.message("Ready....")
 
 	def new_tab(self):
-		self.session.add()
+		self.session.add(self.tabs)
 		
 	def close_tab(self):
 		self.session.close_tab()
