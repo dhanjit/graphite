@@ -1,11 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from numpy import arange
-import numpy as np
-from matplotlib import cm
 from src.ui import Calculator
 from src.ui import Canvas2D, Canvas3D
-from src import Model
-from src import Aggregator
 from src import Parser
 
 class Display(QtGui.QWidget):
@@ -14,21 +10,32 @@ class Display(QtGui.QWidget):
 
 	def __init__(self):
 		super(Display,self).__init__()
+		# self.type = '2d'
+		# self.table = None
+		
 		self.models = []						# list of model tuples
-		#self.domain = arange(0, 3.0, 0.1),  arange(0, 3.0, 0.1)
-		#self.type = '3d'
-		#self.domain = arange(-3.0, 3.0, 0.1)
-		#self.type = '2d'
+		self.domain = {}
 
-		self.table = None
+		self.canvas2D = Canvas2D()
+		self.canvas3D = Canvas3D()
+		
+		self.domain['x'] = arange(-5, 5, 0.25)
+		self.domain['y'] = arange(-5, 5, 0.25)
+		self.domain['z'] = arange(0.0, 3.0, 0.1)
+
 		self.calculator = Calculator(self)
+<<<<<<< HEAD
 		self.canvas = Canvas2D()
 		#self.canvas = Canvas3D()
-		self.defaultSettings()
+=======
+		# self.canvas = self.canvas2D
+		self.canvas = self.canvas3D
 
+>>>>>>> 2137ddd548201df3eb62c1d326f4047ea2039a30
+		self.defaultSettings()
 		self.initUI()
 
-		# initialise default settings
+	# initialise default settings
 	def defaultSettings(self):
 		self.settings = {}
 		self.settings['backcolor'] = 'gray'
@@ -37,6 +44,7 @@ class Display(QtGui.QWidget):
 		self.settings['y_range'] = (-3.0,+3.0)
 
 	def initUI(self):
+<<<<<<< HEAD
 		# hbox_layout = QtGui.QHBoxLayout()
 		# hbox_layout.addWidget(self.calculator)
 		# hbox_layout.addWidget(self.canvas)
@@ -45,30 +53,33 @@ class Display(QtGui.QWidget):
 		grid_layout.addWidget(self.calculator,0,0,2,2)
 		grid_layout.addWidget(self.canvas,0,2,3,7)
 		self.setLayout(grid_layout)
+=======
+		hbox_layout = QtGui.QHBoxLayout()
+		hbox_layout.addWidget(self.calculator)
+		hbox_layout.addWidget(self.canvas)
+		self.setLayout(hbox_layout)
+>>>>>>> 2137ddd548201df3eb62c1d326f4047ea2039a30
 
 	def insert_function_model(self, function):
-		model = Display.parser.parse(function)
+		model = Display.parser.parse_expression(function)
 		self.models.append(model)
 		self.draw_canvas()
 
 	def insert_data_model(self, filename):
-		with open(filename, 'rb') as input:			
-			lines = input.read().decode(encoding='UTF-8').split('\n')[:-1]
-		data = []
-		for line in lines:
-			tokens = line.split(' ')
-			d = [float(token) for token in tokens]
-			data.append(d)
-		model = Model()
-		model.data = data
+		model = Display.parser.parse_file(filename)
 		self.models.append(model)
 		self.draw_canvas()
 
 	def draw_canvas(self):
 		self.canvas.axes.clear()
-		self.canvas.axes.mouse_init()
+		#if self.type == '2d':
+		#	self.canvas = self.canvas2D
+		#else:
+		#	self.canvas = self.canvas3D
+
 		for model in self.models:
 			if model.visible:
+<<<<<<< HEAD
 				temp = True
 				#data = model.eval(self.domain)				
 				#self.canvas.axes.plot(self.domain, data)
@@ -89,9 +100,15 @@ class Display(QtGui.QWidget):
 					#self.scatter_plot()
 		self.surface_plot()
 		#self.scatter_plot()
+=======
+				model.draw(self.canvas, self.domain)
+
+>>>>>>> 2137ddd548201df3eb62c1d326f4047ea2039a30
 		self.canvas.draw()
 
 	def surface_plot(self):
+		print("plot")
+		self.canvas.axes.mouse_init()
 		X = np.arange(-5, 5, 0.25)
 		Y = np.arange(-5, 5, 0.25)
 		X, Y = np.meshgrid(X, Y)
