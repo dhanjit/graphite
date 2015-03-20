@@ -3,15 +3,15 @@ __author__ = 'batman'
 class Point3D:
   
   def __init__(self,valx,valy,valz):
-      self.x=valx;
-      self.y=valy;
-      self.z=valz;
+      self.x=valx
+      self.y=valy
+      self.z=valz
 
   def getX(self):
-      return self.x;
+      return self.x
 
   def getY(self):
-      return self.y;
+      return self.y
 
   def getZ(self):
-      return self.z;
+      return self.z

@@ -1,7 +1,4 @@
-__author__ = 'batman'
-
-from Plottable import *
-
+from Plottable import Plottable
 class Plottable2D(Plottable):
 
     def __init__(self, points):

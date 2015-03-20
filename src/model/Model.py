@@ -1,32 +1,40 @@
-__author__ = 'batman'
-from BivariateExpressionModel import *
-from UnivariateExpressionModel import *
-from BivariateExpression import *
-from UnivariateExpression import *
-from Plottable2D import *
-from Plottable3D import *
+# from .Expression3DModel import Expression3DModel
+# from .Expression2DModel import Expression2DModel
+# from .Expression2D import Expression2D
+# from .Expression3D import Expression3D
+# from .Plottable2D import Plottable2D
+# from .Plottable3D import Plottable3D
+# from .Model2D import Model2D
+# from .Model3D import Model3D
+
+from src.Settings import Settings
 
 class Model(object):
 
-    def __init__(self):
-        pass
+	def __init__(self):
+		self.settings = Settings()
+		self.visible = True
 
-    @staticmethod
-    def createModelFromExpression(parser,string):
-        expr = parser.parse(string)
-        if isinstance(expr,UnivariateExpression):
-            return UnivariateExpressionModel(expr)
-        elif isinstance(expr,BivariateExpression) :
-            return BivariateExpressionModel(expr)
-        else:
-            raise Exception(expr)
 
-    @staticmethod
-    def createModelFromFile(formatHandler,file):
-        plottable = formatHandler.handle(file)
-        if isinstance(plottable, Plottable2D):
-            return Model2D(plottable)
-        elif isinstance(plottable,Plottable3D) :
-            return Model3D(plottable)
-        else:
-            raise Exception(plottable)
+
+	def eval(self, domain):
+		raise NotImplementedError("Subclass must implement abstract method")
+
+
+# class Model2D(Model):
+#
+# 	def __init__(self,plottable2d):
+# 		super(Model2D, self).__init__()
+# 		self.plottable2d = plottable2d
+#
+# 	def eval(self, domain):
+# 		return self.plottable2d.points
+#
+# class Model3D(Model):
+#
+# 	def __init__(self,plottable3d):
+# 		super(Model3D, self).__init__()
+# 		self.plottable3d = plottable3d
+#
+# 	def eval(self, domain):
+# 		return self.plottable3d.points
