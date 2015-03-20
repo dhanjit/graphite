@@ -134,7 +134,7 @@ class Calculator(QWidget):
 		self.main_layout.addLayout(self.grid)
 		self.main_layout.addLayout(self.grid_func)
 		self.main_layout.addLayout(self.hbox_select)
-
+		
 		self.setLayout(self.main_layout)
 
 		self.n1.setStyleSheet("color: blue; background-color: yellow; font: bold")

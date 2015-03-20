@@ -11,11 +11,11 @@ class Canvas2D(FigureCanvas):
 		FigureCanvas.__init__(self, self.fig)
 
 		self.axes=self.fig.add_subplot(111)
-		self.setParent(parent)
-		#FigureCanvas.setSizePolicy(self,
-			#QtGui.QSizePolicy.Expanding,
-			#QtGui.QSizePolicy.Expanding)
-		#FigureCanvas.updateGeometry(self)
+		#self.setParent(parent)
+		# FigureCanvas.setSizePolicy(self,
+		# 	QtGui.QSizePolicy.Expanding,
+		# 	QtGui.QSizePolicy.Expanding)
+		# FigureCanvas.updateGeometry(self)
 
 	def save_figure(self,fileName):
 		fileName=str(fileName)

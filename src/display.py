@@ -22,9 +22,8 @@ class Display(QtGui.QWidget):
 
 		self.table = None
 		self.calculator = Calculator(self)
-
-		#self.canvas = Canvas2D()
-		self.canvas = Canvas3D()
+		self.canvas = Canvas2D()
+		#self.canvas = Canvas3D()
 		self.defaultSettings()
 
 		self.initUI()
@@ -38,11 +37,14 @@ class Display(QtGui.QWidget):
 		self.settings['y_range'] = (-3.0,+3.0)
 
 	def initUI(self):
-		hbox_layout = QtGui.QHBoxLayout()
-		hbox_layout.addWidget(self.calculator)
-		hbox_layout.addWidget(self.canvas)
-		hbox_layout.addStretch()
-		self.setLayout(hbox_layout)
+		# hbox_layout = QtGui.QHBoxLayout()
+		# hbox_layout.addWidget(self.calculator)
+		# hbox_layout.addWidget(self.canvas)
+		#hbox_layout.addStretch()
+		grid_layout = QtGui.QGridLayout()
+		grid_layout.addWidget(self.calculator,0,0,2,2)
+		grid_layout.addWidget(self.canvas,0,2,3,7)
+		self.setLayout(grid_layout)
 
 	def insert_function_model(self, function):
 		model = Display.parser.parse(function)
@@ -67,6 +69,7 @@ class Display(QtGui.QWidget):
 		self.canvas.axes.mouse_init()
 		for model in self.models:
 			if model.visible:
+				temp = True
 				#data = model.eval(self.domain)				
 				#self.canvas.axes.plot(self.domain, data)
 				#self.canvas.axes.plot(self.domain, data,color=model.settings['LineColor'], label=str(model.expression),linewidth=model.settings['LineWidth']);
@@ -83,8 +86,7 @@ class Display(QtGui.QWidget):
 					#data = np.arange(20).reshape([4, 5]).copy()
 					#self.canvas.axes.imshow(data, interpolation='nearest')
 					#self.canvas.axes.plot(self.domain, data)
-				#	self.scatter_plot()
-
+					#self.scatter_plot()
 		self.surface_plot()
 		#self.scatter_plot()
 		self.canvas.draw()
