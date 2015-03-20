@@ -22,9 +22,9 @@ class Controller():
 
 	def createModel(self, input, isFile):
 		if isFile:
-			return ModelCreator.createModelFromFile(self.inputhandler.parser, input)
+			return ModelCreator.createModelFromFile(self.inputhandler.fileformathandler, input)
 		else:
-			return ModelCreator.createModelFromExpression(self.inputhandler.fileformathandler, input)
+			return ModelCreator.createModelFromExpression(self.inputhandler.parser, input)
 
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
