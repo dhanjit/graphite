@@ -25,7 +25,7 @@ class Model:
 class Model2D(Model):
 
 	def __init__(self, expression=None):
-		super(Model2D, self).__init__()
+		super(Model2D,self).__init__()
 		self.expression = expression
 		self.type = '2d'
 	

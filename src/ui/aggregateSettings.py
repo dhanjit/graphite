@@ -6,7 +6,7 @@ from PyQt4.QtCore import *
 
 class Customize(QWidget):
 
-    def __init__(self):
+    def __init__(self,display):
         super(Customize,self).__init__()
 
         self.axis = "x"
@@ -18,8 +18,8 @@ class Customize(QWidget):
         self.xscaletype = "linear"
         self.yscaletype = "linear"
         self.zscaletype = "linear"
-        self.autolayout = True
-
+        self.autolayout = False
+        self.display = display
         self.setui()
         self.show()
 
@@ -103,12 +103,12 @@ class Customize(QWidget):
         self.setLayout(layout)
 
         self.connect(self.facecolourbtn,SIGNAL("clicked()"),self.setColor)
-        self.connect(self.axisbtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.axisbtn,SIGNAL("activated(QString)"),self.setCombo)
         self.connect(self.gridset,SIGNAL(" stateChanged(int)"),self.setCheck)
         self.connect(self.autolayoutbox,SIGNAL(" stateChanged(int)"),self.setCheck)
-        self.connect(self.xscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
-        self.connect(self.yscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
-        self.connect(self.zscalebtn,SIGNAL("valueChanged(int)"),self.setCombo)
+        self.connect(self.xscalebtn,SIGNAL("activated(QString)"),self.setCombo)
+        self.connect(self.yscalebtn,SIGNAL("activated(QString)"),self.setCombo)
+        self.connect(self.zscalebtn,SIGNAL("activated(QString)"),self.setCombo)
         self.connect(self.applybtn,SIGNAL("clicked()"),self.applySettings)
         self.connect(self.defaultbtn,SIGNAL("clicked()"),self.defaultSettings)
 
@@ -119,16 +119,16 @@ class Customize(QWidget):
             btn.setStyleSheet("background-color:"+colordialog.name())
             self.facecolour = QColor(colordialog.name())
 
-    def setCombo(self):
+    def setCombo(self,text):
         sender = self.sender()
         if(sender==self.axisbtn):
-            self.axis = str(self.sender().text())
+            self.axis = str(text)
         elif(sender==self.xscalebtn):
-            self.xscaletype = str(self.sender().text())
+            self.xscaletype = str(text)
         elif(sender==self.yscalebtn):
-            self.xscaletype = str(self.sender().text())
+            self.xscaletype = str(text)
         else:
-            self.xscaletype = str(self.sender().text())
+            self.xscaletype = str(text)
 
 
     def setCheck(self,state):
@@ -171,6 +171,18 @@ class Customize(QWidget):
         settings["yscale"] = self.yscaletype
         settings["zscale"] = self.zscaletype
 
+        self.display.settings["axis"] = settings["axis"]
+        self.display.settings["xrange"] = settings["xrange"]
+        self.display.settings["yrange"] = settings["yrange"]
+        self.display.settings["zrange"] = settings["zrange"]
+        self.display.settings["facecolour"] = settings["facecolour"]
+        self.display.settings["grid"] = settings["grid"]
+        self.display.settings["autolayout"] = settings["autolayout"]
+        self.display.settings["xscale"] = settings["xscale"]
+        self.display.settings["yscale"] = settings["yscale"]
+        self.display.settings["zscale"] = settings["zscale"]
+        print self.display.settings
+
     def defaultSettings(self):
         self.axis = "x"
         self.range_x = arange(-3.0,3.0,0.2)
@@ -186,8 +198,8 @@ class Customize(QWidget):
 
 
 
-app = QApplication(sys.argv)
-setting = Customize()
-app.exec_()
+# app = QApplication(sys.argv)
+# setting = Customize()
+# app.exec_()
 
 
