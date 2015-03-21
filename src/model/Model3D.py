@@ -11,4 +11,5 @@ class Model3D(Model):
 		return self.plottable3d
 
 	def getPlottable(self, type, domain):
+		print('here3d')
 		return self.eval(domain)

@@ -8,7 +8,7 @@ class Viewport(QWidget):
 		super(Viewport, self).__init__()
 		# self.controller = controller
 		self.canvas2d = Canvas2D()
-		self.canvas3d = Canvas2D()
+		self.canvas3d = Canvas3D()
 		self.canvas = { '2D': self.canvas2d, '3D': self.canvas3d }
 		self.canvascontainer = None
 		self.canvastype = '2D'
@@ -28,9 +28,12 @@ class Viewport(QWidget):
 		self.canvas[self.canvastype].axes.clear()
 		self.plot(plottables = aggregator.getPlottables())
 		self.canvas[self.canvastype].draw()
-		self.showCanvas()
 
 	def plot(self, plottables):
+		print plottables
+		print len(plottables[0].x)
+		print len(plottables[0].y)
+		print len(plottables[0].z)
 		for plottable in plottables:
 #			print plottable
 			self.canvas[self.canvastype].plot(plottable)
@@ -51,6 +54,8 @@ class Viewport(QWidget):
 			self.canvascontainer.setCurrentIndex(1)
 		else:
 			self.canvascontainer.setCurrentIndex(1)
+		self.canvascontainer.update()
+		print("foo2")
 
 	def updateSettings(self):
 		self.canvas[self.canvastype].updateSettings()

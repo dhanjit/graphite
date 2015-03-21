@@ -21,7 +21,7 @@ class Model(object):
 	def eval(self, domain):
 		raise NotImplementedError("Subclass must implement abstract method")
 
-	def getPlottable(self, domain):
+	def getPlottable(self, type, domain):
 		raise NotImplementedError("Subclass must implement abstract method")
 
 # class Model2D(Model):

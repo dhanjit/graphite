@@ -11,7 +11,7 @@ class Parser(object):
 
     def parse(self, string):
         self.checkConsistency(string)
-
+        print(self.type)
         if self.type == '3D':
             return Expression3D(self.expression)
         else:

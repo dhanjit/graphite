@@ -12,6 +12,7 @@ class Plottable3D(Plottable):
 		for point in points:
 			self.x.append(point.getX())
 			self.y.append(point.getY())
+			self.z.append(point.getZ())
 
 	def setPoints(self,x,y,z):
 		self.x = x
