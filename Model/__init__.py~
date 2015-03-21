@@ -1,2 +1,0 @@
-from model2D import model2D
-from model3D import model3D
