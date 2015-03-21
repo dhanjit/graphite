@@ -1,10 +1,9 @@
-# from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-# from mpl_toolkits.mplot3d import Axes3D
 # from PyQt4 import QtGui, QtCore
-from Canvas import Canvas
+from src.ui.canvas import Canvas
 
-class Canvas2D(Canvas):
+class Canvas2D(FigureCanvas):
 	""" this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 	def __init__(self, parent=None):
 		

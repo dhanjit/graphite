@@ -1,4 +1,5 @@
-from Plottable import Plottable
+from src.model.Plottable import Plottable
+
 class Plottable2D(Plottable):
 
 	def __init__(self, points=list(), x=list(), y=list()):

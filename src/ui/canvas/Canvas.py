@@ -3,7 +3,7 @@ from matplotlib.figure import Figure
 
 
 class Canvas(FigureCanvas):
-	def __init__(self, figure=Figure()):
+	def __init__(self, figure=Figure(facecolor='#FFFFFF')):
 		super(Canvas,self).__init__(figure)
 		self.fig = figure
 

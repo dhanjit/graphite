@@ -26,19 +26,15 @@ class Viewport(QWidget):
 	def updateCanvas(self, aggregator):
 		self.canvastype = aggregator.getCurrentType(default='3D')
 		self.canvas[self.canvastype].axes.clear()
-
-		print self.canvastype
-		print 'yoyo'
-
 		self.plot(plottables = aggregator.getPlottables())
 
 		self.canvas[self.canvastype].draw()
 
 	def plot(self, plottables):
-		print plottables
-		print len(plottables[0].x)
-		print len(plottables[0].y)
-		print len(plottables[0].z)
+		# print plottables
+		# print len(plottables[0].x)
+		# print len(plottables[0].y)
+		# print len(plottables[0].z)
 		for plottable in plottables:
 #			print plottable
 			self.canvas[self.canvastype].plot(plottable)

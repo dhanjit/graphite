@@ -1,7 +1,8 @@
-from Model2D import Model2D
 from sympy import Symbol
 from sympy import lambdify
-from Plottable2D import Plottable2D
+from src.model.Model2D import Model2D
+from src.model.Plottable2D import Plottable2D
+
 class Expression2DModel(Model2D):
 
 	def __init__(self, expression2D):

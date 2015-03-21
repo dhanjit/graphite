@@ -30,7 +30,7 @@ class FileFormatHandler(object):
 					typer="3D"
 					pl.append(Point3D(int(store[0]),int(store[1]),int(store[2])))
 				else:
-					print "Wrong Input Format"
+					print("Wrong Input Format")
 					break
 			else:
 				if typer==str(len(store))+"D":
@@ -39,10 +39,10 @@ class FileFormatHandler(object):
 					elif len(store)==3:
 						pl.append(Point3D(int(store[0]),int(store[1]),int(store[2])))
 					else:
-						print "Wrong Input Format"
+						print("Wrong Input Format")
 						break
 				else:
-					print "Wrong Input Format"
+					print("Wrong Input Format")
 					break
 			lineNumber+=1
 

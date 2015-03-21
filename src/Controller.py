@@ -38,7 +38,7 @@ class Controller():
 	def updateViewport(self):
 		#self.viewport.updateCanvas(self.aggregator)
 		self.viewport.updateSettings()
-		print self.viewport.canvastype
+		print(self.viewport.canvastype)
 		self.viewport.updateCanvas(self.aggregator)
 		self.viewport.showCanvas()
 

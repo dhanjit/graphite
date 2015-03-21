@@ -1,4 +1,5 @@
-from Model import Model
+from src.model.Model import Model
+
 class Model2D(Model):
 
 	def __init__(self,plottable2d=None):

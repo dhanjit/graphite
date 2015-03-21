@@ -1,11 +1,11 @@
-from Expression2D import Expression2D
-from Expression3D import Expression3D
-from Expression2DModel import Expression2DModel
-from Expression3DModel import Expression3DModel
-from Model2D import Model2D
-from Model3D import Model3D
-from Plottable2D import Plottable2D
-from Plottable3D import Plottable3D
+from src.model.Expression2D import Expression2D
+from src.model.Expression3D import Expression3D
+from src.model.Expression2DModel import Expression2DModel
+from src.model.Expression3DModel import Expression3DModel
+from src.model.Model2D import Model2D
+from src.model.Model3D import Model3D
+from src.model.Plottable2D import Plottable2D
+from src.model.Plottable3D import Plottable3D
 
 class ModelCreator():
 	@staticmethod
