@@ -21,7 +21,7 @@ class Canvas3D(Canvas):
 
 	def plot(self, plottable3D):
 		#self.axes.scatter(self.data['x'], self.data['y'], self.data['z'], c='r', marker='o')
-		self.axes.plot_surface(data['x'], data['y'], data['z'], rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
 			#self.draw()
 
 	def updateSettings(self):
