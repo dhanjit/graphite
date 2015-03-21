@@ -36,7 +36,8 @@ class Controller():
 		print('model added to aggregator')
 
 	def updateViewport(self):
-		self.viewport.updateView(self.aggregator)
+		self.viewport.updateSettings()
+		self.viewport.updateCanvas(self.aggregator)
 #		self.viewport.canvas.axes.clear()
 #		self.draw_canvas()
 
