@@ -13,6 +13,7 @@ class Expression3DModel(Model3D):
 
 	def eval(self, domain):
 		domain['x'], domain['y'] = np.meshgrid(domain['x'], domain['y'])
+
 		x = Symbol('x')
 		y = Symbol('y')
 		f = lambdify((x, y), self.expression, "numpy")
