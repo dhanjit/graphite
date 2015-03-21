@@ -1,4 +1,3 @@
-__author__ = 'batman'
 import sympy
 from src.model.Expression2D import *
 from src.model.Expression3D import *
@@ -11,7 +10,7 @@ class Parser(object):
 		self.formatted = ''
 
 	def parse(self, string):
-		self.checkConsistency(self.expression)
+		self.checkConsistency(string)
 
 		if self.type == '3D':
 			return Expression3D(self.expression)
@@ -19,9 +18,12 @@ class Parser(object):
 			return Expression2D(self.expression)
 
 	def checkConsistency(self, string):
+		print(string)
 		type = '2D'
 		string = self.makeSympifiable(string)
 		self.type = type
+		print(string)
+		string = str(string)
 		self.expression = sympy.sympify(string)
 
 	def makeSympifiable(self, string):

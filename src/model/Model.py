@@ -12,8 +12,10 @@ from src.Settings import Settings
 class Model(object):
 
 	def __init__(self):
+		print('inModel__init__')
 		self.settings = Settings()
 		self.visible = True
+		print('outModel__init__')
 
 
 

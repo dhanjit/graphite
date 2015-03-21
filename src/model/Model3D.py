@@ -2,7 +2,7 @@
 from .Model import Model
 class Model3D(Model):
 
-	def __init__(self,plottable3d):
+	def __init__(self,plottable3d=None):
 		super(Model3D, self).__init__()
 		self.plottable3d = plottable3d
 

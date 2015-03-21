@@ -21,10 +21,12 @@ class Viewport(QWidget):
 		self.setLayout(hbox_layout)
 
 	def updateView(self, aggregator):
-		self.canvas2d.axes.clear()
+		self.canvas.axes.clear()
 		self.plot(aggregator)
 
 	def plot(self, aggregator):
 		for data in aggregator.genSelectedModelData():
-			self.canvas2d.axes.plot(aggregator.domain, data)
-		self.canvas2d.draw()
+			print('plotting')
+			self.canvas.axes.plot(data['x'], data['y'])
+		self.canvas.draw()
+		print('plotted')

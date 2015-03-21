@@ -15,20 +15,25 @@ class Controller():
 
 		self.inputhandler = inputhandler
 
-	def plotInput(self, input, isFile):
-		model = self.createModel(input, isFile)
+	def plotInput(self, input, isfile):
+		model = self.createModel(input, isfile)
+		print('foooooooo')
 		self.addModelToAggregator(model)
 		self.updateViewport()
 
-	def createModel(self, input, isFile):
-		if isFile:
-			return ModelCreator.createModelFromFile(self.inputhandler.fileformathandler, input)
+	def createModel(self, input, isfile):
+		if isfile:
+			model = ModelCreator.createModelFromFile(self.inputhandler.fileformathandler, input)
 		else:
-			return ModelCreator.createModelFromExpression(self.inputhandler.parser, input)
+			model = ModelCreator.createModelFromExpression(self.inputhandler.parser, input)
+		#print('return createModel')
+		return model
 
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
 		self.aggregator.clearSelection()
+		self.aggregator.selectModel(-1) #-1 for last model
+		print('model added to aggregator')
 
 	def updateViewport(self):
 		self.viewport.updateView(self.aggregator)

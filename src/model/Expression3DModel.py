@@ -5,7 +5,7 @@ class Expression3DModel(Model3D):
 
 	def __init__(self,expression3D):
 		super(Expression3DModel, self).__init__()
-		self.expression = expression3D
+		self.expression = expression3D.expr
 
 	def eval(self, domain):
 		x,y = Symbol('x y')

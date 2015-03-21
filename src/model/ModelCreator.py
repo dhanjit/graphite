@@ -11,7 +11,9 @@ class ModelCreator():
 	@staticmethod
 	def createModelFromExpression(parser,string):
 		expr = parser.parse(string)
+		print('parsed')
 		if isinstance(expr,Expression2D):
+			print('isExpression2D')
 			return Expression2DModel(expr)
 		elif isinstance(expr,Expression3D) :
 			return Expression3DModel(expr)
