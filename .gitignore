@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+
+*.7z
+*.gz
+*.rar
+*.tar
+*.zip
+
+.idea/
+
