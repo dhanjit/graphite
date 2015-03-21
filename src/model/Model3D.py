@@ -8,7 +8,7 @@ class Model3D(Model):
 		self.type = '3D'
 
 	def eval(self, domain):
-		return self.plottable3d.points
+		return self.plottable3d
 
 	def getPlottable(self, type, domain):
 		return self.eval(domain)

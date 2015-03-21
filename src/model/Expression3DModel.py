@@ -1,6 +1,7 @@
 from sympy import Symbol
 from sympy import lambdify
-from .Model3D import Model3D
+from Model3D import Model3D
+from Plottable3D import Plottable3D
 import numpy as np
 
 class Expression3DModel(Model3D):
@@ -15,6 +16,6 @@ class Expression3DModel(Model3D):
 		x = Symbol('x')
 		y = Symbol('y')
 		f = lambdify((x, y), self.expression, "numpy")
-		domain['z'] = f(domain['x'], domain['y'])
-		return domain
+		plottable = Plottable3D( x=domain['x'], y=domain['y'], z=f(domain['x'], domain['y']))
+		return plottable
 

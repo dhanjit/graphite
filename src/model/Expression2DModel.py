@@ -1,7 +1,7 @@
 from Model2D import Model2D
 from sympy import Symbol
 from sympy import lambdify
-
+from Plottable2D import Plottable2D
 class Expression2DModel(Model2D):
 
 	def __init__(self, expression2D):
@@ -14,7 +14,5 @@ class Expression2DModel(Model2D):
 	def eval(self, domain):
 		x = Symbol('x')
 		f = lambdify(x, self.expression, "numpy")
-		print domain
-		domain['y'] = f(domain['x'])
-		return domain
-		#return self.data
+		plottable = Plottable2D(x=domain['x'], y=f(domain['x']))
+		return plottable
