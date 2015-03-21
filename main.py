@@ -42,7 +42,7 @@ class plotterApp(QtGui.QMainWindow):
 		self.session.close_tab()
 
 	def save_tab(self):
-		self.session.save_tab()
+		self.session.save_tab(index, filename)
 	
 	def new_session(self):
 		self.session.close()

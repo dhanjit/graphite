@@ -21,8 +21,8 @@ class Canvas3D(FigureCanvas):
 		FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable3D):
-		self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
-		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
 
 	def updateSettings(self):
 		self.axes.mouse_init()

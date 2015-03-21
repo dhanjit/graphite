@@ -23,6 +23,8 @@ class Aggregator(QtGui.QWidget):
 		self.domain = init
 		self.domain['x'] = arange(-5, 5, 0.25)
 		self.domain['y'] = arange(-5, 5, 0.25)
+		# self.domain['x'] = arange(0.0, 3.0, 0.1)
+		# self.domain['y'] = arange(0.0, 3.0, 0.1)
 		self.domain['z'] = arange(0.0, 3.0, 0.1)
 
 	def clearSelection(self):

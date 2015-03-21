@@ -37,5 +37,5 @@ class Session(object):
 		tabs.removeTab(index)
 
 	#shouldn't be save Tab
-	def save_tab(self,index,filename):
+	def save_tab(self, index, filename):
 		self.controllers[index].viewport.canvas.save_figure(filename)
