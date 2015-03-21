@@ -1,4 +1,4 @@
-from PyQt4.QtGui import QWidget, QHBoxLayout
+from PyQt4.QtGui import QWidget, QHBoxLayout, QStackedWidget
 from src.ui.canvas.Canvas3D import Canvas3D
 from src.ui.canvas.Canvas2D import Canvas2D
 
@@ -9,24 +9,42 @@ class Viewport(QWidget):
 		# self.controller = controller
 		self.canvas2d = Canvas2D()
 		self.canvas3d = Canvas3D()
+		self.canvas = { '2D': self.canvas2d, '3D': self.canvas3d }
+		self.canvascontainer = None
+		self.canvastype = '2D'
 
-		self.canvas = self.canvas2d #default show 2d
 		#	    self.settingsWidget
 		self.initUI()
 
 	def initUI(self):
 		hbox_layout = QHBoxLayout()
-		hbox_layout.addWidget(self.canvas)
+		hbox_layout.addWidget(self.canvascontainer)
 		hbox_layout.addStretch()
 		self.setLayout(hbox_layout)
 
 	def updateView(self, aggregator):
-		self.canvas.axes.clear()
-		self.plot(aggregator)
+		self.canvastype = aggregator.getCurrentType(default='3D')
+		self.canvas[self.canvastype].axes.clear()
+		self.plot(plottables = aggregator.getPlottables())
+		self.showCanvas()
 
-	def plot(self, aggregator):
-		for data in aggregator.genSelectedModelData():
-			print('plotting')
-			self.canvas.axes.plot(data['x'], data['y'])
-		self.canvas.draw()
-		print('plotted')
+	def plot(self, plottables):
+		for plottable in plottables:
+			self.canvas[self.canvastype].plot(plottable)
+
+	def setCanvasType(self,type='2D'):
+		self.canvastype = type
+
+	def initCanvasContainer(self):
+		container = QStackedWidget()
+		container.insertWidget(0, self.canvas2d)
+		container.insertWidget(1, self.canvas3d)
+		self.canvascontainer = container
+
+	def showCanvas(self):
+		if self.canvastype == '2D':
+			self.canvascontainer.setCurrentIndex(0)
+		elif self.canvastype == '3D':
+			self.canvascontainer.setCurrentIndex(1)
+		else:
+			self.canvascontainer.setCurrentIndex(1)
