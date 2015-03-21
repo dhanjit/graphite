@@ -8,6 +8,7 @@ class Expression2DModel(Model2D):
 		print('inExpression2DModel__init__')
 		super(Expression2DModel, self).__init__()
 		self.expression = expression2D.expr
+		self.type = '2D'
 		print('outExpression2DModel__init__')
 
 	def eval(self, domain):

@@ -5,6 +5,10 @@ class Model3D(Model):
 	def __init__(self,plottable3d=None):
 		super(Model3D, self).__init__()
 		self.plottable3d = plottable3d
+		self.type = '3D'
 
 	def eval(self, domain):
 		return self.plottable3d.points
+
+	def getPlottable(self, type, domain):
+		return self.eval(domain)
