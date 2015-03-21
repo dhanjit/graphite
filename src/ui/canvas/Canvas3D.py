@@ -21,19 +21,8 @@ class Canvas3D(FigureCanvas):
 		FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable3D):
-		# print('chut')
-		# print len(plottable3D.x)
-		# print len(plottable3D.y)
-		# print len(plottable3D.z)
-
-		x = np.random.random_sample(100)
-		y = np.random.random_sample(100)
-		z = np.random.random_sample(100)
-
-		# self.axes.plot(x, y, z)
-		#self.axes.scatter(self, plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
-		# self.axes.scatter(self, x, y, z, c='r', marker='o')
-		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
 
 	def updateSettings(self):
 		self.axes.mouse_init()

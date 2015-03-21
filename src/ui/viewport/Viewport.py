@@ -29,13 +29,8 @@ class Viewport(QWidget):
 
 		self.canvas[self.canvastype].draw()
 
-	def plot(self, plottables):
-		# print plottables
-		# print len(plottables[0].x)
-		# print len(plottables[0].y)
-		# print len(plottables[0].z)
+	def plot(self, plottables):		
 		for plottable in plottables:
-#			print plottable
 			self.canvas[self.canvastype].plot(plottable)
 
 	def setCanvasType(self,type='2D'):
@@ -54,8 +49,7 @@ class Viewport(QWidget):
 			self.canvascontainer.setCurrentIndex(1)
 		else:
 			self.canvascontainer.setCurrentIndex(1)
-		self.canvascontainer.update()
-		print("foo2")
+		self.canvascontainer.update()		
 
 	def updateSettings(self):
 		self.canvas[self.canvastype].updateSettings()
