@@ -12,7 +12,7 @@ class Parser(object):
 
     def parse(self, string):
         self.checkConsistency(string)
-
+        print(self.type)
         if self.type == '3D':
             return Expression3D(self.expression)
         else:
@@ -20,7 +20,8 @@ class Parser(object):
 
     def checkConsistency(self, string):
         print 'parser ',(string)
-        string = self.make_sympifiable(string)
+        string = self.makeSympifiable(string)
+        self.type = type
         string = str(string)
         try:
 			self.expression = sympy.sympify(string)
@@ -35,7 +36,7 @@ class Parser(object):
         except Exception, e:
 	        print('Not Parsable '+repr(e))
 
-    def make_sympifiable(self, string):
+    def makeSympifiable(self, string):
         temp = string
 
         if '=' in temp:

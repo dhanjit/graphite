@@ -15,7 +15,7 @@ class Canvas(FigureCanvas):
 		self.fig.savefig(filename)
 		#self.fig.savefig(filename)
 
-	def plot(self,aggregator):
+	def plot(self,plottable):
 		raise NotImplementedError("Subclass not implemented function")
 
 	def updateSettings(self):

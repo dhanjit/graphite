@@ -1,6 +1,7 @@
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from Canvas import Canvas
+from mpl_toolkits.mplot3d import Axes3D
 #import numpy as np
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
@@ -21,8 +22,12 @@ class Canvas3D(Canvas):
 		FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable3D):
-		#self.axes.scatter(self.data['x'], self.data['y'], self.data['z'], c='r', marker='o')
-		self.axes.plot_surface(data['x'], data['y'], data['z'], rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		print('chut')
+		print len(plottable3D.x)
+		print len(plottable3D.y)
+		print len(plottable3D.z)
+		#self.axes.scatter(self, plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
 			#self.draw()
 
 	def updateSettings(self):

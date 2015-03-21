@@ -9,7 +9,7 @@ class Model2D(Model):
 		print('outModel2D__out__')
 
 	def eval(self, domain):
-		return self.plottable2d.points
+		return self.plottable2d
 
 	def getPlottable(self, type, domain):
 		return self.eval(domain)

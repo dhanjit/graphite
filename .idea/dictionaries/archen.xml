@@ -4,6 +4,8 @@
       <w>canvascontainer</w>
       <w>canvastype</w>
       <w>currenttype</w>
+      <w>inputhandler</w>
+      <w>plottables</w>
       <w>viewport</w>
     </words>
   </dictionary>
