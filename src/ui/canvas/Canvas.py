@@ -20,3 +20,4 @@ class Canvas(FigureCanvas):
 
 	def updateSettings(self):
 		raise NotImplementedError("Subclass not implemented function")
+	
