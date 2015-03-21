@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 
-class Canvas3D(FigureCanvas):
+class Canvas3D(Canvas):
 	def __init__(self, parent=None, width=6.5, height=5.5, dpi=100, sharex=None, sharey=None, fig=None):
 		self.fig = Figure(figsize=(width, height), dpi=dpi, facecolor='#FFFFFF')
 		super(Canvas3D, self).__init__(figure=self.fig)

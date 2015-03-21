@@ -3,7 +3,7 @@ from matplotlib.figure import Figure
 
 
 class Canvas(FigureCanvas):
-	def __init__(self, figure=Figure(facecolor='#FFFFFF')):
+	def __init__(self, figure=None):
 		super(Canvas,self).__init__(figure)
 		self.fig = figure
 
@@ -13,7 +13,6 @@ class Canvas(FigureCanvas):
 	def saveFigure(self,filename):
 		filename=str(filename)
 		self.fig.savefig(filename)
-		#self.fig.savefig(filename)
 
 	def plot(self,plottable):
 		raise NotImplementedError("Subclass not implemented function")

@@ -2,7 +2,6 @@ from PyQt4.QtGui import QWidget, QHBoxLayout, QStackedWidget
 from src.ui.canvas.Canvas3D import Canvas3D
 from src.ui.canvas.Canvas2D import Canvas2D
 
-
 class Viewport(QWidget):
 	def __init__(self):
 		super(Viewport, self).__init__()
