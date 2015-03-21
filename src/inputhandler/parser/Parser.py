@@ -3,7 +3,6 @@ from src.model.Expression2D import *
 from src.model.Expression3D import *
 
 class Parser(object):
-
     def __init__(self):
         self.expression = ''
         self.errors = []
@@ -34,16 +33,16 @@ class Parser(object):
 				self.type = 'NP'
 				raise Exception('Not plottable in 2d or 3d!')
         except Exception, e:
-	        print('Not Parsable '+repr(e))
+            print('Not Parsable '+repr(e))
 
     def makeSympifiable(self, string):
         temp = string
 
         if '=' in temp:
-	        z = temp.split('=')[0]
-	        temp = temp.split('=')[1]
-	        if 'z' in z:
-		        self.type = '3D'
+            z = temp.split('=')[0]
+            temp = temp.split('=')[1]
+            if 'z' in z:
+                self.type = '3D'
 
         for i in range(10):
             if str(i)+'x' in temp:
@@ -57,5 +56,19 @@ class Parser(object):
 		for i in range(10):
 			if str(i)+'x' in temp:
 				temp = temp.replace(str(i)+"x",str(i)+"*x")
+
+        if 'x(' in temp:
+            temp = temp.replace('x(','x*(')
+        if 'y(' in temp:
+            temp = temp.replace('y(','y*(')
+
+        if 'xy' in temp:
+            temp = temp.replace('xy','x*y')
+        if 'yx' in temp:
+            temp = temp.replace('yx','y*x')
+
+        for c in ['s','c','e','x','y','a','t','l']:
+            if ')'+c in temp:
+                temp = temp.replace(')'+c,')*'+c)
 
         return temp

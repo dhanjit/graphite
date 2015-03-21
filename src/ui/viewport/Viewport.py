@@ -33,7 +33,7 @@ class Viewport(QWidget):
 		print plottables
 		print len(plottables[0].x)
 		print len(plottables[0].y)
-		print len(plottables[0].z)
+		# print len(plottables[0].z)
 		for plottable in plottables:
 #			print plottable
 			self.canvas[self.canvastype].plot(plottable)
