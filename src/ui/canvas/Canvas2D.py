@@ -3,7 +3,7 @@ from matplotlib.figure import Figure
 # from PyQt4 import QtGui, QtCore
 from src.ui.canvas import Canvas
 
-class Canvas2D(Canvas):
+class Canvas2D(FigureCanvas):
 	""" this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 	def __init__(self, parent=None):
 		
