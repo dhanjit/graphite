@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e630fb6b-c7f6-4df1-a7b9-4ded061085ed" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/input/Calculator.py" afterPath="$PROJECT_DIR$/src/ui/input/Calculator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/canvas/Canvas2D.py" afterPath="$PROJECT_DIR$/src/ui/canvas/Canvas2D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/canvas/Canvas3D.py" afterPath="$PROJECT_DIR$/src/ui/canvas/Canvas3D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Expression2DModel.py" afterPath="$PROJECT_DIR$/src/model/Expression2DModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Expression3DModel.py" afterPath="$PROJECT_DIR$/src/model/Expression3DModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/inputhandler/filehandler/FileFormatHandler.py" afterPath="$PROJECT_DIR$/src/inputhandler/filehandler/FileFormatHandler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/input/FileVisualizer.py" afterPath="$PROJECT_DIR$/src/ui/input/FileVisualizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Model2D.py" afterPath="$PROJECT_DIR$/src/model/Model2D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Model3D.py" afterPath="$PROJECT_DIR$/src/model/Model3D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Plottable.py" afterPath="$PROJECT_DIR$/src/model/Plottable.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Plottable2D.py" afterPath="$PROJECT_DIR$/src/model/Plottable2D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Plottable3D.py" afterPath="$PROJECT_DIR$/src/model/Plottable3D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Point2D.py" afterPath="$PROJECT_DIR$/src/model/Point2D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/archen.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/archen.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/inputhandler/parser/Parser.py" afterPath="$PROJECT_DIR$/src/inputhandler/parser/Parser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="graphite.iws" />
@@ -40,16 +27,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="168" max-vertical-offset="720">
-              <caret line="24" column="76" selection-start-line="24" selection-start-column="76" selection-end-line="24" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Model2D.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Model2D.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,12 +59,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Expression3DModel.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Expression3DModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Expression3DModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="421">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
               <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Parser.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/inputhandler/parser/Parser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5011876" vertical-offset="269" max-vertical-offset="690">
+              <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/model/__init__.py" />
         <option value="$PROJECT_DIR$/src/ui/input/Input.py" />
         <option value="$PROJECT_DIR$/src/session/Session.py" />
-        <option value="$PROJECT_DIR$/src/inputhandler/parser/Parser.py" />
         <option value="$PROJECT_DIR$/src/model/ModelCreator.py" />
         <option value="$PROJECT_DIR$/src/model/Expression3D.py" />
         <option value="$PROJECT_DIR$/src/model/Model.py" />
@@ -190,6 +178,7 @@
         <option value="$PROJECT_DIR$/src/model/Plottable3D.py" />
         <option value="$PROJECT_DIR$/src/model/Expression2DModel.py" />
         <option value="$PROJECT_DIR$/src/model/Expression3DModel.py" />
+        <option value="$PROJECT_DIR$/src/inputhandler/parser/Parser.py" />
       </list>
     </option>
   </component>
@@ -791,12 +780,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/src/inputhandler/parser/Parser.py</url>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
@@ -1088,14 +1071,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/inputhandler/parser/Parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <caret line="0" column="4" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/input/Input.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
@@ -1211,6 +1186,16 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="421">
           <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/inputhandler/parser/Parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5011876" vertical-offset="269" max-vertical-offset="690">
+          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

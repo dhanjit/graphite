@@ -19,7 +19,7 @@ class Parser(object):
 
     def checkConsistency(self, string):
         print 'parser ',(string)
-        string = self.make_sympifiable(string)
+        string = self.makeSympifiable(string)
         self.type = type
         string = str(string)
         self.expression = sympy.sympify(string)
@@ -29,7 +29,7 @@ class Parser(object):
         elif var_num == 1:
             self.type = '2D'
 
-    def make_sympifiable(self, string):
+    def makeSympifiable(self, string):
         temp = string
         if '=' in temp:
             temp = temp.split('=')[1]
