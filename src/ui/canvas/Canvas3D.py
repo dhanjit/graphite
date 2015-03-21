@@ -20,6 +20,11 @@ class Canvas3D(FigureCanvas):
 		#	QtGui.QSizePolicy.Expanding)
 		FigureCanvas.updateGeometry(self)
 
+	def saveFigure(self,filename):
+		filename=str(filename)
+		self.fig.savefig(filename)
+		# raise NotImplementedError("not implemented function")
+
 	def plot(self, plottable3D):
 		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
 		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)

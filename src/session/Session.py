@@ -38,4 +38,4 @@ class Session(object):
 
 	#shouldn't be save Tab
 	def save_tab(self, index, filename):
-		self.controllers[index].viewport.canvas.save_figure(filename)
+		self.controllers[index].viewport.canvas[self.controllers[index].aggregator.getCurrentType(default='3D')].saveFigure(filename)

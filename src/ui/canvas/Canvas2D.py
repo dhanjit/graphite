@@ -16,6 +16,10 @@ class Canvas2D(FigureCanvas):
 			#QtGui.QSizePolicy.Expanding)
 		FigureCanvas.updateGeometry(self)
 
+	def saveFigure(self,filename):
+		filename=str(filename)
+		self.fig.savefig(filename)
+
 	def plot(self, plottable2D):
 		self.axes.plot(plottable2D.x, plottable2D.y)
 
