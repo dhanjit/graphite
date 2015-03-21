@@ -17,3 +17,6 @@ class Canvas(FigureCanvas):
 
 	def plot(self,aggregator):
 		raise NotImplementedError("Subclass not implemented function")
+
+	def updateSettings(self):
+		raise NotImplementedError("Subclass not implemented function")

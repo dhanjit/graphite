@@ -20,8 +20,9 @@ class Canvas2D(Canvas):
 		#FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable2D):
-		for data in plottable2D:
-			self.axes.plot(data['x'], data['y'])
-		self.draw()
+		self.axes.plot(plottable2D['x'], plottable2D['y'])
 
+	def updateSettings(self):
+		pass
+#		self.draw()
 
