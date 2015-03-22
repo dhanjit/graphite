@@ -81,7 +81,7 @@ class TableInput(QTableWidget):
 		self.setData()
 
 	def setData(self):
-		print self.plottable.x
+		print(self.plottable.x)
 		for row in range(self.plottable.size()):
 			self.setItem(row,0,QTableWidgetItem(str(self.plottable.x[row])))
 			self.setItem(row,1,QTableWidgetItem(str(self.plottable.y[row])))
