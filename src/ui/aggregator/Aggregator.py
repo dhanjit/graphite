@@ -1,7 +1,10 @@
+# from mathtex.mathtex_main import Mathtex
+# from mathtex.fonts import UnicodeFonts
 from PyQt4 import QtGui, QtCore
 from numpy import arange
 from src.Settings import Settings
 from src.ui.aggregator.settingsTable import *
+import matplotlib.pyplot as plt
 
 class Aggregator(QtGui.QWidget):
 	def __init__(self, controller):
@@ -17,10 +20,22 @@ class Aggregator(QtGui.QWidget):
 		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
+		
+	def generateImage(self,latexString,number):
+		latexString="$"+latexString+"$"
+		plt.text(0.0, 0.5,latexString,fontsize=150)
+		fig = plt.gca()
+		fig.axes.get_xaxis().set_visible(False)
+		fig.axes.get_yaxis().set_visible(False)
+		plt.savefig("pic"+str(number)+".png")
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
-		function = QtGui.QCheckBox(model.getRenderedView())
+		# widget = QtGui.QWidget()
+		latexString=model.getRenderedView()
+		self.generateImage(latexString,len(self.models))
+		function = QtGui.QCheckBox(latexString)
+
 		function.setStyleSheet("color: black; background-color: red; font: bold")
 		function.setChecked(True)
 		self.functions.append(function)
