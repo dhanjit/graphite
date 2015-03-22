@@ -20,3 +20,4 @@ class FileVisualizer(QWidget):
 	def setTableData(self, plottable):
 		self.tableinput.updateTable(plottable)
 
+

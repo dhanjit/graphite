@@ -3,7 +3,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import sys
 
-class ModelSettingsTable(QtGui.QWidget):
+class ModelSettingsTable(QtGui.QDialog):
 
 	def __init__(self,model,type):
 		super(ModelSettingsTable,self).__init__()
@@ -14,7 +14,7 @@ class ModelSettingsTable(QtGui.QWidget):
 		elif(type=="3D"):
 			self.initUI3D()
 		self.center()
-		self.show()
+		# self.show()
 
 
 	def initUI2D(self):
@@ -102,7 +102,8 @@ class ModelSettingsTable(QtGui.QWidget):
 		self.temp["Line Fill"] = str(text)
 
 	def save(self):
-		self.modelSet = self.temp
+		for key in self.temp:
+			self.modelSet[key] = self.temp[key]
 		self.close()
 
 	def center(self):
