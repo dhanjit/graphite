@@ -98,6 +98,7 @@ class Aggregator(QtGui.QWidget):
 		for i in range(len(self.settings_btn)):
 			if(self.sender()==self.settings_btn[i]):
 				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
+				self.table.exec_()
 
 
 	def select(self):
