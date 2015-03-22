@@ -4,7 +4,7 @@ Main Application Start
 
 import sys
 from PyQt4 import QtGui
-from src import Session
+from src.session.Session import Session
 from src.ui import *
 
 class plotterApp(QtGui.QMainWindow):
@@ -149,7 +149,7 @@ class plotterApp(QtGui.QMainWindow):
 		doc_action = QtGui.QAction('Documentation', self)
 		doc_action.setShortcut('Ctrl+H')
 		doc_action.setStatusTip('Documentation for the software')
-		doc_action.triggered.connect('''implement the function to create doc_action''')
+		# doc_action.triggered.connect('''implement the function to create doc_action''')
 		help_menu.addAction(doc_action)
 
 		about_action = QtGui.QAction('About', self)
