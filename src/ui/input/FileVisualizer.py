@@ -1,5 +1,5 @@
 from PyQt4.QtGui import QWidget, QVBoxLayout
-from tableinput.TableInput import TableInput
+from src.ui.input.tableinput .TableInput import TableInput
 from src.model.Plottable2D import *
 from src.model.Plottable3D import *
 from src.model.Point2D import *
