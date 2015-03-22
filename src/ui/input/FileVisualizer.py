@@ -1,5 +1,5 @@
 from PyQt4.QtGui import QWidget, QVBoxLayout
-# from tableinput.TableInput import *
+from tableinput.TableInput import TableInput
 from src.model.Plottable2D import *
 from src.model.Plottable3D import *
 from src.model.Point2D import *
@@ -9,8 +9,8 @@ class FileVisualizer(QWidget):
 		super(FileVisualizer,self).__init__()
 		self.controller = controller
 		points = [ Point2D(0,0) ]
-		# self.tableinput = TableInput(plottable=points, type='2D')
-		# self.initUI()
+		self.tableinput = TableInput(plottable=points, type='2D')
+		self.initUI()
 
 	def initUI(self):
 		layout = QVBoxLayout()
@@ -18,4 +18,6 @@ class FileVisualizer(QWidget):
 		layout.addStretch()
 		self.setLayout(layout)
 
+	def setTableData(self, plottable, type):
+		self.tableinput.updateTable(plottable,type)
 

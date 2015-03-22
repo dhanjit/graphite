@@ -11,3 +11,10 @@ class Input(QTabWidget):
 	def initUI(self):
 		self.addTab(self.calculator,"Function")
 		self.addTab(self.filevisualizer,"File")
+
+#		size = QSize(0,0)
+#		qt = self.tabBar().frameGeometry()
+#		self.tabBar().tabSizeHint()
+
+
+
