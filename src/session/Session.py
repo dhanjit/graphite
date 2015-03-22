@@ -14,7 +14,7 @@ class Session(object):
 	def open(self):
 		filename = QtGui.QFileDialog.getOpenFileName(None, "Open Session", "")
 		#self.close()
-		return self.load(filename)
+		return self.load(str(filename))
 
 	def load(self, filename):
 		if os.path.exists(filename):
@@ -60,3 +60,4 @@ class Session(object):
 			controller.aggregator.models = models
 			self.controllers.append(controller)
 			tabs.addTab(controller.tab, "        ")
+			controller.updateViewport()
