@@ -20,7 +20,6 @@ class Parser(object):
     def checkConsistency(self, string):
         print 'parser ',(string)
         string = self.makeSympifiable(string)
-        self.type = type
         string = str(string)
         try:
 			self.expression = sympy.sympify(string)
