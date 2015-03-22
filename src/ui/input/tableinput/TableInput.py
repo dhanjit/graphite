@@ -1,16 +1,17 @@
 from PyQt4.QtGui import QTableWidget, QTableWidgetItem
 from PyQt4 import QtCore
+from src.model.Plottable2D import Plottable2D
 
 class TableInput(QTableWidget):
-	def __init__(self, plottable, type):
+	def __init__(self, plottable=Plottable2D()):
 		super(TableInput,self).__init__()
 
 		self.plottable = plottable
 		self.focusKeyboardOn = False
 		self.headers = []
+		self.initCustoms(type=plottable.getType())
 #		self.headers = TableInput.getHeaders(type)
 
-		self.initCustoms(type)
 		self.initUI()
 
 	@staticmethod
@@ -23,7 +24,7 @@ class TableInput(QTableWidget):
 			raise Exception("Invalid type, No headers")
 
 	def initCustoms(self,type):
-		self.setRowCount(len(self.plottable))
+		self.setRowCount(self.plottable.getDimension())
 		self.headers = TableInput.getHeaders(type)
 		self.setColumnCount(len(self.headers))
 		self.setHeaders(self.headers)
@@ -65,7 +66,7 @@ class TableInput(QTableWidget):
 		elif column == 2 :
 			self.plottable.z[row] = x
 
-	def updateTable(self, plottable, type):
+	def updateTable(self, plottable):
 		self.plottable = plottable
-		self.initCustoms(type)
+		self.initCustoms(type=plottable.getType())
 		self.update()
