@@ -1,7 +1,6 @@
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-
 class Canvas(FigureCanvas):
 	def __init__(self, figure=None):
 		super(Canvas,self).__init__(figure)
