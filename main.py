@@ -24,7 +24,7 @@ class plotterApp(QtGui.QMainWindow):
 
 	def initView(self):
 		self.tabs = QtGui.QTabWidget(self)
-		print(self.session.window)
+		# print(self.session.window)
 		self.new_tab()
 		self.setCentralWidget(self.tabs)
 
