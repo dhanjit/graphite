@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
-from src.Settings import Settings
 from numpy import arange
-from settingsTable import *
+from src.Settings import Settings
+from src.ui.aggregator.settingsTable import *
 
 class Aggregator(QtGui.QWidget):
 	models = []
@@ -9,14 +9,13 @@ class Aggregator(QtGui.QWidget):
 	model_settings = []
 	settings_btn = []
 
-	def __init__(self):
+	def __init__(self, controller):
 		super(Aggregator, self).__init__()
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout()
-#		self.controller = controller  # Check gargbage collection. Causes problems.
+		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
-		# self.initUI()
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
@@ -43,13 +42,10 @@ class Aggregator(QtGui.QWidget):
 		self.initUI(model)
 		self.setDefaultSetting(model.type)
 
-
 	def initDomain(self, init={}):
 		self.domain = init
-		self.domain['x'] = arange(-5, 5, 0.25)
-		self.domain['y'] = arange(-5, 5, 0.25)
-		# self.domain['x'] = arange(0.0, 3.0, 0.1)
-		# self.domain['y'] = arange(0.0, 3.0, 0.1)
+		self.domain['x'] = arange(0.0, 3.0, 0.1)
+		self.domain['y'] = arange(0.0, 3.0, 0.1)
 		self.domain['z'] = arange(0.0, 3.0, 0.1)
 
 	def clearSelection(self):
@@ -74,10 +70,14 @@ class Aggregator(QtGui.QWidget):
 			self.updateCurrentType()
 		return default if not self.currenttype else self.currenttype
 
+	def getModels(self):
+		return [model for model in self.models if model.visible]
+
+	def getPlottablesSettings(self):
+		return [ (self.models[i].getPlottable(type=self.currenttype, domain=self.domain), self.model_settings[i]) for i in range(0,len(self.models)) if self.models[i].visible ]
 
 	def getPlottables(self):
 		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
-
 
 	def setDefaultSetting(self,type):
 		if(type=="2D"):
@@ -92,7 +92,6 @@ class Aggregator(QtGui.QWidget):
 			set["Shade"] = False
 
 		self.model_settings.append(set)
-
 
 	def showpop(self):
 		for i in range(len(self.settings_btn)):

@@ -7,7 +7,7 @@ from .model.ModelCreator import ModelCreator
 class Controller():
 	
 	def __init__(self, inputhandler):
-		self.aggregator = Aggregator()
+		self.aggregator = Aggregator(self)
 		self.input = Input(self)
 		self.viewport = Viewport()
 
@@ -29,17 +29,15 @@ class Controller():
 			model = ModelCreator.createModelFromFile(self.inputhandler.fileformathandler, input)
 		else:
 			model = ModelCreator.createModelFromExpression(self.inputhandler.parser, input)
-		#print('return createModel')
 		return model
 
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
-		self.aggregator.clearSelection()
-		self.aggregator.selectModel(0) #-1 for last model
+		# self.aggregator.clearSelection()
+		# self.aggregator.selectModel(-1) #-1 for last model
 		print('model added to aggregator')
 
 	def updateViewport(self):
-		#self.viewport.updateCanvas(self.aggregator)
 		self.viewport.updateSettings()
 		print(self.viewport.canvastype)
 		self.viewport.updateCanvas(self.aggregator)

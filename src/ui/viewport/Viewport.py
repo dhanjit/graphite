@@ -25,13 +25,16 @@ class Viewport(QWidget):
 	def updateCanvas(self, aggregator):
 		self.canvastype = aggregator.getCurrentType(default='3D')
 		self.canvas[self.canvastype].axes.clear()
-		self.plot(plottables = aggregator.getPlottables())
+		self.plot(plottables = aggregator.getPlottablesSettings())
 
 		self.canvas[self.canvastype].draw()
 
 	def plot(self, plottables):
 		for plottable in plottables:
-			self.canvas[self.canvastype].plot(plottable)
+			data = plottable[0]
+			settings = plottable[1]
+			print(data, settings)
+			self.canvas[self.canvastype].plot(data)
 
 	def setCanvasType(self,type='2D'):
 		self.canvastype = type
