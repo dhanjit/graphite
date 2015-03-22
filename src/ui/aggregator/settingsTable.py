@@ -16,7 +16,6 @@ class ModelSettingsTable(QtGui.QDialog):
 		self.center()
 		# self.show()
 
-
 	def initUI2D(self):
 		table = QtGui.QTableWidget(len(self.modelSet),2)
 		table.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
@@ -36,12 +35,24 @@ class ModelSettingsTable(QtGui.QDialog):
 		fillcombo.addItem("-.")
 		fillcombo.addItem(":")
 		table.setCellWidget(2,1,fillcombo)
-		table.setItem(3,0,QtGui.QTableWidgetItem("Transparency"))
-		transspin = QtGui.QDoubleSpinBox()
-		transspin.setRange(0.0,1.0)
-		transspin.setSingleStep(0.1)
-		table.setCellWidget(3,1,transspin)
-		transspin.setValue(self.modelSet["Transparency"])
+		# table.setItem(3,0,QtGui.QTableWidgetItem("Transparency"))
+		# transspin = QtGui.QDoubleSpinBox()
+		# transspin.setRange(0.0,1.0)
+		# transspin.setSingleStep(0.1)
+		linestylelbl = QtGui.QLabel("Line Style")
+		table.setCellWidget(3,0,linestylelbl)
+		linestylecombo = QtGui.QComboBox()
+		linestylecombo.addItem("")
+		linestylecombo.addItem(".")
+		linestylecombo.addItem(",")
+		linestylecombo.addItem("o")
+		linestylecombo.addItem("v")
+		linestylecombo.addItem("^")
+		linestylecombo.addItem("<")
+		linestylecombo.addItem(">")
+		linestylecombo.addItem("|")
+		table.setCellWidget(3,1,linestylecombo)
+		# transspin.setValue(self.modelSet["Transparency"])
 		table.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
 		table.verticalHeader().setVisible(False)
 		table.resizeColumnsToContents()
@@ -55,6 +66,7 @@ class ModelSettingsTable(QtGui.QDialog):
 		self.connect(colorbtn,QtCore.SIGNAL("clicked()"),self.setColor)
 		self.connect(widthspin,QtCore.SIGNAL("valueChanged(int)"),self.setWidth)
 		self.connect(fillcombo,QtCore.SIGNAL("activated(QString)"),self.setFill)
+		self.connect(linestylecombo,QtCore.SIGNAL("activated(QString)"),self.setStyle)
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.save)
 
 
@@ -91,7 +103,7 @@ class ModelSettingsTable(QtGui.QDialog):
 		if colordialog.isValid():
 			btn = self.sender()
 			btn.setStyleSheet("background-color:"+colordialog.name())
-			self.temp["Color"] = QtGui.QColor(colordialog.name())
+			self.temp["Color"] = colordialog.name()
 
 
 	def setWidth(self):
@@ -100,6 +112,10 @@ class ModelSettingsTable(QtGui.QDialog):
 
 	def setFill(self,text):
 		self.temp["Line Fill"] = str(text)
+
+
+	def setStyle(self,text):
+		self.temp["Line Style"] = str(text)
 
 	def save(self):
 		for key in self.temp:

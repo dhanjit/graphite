@@ -34,7 +34,7 @@ class Viewport(QWidget):
 			data = plottable[0]
 			settings = plottable[1]
 			print(data, settings)
-			self.canvas[self.canvastype].plot(data)
+			self.canvas[self.canvastype].plot(data, settings)
 
 	def setCanvasType(self,type='2D'):
 		self.canvastype = type

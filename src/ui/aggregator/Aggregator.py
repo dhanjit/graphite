@@ -82,13 +82,13 @@ class Aggregator(QtGui.QWidget):
 	def setDefaultSetting(self,type):
 		if(type=="2D"):
 			set = Settings()
-			set["Color"] = QtGui.QColor("red")
+			set["Color"] = QtGui.QColor("red").name()
 			set["Width"] = 1
-			set["Line fill"] = "-"
-			set["Transparency"] = 1.0
+			set["Line Fill"] = "-"
+			set["Line Style"] = ""
 		elif(type=="3D"):
 			set = Settings()
-			set["Color"] = QtGui.QColor("red")
+			set["Color"] = QtGui.QColor("red").name()
 			set["Shade"] = False
 
 		self.model_settings.append(set)
@@ -98,6 +98,8 @@ class Aggregator(QtGui.QWidget):
 			if(self.sender()==self.settings_btn[i]):
 				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
 				self.table.exec_()
+				print self.model_settings[i]
+				self.controller.updateViewport()
 
 
 	def select(self):
