@@ -36,11 +36,10 @@ class TableInput(QTableWidget):
 		self.horizontalHeader().setStretchLastSection(True)
 		self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
 		self.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-
-		self.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
-		self.verticalHeader().setVisible(False)
-		self.resizeColumnsToContents()
-		self.resizeRowsToContents()
+		# self.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
+		# self.verticalHeader().setVisible(False)
+		# self.resizeColumnsToContents()
+		# self.resizeRowsToContents()
 
 	def setHeaders(self, headers=list() ):
 		if len(headers) == 0:
