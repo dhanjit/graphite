@@ -19,7 +19,6 @@ class Aggregator(QtGui.QWidget):
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
-		# widget = QtGui.QWidget()
 		function = QtGui.QCheckBox(model.getRenderedView())
 		function.setStyleSheet("color: black; background-color: red; font: bold")
 		function.setChecked(True)

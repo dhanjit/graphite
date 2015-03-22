@@ -1,4 +1,4 @@
-from PyQt4.QtGui import QTableWidget, QTableWidgetItem
+from PyQt4.QtGui import QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
 from PyQt4 import QtCore
 from src.model.Plottable2D import Plottable2D
 
@@ -11,7 +11,7 @@ class TableInput(QTableWidget):
 		self.headers = []
 		self.initCustoms(type=plottable.getType())
 #		self.headers = TableInput.getHeaders(type)
-
+		self.initCustoms(type=plottable.getType())
 		self.initUI()
 
 	@staticmethod
@@ -24,13 +24,16 @@ class TableInput(QTableWidget):
 			raise Exception("Invalid type, No headers")
 
 	def initCustoms(self,type):
-		self.setRowCount(self.plottable.getDimension())
+		self.setRowCount(self.plottable.size())
 		self.headers = TableInput.getHeaders(type)
 		self.setColumnCount(len(self.headers))
 		self.setHeaders(self.headers)
 
 	def initUI(self):
 		self.setGeometry(0,0,2,4)
+		self.horizontalHeader().setStretchLastSection(True)
+		self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+		self.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
 
 	def setHeaders(self, headers=list() ):
 		if len(headers) == 0:
@@ -69,4 +72,12 @@ class TableInput(QTableWidget):
 	def updateTable(self, plottable):
 		self.plottable = plottable
 		self.initCustoms(type=plottable.getType())
-		self.update()
+		self.setData()
+
+	def setData(self):
+		print self.plottable.x
+		for row in range(self.plottable.size()):
+			self.setItem(row,0,QTableWidgetItem(str(self.plottable.x[row])))
+			self.setItem(row,1,QTableWidgetItem(str(self.plottable.y[row])))
+			if self.plottable.getDimension() == 3:
+				self.setItem(row,2,QTableWidgetItem(str(self.plottable.z[row])))
