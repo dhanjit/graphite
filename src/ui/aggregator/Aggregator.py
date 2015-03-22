@@ -23,10 +23,10 @@ class Aggregator(QtGui.QWidget):
 		
 	def generateImage(self,latexString,fileName):
 		latexString="$"+latexString+"$"
-		plt.text(0.0, 0.5,latexString,fontsize=150)
-		fig = plt.gca()
-		fig.axes.get_xaxis().set_visible(False)
-		fig.axes.get_yaxis().set_visible(False)
+		fig = plt.figure()
+		ax= fig.add_subplot(111)
+		ax.text(0.0, 0.5,latexString,fontsize=150)
+		ax.set_axis_off()
 		plt.savefig(fileName)
 
 	def initUI(self,model):
