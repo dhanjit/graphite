@@ -1,5 +1,5 @@
 from PyQt4.QtGui import QTableWidget, QTableWidgetItem
-from PyQt4 import QtCore
+from PyQt4 import QtGui,QtCore
 from src.model.Plottable2D import Plottable2D
 
 class TableInput(QTableWidget):
@@ -31,6 +31,11 @@ class TableInput(QTableWidget):
 
 	def initUI(self):
 		self.setGeometry(0,0,2,4)
+
+		self.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
+		self.verticalHeader().setVisible(False)
+		self.resizeColumnsToContents()
+		self.resizeRowsToContents()
 
 	def setHeaders(self, headers=list() ):
 		if len(headers) == 0:

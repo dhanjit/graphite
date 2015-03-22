@@ -19,7 +19,7 @@ class Viewport(QWidget):
 		self.initCanvasContainer()
 		hbox_layout = QHBoxLayout()
 		hbox_layout.addWidget(self.canvascontainer)
-		hbox_layout.addStretch()
+		# hbox_layout.addStretch()
 		self.setLayout(hbox_layout)
 
 	def updateCanvas(self, aggregator):
