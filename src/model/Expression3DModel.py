@@ -20,5 +20,3 @@ class Expression3DModel(Model3D):
 		f = lambdify((x, y), self.expression, "numpy")
 		plottable = Plottable3D( x=domain['x'], y=domain['y'], z=f(domain['x'], domain['y']))
 		return plottable
-
-
