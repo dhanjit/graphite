@@ -18,13 +18,12 @@ class Parser(object):
 			return Expression2D(self.expression)
 
 	def checkConsistency(self, string):
-		print 'parser ',(string)
+		print('parser ', string)
 		string = self.makeSympifiable(string)
-		print string
 		try:
 			self.expression = sympy.sympify(string)
+			print("parsing ... ", str(self.expression))
 			var_num = len(self.expression.free_symbols)
-			# print(self.expression, var_num, self.type)
 			if var_num == 2 and not self.type:
 				self.type = '3D'
 			elif var_num == 1 and not self.type:
@@ -32,7 +31,7 @@ class Parser(object):
 			elif not self.type:
 				self.type = 'NP'
 				raise Exception('Not plottable in 2d or 3d!')
-		except Exception, e:
+		except:
 			print('Not Parsable '+repr(e))
 
 	def makeSympifiable(self, string):

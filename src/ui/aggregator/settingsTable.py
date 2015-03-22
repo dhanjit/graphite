@@ -101,7 +101,6 @@ class ModelSettingsTable(QtGui.QDialog):
 	def setFill(self,text):
 		self.temp["Line Fill"] = str(text)
 
-
 	def save(self):
 		for key in self.temp:
 			self.modelSet[key] = self.temp[key]

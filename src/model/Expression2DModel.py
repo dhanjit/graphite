@@ -16,7 +16,11 @@ class Expression2DModel(Model2D):
 		x = Symbol('x')
 		f = lambdify(x, self.expression, "numpy")
 		plottable = Plottable2D(x=domain['x'], y=f(domain['x']))
+
 		return plottable
+
+	def getRenderedView(self):
+		return str(self.expression)
 
 	#def getPlottable(self, type, domain):
 

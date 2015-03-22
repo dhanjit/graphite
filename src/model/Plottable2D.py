@@ -16,3 +16,9 @@ class Plottable2D(Plottable):
 	def setPoints(self,x,y):
 		self.x = x
 		self.y = y
+
+	def getDimension(self):
+		return 2
+
+	def getType(self):
+		return '2D'

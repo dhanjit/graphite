@@ -6,7 +6,6 @@ import sys
 from PyQt4 import QtGui
 from src.session.Session import Session
 
-
 class plotterApp(QtGui.QMainWindow):
 
 	def __init__(self, *args):
@@ -15,8 +14,8 @@ class plotterApp(QtGui.QMainWindow):
 		self.initUI()
 
 	def initUI(self):
-		self.setWindowTitle('Graphite')                 # Window Title
-		self.setWindowIcon(QtGui.QIcon('icon.png'))     # App Icon
+		self.setWindowTitle('Graphite - Graph Plotter')                 # Window Title
+		self.setWindowIcon(QtGui.QIcon('icon.png'))						# App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
@@ -24,7 +23,6 @@ class plotterApp(QtGui.QMainWindow):
 
 	def initView(self):
 		self.tabs = QtGui.QTabWidget(self)
-		print(self.session.window)
 		self.new_tab()
 		self.setCentralWidget(self.tabs)
 
