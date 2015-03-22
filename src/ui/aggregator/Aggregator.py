@@ -13,9 +13,14 @@ class Aggregator(QtGui.QWidget):
 
 	def __init__(self):
 		super(Aggregator, self).__init__()
+<<<<<<< HEAD
 		#self.controller = controller  #Check gargbage collection. Causes problems.
 		self.mainLayout = QtGui.QVBoxLayout()
 		# self.mainLayout = QtGui.QListView()
+=======
+		self.currenttype = None
+#		self.controller = controller  # Check gargbage collection. Causes problems.
+>>>>>>> 0127e523993fe7c5682beec85d439a604be89181
 		self.settings = Settings()
 		self.initDomain()
 		#self.initUI()
@@ -56,18 +61,13 @@ class Aggregator(QtGui.QWidget):
 		self.domain['y'] = arange(-5, 5, 0.25)
 		self.domain['z'] = arange(0.0, 3.0, 0.1)
 
-	def genSelectedModelData(self):
-		for model in self.models:
-			if model.visible:
-				data = model.eval(self.domain)
-				yield data
-
 	def clearSelection(self):
 		for model in self.models:
 			model.visible = False
 
 	def selectModel(self, index):
 		self.models[index].visible = True
+<<<<<<< HEAD
 
 	def showTable(self):
 		for i in range(len(self.settings_btn)):
@@ -97,4 +97,26 @@ class Aggregator(QtGui.QWidget):
 				self.settings_btn[i].setEnabled(True)
 			else:
 				self.settings_btn[i].setEnabled(False)
+=======
+#		self.updateCurrentType()
+
+	def updateCurrentType(self):
+		is2D = [ model.type == '2D' for model in self.models if model.visible ]
+		if all(is2D):
+			self.currenttype = '2D'
+		elif not any(is2D):
+			self.currenttype = '3D'
+		else:
+			self.currenttype = False
+
+	def getCurrentType(self, refresh=True, default=False):
+		if refresh:
+			self.updateCurrentType()
+		return default if not self.currenttype else self.currenttype
+
+
+	def getPlottables(self):
+		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
+
+>>>>>>> 0127e523993fe7c5682beec85d439a604be89181
 

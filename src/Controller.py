@@ -32,11 +32,16 @@ class Controller():
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
 		self.aggregator.clearSelection()
-		self.aggregator.selectModel(-1) #-1 for last model
+		self.aggregator.selectModel(0) #-1 for last model
 		print('model added to aggregator')
 
 	def updateViewport(self):
-		self.viewport.updateView(self.aggregator)
+		#self.viewport.updateCanvas(self.aggregator)
+		self.viewport.updateSettings()
+		print self.viewport.canvastype
+		self.viewport.updateCanvas(self.aggregator)
+		self.viewport.showCanvas()
+
 #		self.viewport.canvas.axes.clear()
 #		self.draw_canvas()
 
