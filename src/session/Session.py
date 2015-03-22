@@ -1,7 +1,9 @@
 import pickle
 import os
+from PyQt4 import QtGui
 from src.inputhandler.InputHandler import InputHandler
 from src.Controller import Controller
+
 class Session(object):
 
 	def __init__(self, window):
@@ -9,6 +11,11 @@ class Session(object):
 		self.controllers = []
 		self.inputhandler = InputHandler()
 	
+	def open(self):
+		filename = QtGui.QFileDialog.getOpenFileName(None, "Open Session", "")
+		self.close()
+		self.load(filename)
+
 	def load(self, filename):
 		if os.path.exists(filename):
 			print("session loading: ", filename)
@@ -16,7 +23,8 @@ class Session(object):
 				self = pickle.load(input)
 			print("session loaded.", filename)
 
-	def save(self, filename):
+	def save(self):
+		filename = QtGui.QFileDialog.getSaveFileName(None, "Save Session", "")
 		if os.access(os.path.dirname(filename), os.W_OK):
 			print("session saving: ", filename)
 			with open(filename, 'wb') as output:
@@ -30,12 +38,14 @@ class Session(object):
 		tabs.addTab(controller.tab, "Unsaved..")
 
 	def close(self):
-		pass
+		close_msg = "Save Session?"
+		reply = QtGui.QMessageBox.question(None, 'Message', close_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+		if reply == QtGui.QMessageBox.Yes:
+			self.save()				
 
 	def close_tab(self, tabs, index):
 		del self.controllers[index]
 		tabs.removeTab(index)
 
-	#shouldn't be save Tab
 	def save_tab(self, index, filename):
 		self.controllers[index].viewport.canvas[self.controllers[index].aggregator.getCurrentType(default='3D')].saveFigure(filename)

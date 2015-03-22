@@ -21,7 +21,7 @@ class Plottable3D(Plottable):
 		self.z = z
 
 	def getDimension(self):
-		return 2
+		return 3
 
 	def getType(self):
 		return '3D'

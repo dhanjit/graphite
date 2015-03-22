@@ -34,6 +34,7 @@ class Aggregator(QtGui.QWidget):
 		latexString=model.getRenderedView()
 		self.generateImage(latexString,len(self.models))
 		function = QtGui.QCheckBox(latexString)
+
 		function.setStyleSheet("color: black; background-color: red; font: bold")
 		function.setChecked(True)
 		self.functions.append(function)
