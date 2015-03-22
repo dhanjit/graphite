@@ -20,6 +20,7 @@ class Parser(object):
     def checkConsistency(self, string):
         print 'parser ',(string)
         string = self.makeSympifiable(string)
+        print string
         try:
 			self.expression = sympy.sympify(string)
 			var_num = len(self.expression.free_symbols)
@@ -110,7 +111,7 @@ class Parser(object):
         j = temp.find('cot(')
         while j!=-1:
             a='('
-            j+=6
+            j+=4
             br = '('
             n = len(temp)
             for i in range(j,n):
