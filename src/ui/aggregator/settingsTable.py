@@ -5,25 +5,19 @@ import sys
 
 class ModelSettingsTable(QtGui.QWidget):
 
-	def __init__(self,model):
+	def __init__(self,model,type):
 		super(ModelSettingsTable,self).__init__()
 		self.modelSet = model
 		self.temp = {}
-		# self.modelSet["Color"] = QtGui.QColor("red")
-		# self.modelSet["Width"] = 1
-		# self.modelSet["Line fill"] = "-"
-		# self.modelSet["Transparency"] = 1.0
-		self.initUI()
-		# self.move()
-		# self.setWindowFlags(Qt.Popup)
-		# self.setAttribute(Qt.WA_QuitOnClose)
+		if(type=="2D"):
+			self.initUI2D()
+		elif(type=="3D"):
+			self.initUI3D()
 		self.center()
 		self.show()
-		# self.setFocus()
-		# self.raise_()
 
 
-	def initUI(self):
+	def initUI2D(self):
 		table = QtGui.QTableWidget(len(self.modelSet),2)
 		table.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
 		table.setHorizontalHeaderLabels(["Attribute","Value"])
@@ -63,6 +57,35 @@ class ModelSettingsTable(QtGui.QWidget):
 		self.connect(fillcombo,QtCore.SIGNAL("activated(QString)"),self.setFill)
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.save)
 
+
+
+	def initUI3D(self):
+		table = QtGui.QTableWidget(len(self.modelSet),2)
+		table.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
+		table.setHorizontalHeaderLabels(["Attribute","Value"])
+		table.setItem(0,0,QtGui.QTableWidgetItem("Colour"))
+		colorbtn = QtGui.QPushButton("Choose")
+		colorbtn.setStyleSheet("color: black; background-color: red; font: bold")
+		table.setCellWidget(0,1,colorbtn)
+		table.setItem(1,0,QtGui.QTableWidgetItem("Shade"))
+		shadecheck = QtGui.QCheckBox("Apply")
+		shadecheck.setChecked(False)
+		table.setCellWidget(1,1,shadecheck)
+		table.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
+		table.verticalHeader().setVisible(False)
+		table.resizeColumnsToContents()
+		table.resizeRowsToContents()
+		grid = QtGui.QGridLayout()
+		grid.addWidget(table)
+		btn = QtGui.QPushButton("Save")
+		grid.addWidget(btn)
+		self.setLayout(grid)
+
+		self.connect(colorbtn,QtCore.SIGNAL("clicked()"),self.setColor)
+		self.connect(shadecheck,QtCore.SIGNAL("valueChanged(int)"),self.setShade)
+		self.connect(btn,QtCore.SIGNAL("clicked()"),self.save)
+
+
 	def setColor(self):
 		colordialog = QtGui.QColorDialog.getColor()
 		if colordialog.isValid():
@@ -89,9 +112,12 @@ class ModelSettingsTable(QtGui.QWidget):
 		qr.moveCenter(cp)
 		self.move(qr.topLeft())
 
-# app = QtGui.QApplication(sys.argv)
-# set = ModelSettings()
-# app.exec_()
+	def setShade(self):
+		if self.sender():
+			self.temp["Shade"] = True
+		else:
+			self.temp["Shade"] = False
+
 
 
 
