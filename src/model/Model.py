@@ -16,13 +16,19 @@ class Model(object):
 		self.settings = Settings()
 		self.visible = True
 		self.type = None
+		self.expression = ''
+		self.filename = ''
 		print('outModel__init__')
 
 	def eval(self, domain):
 		raise NotImplementedError("Subclass must implement abstract method")
 
-	def getPlottable(self, type, domain):
+	def getPlottable(self, type=None, domain=None):
 		raise NotImplementedError("Subclass must implement abstract method")
+
+	def getRenderedView(self):
+		return self.filename
+
 
 # class Model2D(Model):
 #
