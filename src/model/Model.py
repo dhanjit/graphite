@@ -6,7 +6,7 @@
 # from .Plottable3D import Plottable3D
 # from .Model2D import Model2D
 # from .Model3D import Model3D
-
+import os
 from src.Settings import Settings
 
 class Model(object):
@@ -27,7 +27,7 @@ class Model(object):
 		raise NotImplementedError("Subclass must implement abstract method")
 
 	def getRenderedView(self):
-		return self.filename
+		return os.path.basename(self.filename)
 
 
 # class Model2D(Model):

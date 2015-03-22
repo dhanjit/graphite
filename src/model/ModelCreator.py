@@ -21,10 +21,10 @@ class ModelCreator():
 			raise Exception(expr)
 
 	@staticmethod
-	def createModelFromFile(formatHandler,file):
-		plottable = formatHandler.handle(file)
+	def createModelFromFile(formatHandler,filename):
+		plottable = formatHandler.handle(filename)
 		if isinstance(plottable, Plottable2D):
-			return Model2D(plottable)
+			return Model2D(plottable, filename)
 		elif isinstance(plottable, Plottable3D) :
 			return Model3D(plottable)
 		else:

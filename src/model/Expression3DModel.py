@@ -1,3 +1,4 @@
+from sympy import latex
 from sympy import Symbol
 from sympy import lambdify
 import numpy as np
@@ -22,4 +23,4 @@ class Expression3DModel(Model3D):
 		return plottable
 
 	def getRenderedView(self):
-		return str(self.expression)
+		return latex(self.expression)

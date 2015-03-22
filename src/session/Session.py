@@ -41,11 +41,7 @@ class Session(object):
 		close_msg = "Save Session?"
 		reply = QtGui.QMessageBox.question(None, 'Message', close_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 		if reply == QtGui.QMessageBox.Yes:
-			self.save()
-		else:
-			for i in range(0, len(self.controllers)):
-				del self.controllers[i]
-				tabs.removeTab()
+			self.save()				
 
 	def close_tab(self, tabs, index):
 		del self.controllers[index]
