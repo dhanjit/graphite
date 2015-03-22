@@ -43,9 +43,9 @@ class plotterApp(QtGui.QMainWindow):
 		self.session.close_tab(self.tabs, index)
 
 	def save_tab(self):
-		fileName = QtGui.QFileDialog.getSaveFileName(self, "Save Current Tab", "")
+		filename = QtGui.QFileDialog.getSaveFileName(self, "Save Current Tab", "")
 		index=int(self.tabs.currentIndex())
-		self.session.save_tab(index,fileName)
+		self.session.save_tab(index,filename)
 
 	def new_session(self):
 		self.session.close()
@@ -145,11 +145,8 @@ class plotterApp(QtGui.QMainWindow):
 		about_action.setStatusTip('About Software and Licenses')
 		#aboutaction.triggered.connect('''implement the function to create new plot''')
 		help_menu.addAction(about_action)
-
+		
 		return
-
-	def close_tabs():
-		pass
 
 
 def main(args):
