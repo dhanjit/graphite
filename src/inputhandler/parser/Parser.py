@@ -20,7 +20,6 @@ class Parser(object):
     def checkConsistency(self, string):
         print 'parser ',(string)
         string = self.makeSympifiable(string)
-        string = str(string)
         try:
 			self.expression = sympy.sympify(string)
 			var_num = len(self.expression.free_symbols)
@@ -35,7 +34,7 @@ class Parser(object):
             print('Not Parsable '+repr(e))
 
     def makeSympifiable(self, string):
-        temp = string
+        temp = str(string)
 
         if '=' in temp:
             z = temp.split('=')[0]
@@ -69,5 +68,61 @@ class Parser(object):
         for c in ['s','c','e','x','y','a','t','l']:
             if ')'+c in temp:
                 temp = temp.replace(')'+c,')*'+c)
+        '''
+        Handling cosec, sec ,cot
+        '''
+        j = temp.find('cosec(')
+        while j!=-1:
+            a='('
+            j+=6
+            br = '('
+            n = len(temp)
+            for i in range(j,n):
+                a += temp[i]
+                if temp[i]=='(':
+                    br += temp[i]
+                if temp[i]==')':
+                    br = br[:-1]
+                if len(br)==0:
+                    break
+
+            temp = temp.replace('cosec'+a,'(1/sin'+a+')')
+            j = temp.find('cosec(')
+
+        j = temp.find('sec(')
+        while j!=-1:
+            a='('
+            j+=4
+            br = '('
+            n = len(temp)
+            for i in range(j,n):
+                a += temp[i]
+                if temp[i]=='(':
+                    br += temp[i]
+                if temp[i]==')':
+                    br = br[:-1]
+                if len(br)==0:
+                    break
+
+            temp = temp.replace('sec'+a,'(1/cos'+a+')')
+            j = temp.find('sec(')
+
+        j = temp.find('cot(')
+        while j!=-1:
+            a='('
+            j+=6
+            br = '('
+            n = len(temp)
+            for i in range(j,n):
+                a += temp[i]
+                if temp[i]=='(':
+                    br += temp[i]
+                if temp[i]==')':
+                    br = br[:-1]
+                if len(br)==0:
+                    break
+
+            temp = temp.replace('cot'+a,'(1/tan'+a+')')
+            j = temp.find('cot(')
 
         return temp
