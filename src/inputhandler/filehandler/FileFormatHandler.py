@@ -9,10 +9,9 @@ class FileFormatHandler(object):
 		self.extensions = []
 	# Reads from a file and returns a list of objects of type Point
 	def handlePlotPoints(self, filename):
-		lines=[]
+
 		with open(filename) as f:
 			lines=f.readlines()
-
 		pl=[]
 		typer="2D"
 		lineNumber=0

@@ -18,4 +18,6 @@ class FileVisualizer(QWidget):
 		layout.addStretch()
 		self.setLayout(layout)
 
+	def setTableData(self, plottable, type):
+		self.tableinput.updateTable(plottable,type)
 

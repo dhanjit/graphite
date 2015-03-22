@@ -17,7 +17,10 @@ class Controller():
 
 	def plotInput(self, input, isfile):
 		model = self.createModel(input, isfile)
-		print('foooooooo')
+		if isfile:
+			self.input.filevisualizer.setTableData(plottable=model.getPlottable(), type=model.type)
+		else:
+			pass
 		self.addModelToAggregator(model)
 		self.updateViewport()
 
