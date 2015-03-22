@@ -1,23 +1,49 @@
-from PyQt4 import QtGui
-from src.Settings import *
+from PyQt4 import QtGui, QtCore
+from src.Settings import Settings
 from numpy import arange
+from settingsTable import *
 
 class Aggregator(QtGui.QWidget):
 	models = []
+	functions = []
+	model_settings = []
+	settings_btn = []
 
 	def __init__(self):
 		super(Aggregator, self).__init__()
 		self.currenttype = None
+		self.mainLayout = QtGui.QVBoxLayout()
 #		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
-		self.initUI()
+		# self.initUI()
 
-	def initUI(self):
-		pass
+	def initUI(self,model):
+		hbox = QtGui.QHBoxLayout()
+		widget = QtGui.QWidget()
+		function = QtGui.QCheckBox("Function")
+		function.setStyleSheet("color: black; background-color: red; font: bold")
+		function.setChecked(True)
+		self.functions.append(function)
+		btn = QtGui.QPushButton("Set")
+		btn.setMaximumWidth(30)
+		btn.setEnabled(True)
+		self.settings_btn.append(btn)
+		hbox.addWidget(function)
+		hbox.addWidget(btn)
+		groupbox = QtGui.QGroupBox()
+		self.mainLayout.addLayout(hbox)
+		self.mainLayout.addStretch(1)
+		self.setLayout(self.mainLayout)
+
+		self.connect(btn,QtCore.SIGNAL("clicked()"),self.showpop)
+		self.connect(function,QtCore.SIGNAL("stateChanged(int)"),self.select)
 
 	def addModel(self, model):
 		self.models.append(model)
+		self.initUI(model)
+		self.setDefaultSetting()
+
 
 	def initDomain(self, init={}):
 		self.domain = init
@@ -54,3 +80,24 @@ class Aggregator(QtGui.QWidget):
 		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
 
 
+	def setDefaultSetting(self):
+		set = Settings()
+		set["Color"] = QtGui.QColor("red")
+		set["Width"] = 1
+		set["Line fill"] = "-"
+		set["Transparency"] = 1.0
+		self.model_settings.append(set)
+
+
+	def showpop(self):
+		for i in range(len(self.settings_btn)):
+			if(self.sender()==self.settings_btn[i]):
+				self.table = ModelSettingsTable(self.model_settings[i])
+
+
+	def select(self):
+		for i in range(len(self.functions)):
+			if self.functions[i].isChecked():
+				self.settings_btn[i].setEnabled(True)
+			else:
+				self.settings_btn[i].setEnabled(False)
