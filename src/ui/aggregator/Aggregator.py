@@ -4,13 +4,14 @@ from src.Settings import Settings
 from src.ui.aggregator.settingsTable import *
 
 class Aggregator(QtGui.QWidget):
-	models = []
-	functions = []
-	model_settings = []
-	settings_btn = []
-
 	def __init__(self, controller):
 		super(Aggregator, self).__init__()
+
+		self.models = []
+		self.functions = []
+		self.model_settings = []
+		self.settings_btn = []
+
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout()
 		self.controller = controller  # Check gargbage collection. Causes problems.

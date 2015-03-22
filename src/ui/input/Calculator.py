@@ -218,7 +218,7 @@ class Calculator(QWidget):
 		self.controller.plotInput(input=filename, isfile=True)
 
 	def plot_btn_handler(self):
-		function = self.lineedit.text()
+		function = self.lineedit.text()		
 		self.controller.plotInput(input=function, isfile=False)
 
 	def comboEvent(self,text):
