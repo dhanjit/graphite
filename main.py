@@ -15,8 +15,8 @@ class plotterApp(QtGui.QMainWindow):
 		self.initUI()
 
 	def initUI(self):
-		self.setWindowTitle('Graphite')				 	# Window Title
-		self.setWindowIcon(QtGui.QIcon('icon.png')) 	# App Icon
+		self.setWindowTitle('Graphite')                 # Window Title
+		self.setWindowIcon(QtGui.QIcon('icon.png'))     # App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
@@ -100,14 +100,14 @@ class plotterApp(QtGui.QMainWindow):
 		file_menu.addAction(tab_close_action)
 
 		exit_action = QtGui.QAction('Exit', self)
-		exit_action.setShortcut('Ctrl+Q') 
+		exit_action.setShortcut('Ctrl+Q')
 		exit_action.setStatusTip('Exit Application')
 		exit_action.triggered.connect(QtGui.qApp.quit)
 		file_menu.addAction(exit_action)
 
 		# # view menu actions
 		clear_action = QtGui.QAction('Clear', self)
-		clear_action.setShortcut('Ctrl+Shift+Q') 
+		clear_action.setShortcut('Ctrl+Shift+Q')
 		clear_action.setStatusTip('Clear current plot')
 		#clearaction.triggered.connect('''implement the function to create new plot''')
 		edit_menu.addAction(clear_action)		

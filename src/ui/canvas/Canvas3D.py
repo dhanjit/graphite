@@ -12,8 +12,9 @@ class Canvas3D(FigureCanvas):
 		super(Canvas3D, self).__init__(figure=self.fig)
 
 		self.axes = self.fig.add_subplot(111, projection='3d')
-		self.fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9)
-		self.axes.hold(True)
+		# self.fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9)
+		# self.axes.hold(True)
+		self.setParent(parent)
 
 		#FigureCanvas.setSizePolicy(self,
 		#	QtGui.QSizePolicy.Expanding,
@@ -23,7 +24,6 @@ class Canvas3D(FigureCanvas):
 	def saveFigure(self,filename):
 		filename=str(filename)
 		self.fig.savefig(filename)
-		# raise NotImplementedError("not implemented function")
 
 	def plot(self, plottable3D):
 		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
