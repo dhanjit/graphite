@@ -19,5 +19,8 @@ class Expression2DModel(Model2D):
 
 		return plottable
 
+	def getRenderedView(self):
+		return str(self.expression)
+
 	#def getPlottable(self, type, domain):
 

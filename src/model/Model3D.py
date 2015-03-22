@@ -10,6 +10,6 @@ class Model3D(Model):
 	def eval(self, domain):
 		return self.plottable3d
 
-	def getPlottable(self, type, domain):
+	def getPlottable(self, type='3D', domain={}):
 		print('here3d')
 		return self.eval(domain)
