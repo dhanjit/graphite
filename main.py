@@ -46,22 +46,10 @@ class plotterApp(QtGui.QMainWindow):
 		fileName = QtGui.QFileDialog.getSaveFileName(self, "Save Current Tab", "")
 		index=int(self.tabs.currentIndex())
 		self.session.save_tab(index,fileName)
-	
+
 	def new_session(self):
 		self.session.close()
 		self.session = Session(self)
-
-	def open_session(self):
-		session_file_name = QtGui.QFileDialog.getOpenFileName(self, "Open Session", "")
-		self.session.close()
-		self.session.load(session_file_name)
-
-	def save_session(self):
-		session_file_name = QtGui.QFileDialog.getSaveFileName(self, "Save Session", "")
-		self.session.save(session_file_name)
-
-	def close_session(self):
-		self.session.close()
 
 	def initMenuBar(self):
 		menubar = self.menuBar()
@@ -108,7 +96,7 @@ class plotterApp(QtGui.QMainWindow):
 
 		# # view menu actions
 		clear_action = QtGui.QAction('Clear', self)
-		clear_action.setShortcut('Ctrl+Shift+Q') 
+		# clear_action.setShortcut('Ctrl+Shift+Q') 
 		clear_action.setStatusTip('Clear current plot')
 		#clearaction.triggered.connect('''implement the function to create new plot''')
 		edit_menu.addAction(clear_action)		
@@ -117,7 +105,7 @@ class plotterApp(QtGui.QMainWindow):
 		session_open_action = QtGui.QAction('Open Session..', self)
 		session_open_action.setShortcut('Ctrl+Shift+O')
 		session_open_action.setStatusTip('Open New Session')
-		session_open_action.triggered.connect(self.open_session)
+		session_open_action.triggered.connect(self.session.open)
 		session_menu.addAction(session_open_action)
 
 		session_recent_action = QtGui.QAction('Open Recent', self)
@@ -129,13 +117,13 @@ class plotterApp(QtGui.QMainWindow):
 		session_save_action = QtGui.QAction('Save Session As..', self)
 		session_save_action.setShortcut('Ctrl+Shift+S')
 		session_save_action.setStatusTip('Save Current Session')
-		session_save_action.triggered.connect(self.save_session)
+		session_save_action.triggered.connect(self.session.save)
 		session_menu.addAction(session_save_action)
 
 		session_close_action = QtGui.QAction('Close Session', self)
 		session_close_action.setShortcut('Ctrl+Shift+Q')
 		session_close_action.setStatusTip('Close Current Session')
-		session_close_action.triggered.connect(self.close_session)
+		session_close_action.triggered.connect(self.session.close)
 		session_menu.addAction(session_close_action)
 
 		# preferences menu actions
@@ -159,6 +147,10 @@ class plotterApp(QtGui.QMainWindow):
 		help_menu.addAction(about_action)
 
 		return
+
+	def close_tabs():
+		pass
+
 
 def main(args):
 	app = QtGui.QApplication(args)
