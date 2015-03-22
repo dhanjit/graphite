@@ -29,7 +29,7 @@ class Viewport(QWidget):
 
 		self.canvas[self.canvastype].draw()
 
-	def plot(self, plottables):		
+	def plot(self, plottables):
 		for plottable in plottables:
 			self.canvas[self.canvastype].plot(plottable)
 
@@ -49,7 +49,7 @@ class Viewport(QWidget):
 			self.canvascontainer.setCurrentIndex(1)
 		else:
 			self.canvascontainer.setCurrentIndex(1)
-		self.canvascontainer.update()		
+		self.canvascontainer.update()
 
 	def updateSettings(self):
 		self.canvas[self.canvastype].updateSettings()
