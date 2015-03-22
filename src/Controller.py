@@ -32,7 +32,7 @@ class Controller():
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
 		self.aggregator.clearSelection()
-		self.aggregator.selectModel(0) #-1 for last model
+		self.aggregator.selectModel(-1) #-1 for last model
 		print('model added to aggregator')
 
 	def updateViewport(self):

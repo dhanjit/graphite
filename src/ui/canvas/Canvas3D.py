@@ -11,7 +11,7 @@ class Canvas3D(Canvas):
 		self.fig = Figure(figsize=(width, height), dpi=dpi, facecolor='#FFFFFF')
 		super(Canvas3D, self).__init__(figure=self.fig)
 
-		self.axes = self.fig.add_subplot(111, projection='3d')
+		self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
 		# self.fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9)
 		# self.axes.hold(True)
 		self.setParent(parent)
@@ -23,7 +23,6 @@ class Canvas3D(Canvas):
 
 	def plot(self, plottable3D):
 		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
-		self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
 		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
 
 		# x = np.random.random_sample(100)

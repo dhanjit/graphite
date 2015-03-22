@@ -22,6 +22,7 @@ class Parser(object):
 		string = self.makeSympifiable(string)
 		try:
 			self.expression = sympy.sympify(string)
+			print("parsing ... ", str(self.expression))
 			var_num = len(self.expression.free_symbols)
 			if var_num == 2 and not self.type:
 				self.type = '3D'

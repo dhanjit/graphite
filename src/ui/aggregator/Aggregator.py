@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
-from src.Settings import Settings
 from numpy import arange
-from settingsTable import *
+from src.Settings import Settings
+from src.ui.aggregator.settingsTable import *
 
 class Aggregator(QtGui.QWidget):
 	models = []
