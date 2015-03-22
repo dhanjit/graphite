@@ -15,7 +15,7 @@ class Canvas2D(Canvas):
 		#FigureCanvas.setSizePolicy(self,
 			#QtGui.QSizePolicy.Expanding,
 			#QtGui.QSizePolicy.Expanding)
-		FigureCanvas.updateGeometry(self)
+		# FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable2D):
 		self.axes.plot(plottable2D.x, plottable2D.y)
