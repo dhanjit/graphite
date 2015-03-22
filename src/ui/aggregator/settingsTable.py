@@ -78,7 +78,6 @@ class ModelSettingsTable(QtGui.QWidget):
 	def setFill(self,text):
 		self.temp["Line Fill"] = str(text)
 
-
 	def save(self):
 		self.modelSet = self.temp
 		self.close()

@@ -9,14 +9,13 @@ class Aggregator(QtGui.QWidget):
 	model_settings = []
 	settings_btn = []
 
-	def __init__(self):
+	def __init__(self, controller):
 		super(Aggregator, self).__init__()
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout()
-#		self.controller = controller  # Check gargbage collection. Causes problems.
+		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
-		# self.initUI()
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
@@ -44,13 +43,10 @@ class Aggregator(QtGui.QWidget):
 		self.initUI(model)
 		self.setDefaultSetting()
 
-
 	def initDomain(self, init={}):
 		self.domain = init
-		self.domain['x'] = arange(-5, 5, 0.25)
-		self.domain['y'] = arange(-5, 5, 0.25)
-		# self.domain['x'] = arange(0.0, 3.0, 0.1)
-		# self.domain['y'] = arange(0.0, 3.0, 0.1)
+		self.domain['x'] = arange(0.0, 3.0, 0.1)
+		self.domain['y'] = arange(0.0, 3.0, 0.1)
 		self.domain['z'] = arange(0.0, 3.0, 0.1)
 
 	def clearSelection(self):
@@ -75,19 +71,22 @@ class Aggregator(QtGui.QWidget):
 			self.updateCurrentType()
 		return default if not self.currenttype else self.currenttype
 
+	def getModels(self):
+		return [model for model in self.models if model.visible]
+
+	def getPlottablesSettings(self):
+		return [ (self.models[i].getPlottable(type=self.currenttype, domain=self.domain), self.model_settings[i]) for i in range(0,len(self.models)) if self.models[i].visible ]
 
 	def getPlottables(self):
 		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
 
-
 	def setDefaultSetting(self):
-		set = Settings()
-		set["Color"] = QtGui.QColor("red")
-		set["Width"] = 1
-		set["Line fill"] = "-"
-		set["Transparency"] = 1.0
-		self.model_settings.append(set)
-
+		setting = Settings()
+		setting["Color"] = QtGui.QColor("red")
+		setting["Width"] = 1
+		setting["Line fill"] = "-"
+		setting["Transparency"] = 1.0
+		self.model_settings.append(setting)
 
 	def showpop(self):
 		for i in range(len(self.settings_btn)):
