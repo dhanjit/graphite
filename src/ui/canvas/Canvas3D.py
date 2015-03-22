@@ -23,7 +23,14 @@ class Canvas3D(Canvas):
 
 	def plot(self, plottable3D):
 		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+		self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
 		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+
+		# x = np.random.random_sample(100)
+		# y = np.random.random_sample(100)
+		# z = np.random.random_sample(100)
+		# self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
+		# self.axes.scatter(x, y, z, c='r', marker='o')
 
 	def updateSettings(self):
 		self.axes.mouse_init()
