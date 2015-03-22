@@ -1,25 +1,44 @@
+# from mathtex.mathtex_main import Mathtex
+# from mathtex.fonts import UnicodeFonts
 from PyQt4 import QtGui, QtCore
 from numpy import arange
 from src.Settings import Settings
 from src.ui.aggregator.settingsTable import *
+import matplotlib.pyplot as plt
 
 class Aggregator(QtGui.QWidget):
-	models = []
-	functions = []
-	model_settings = []
-	settings_btn = []
-
 	def __init__(self, controller):
 		super(Aggregator, self).__init__()
+
+		self.models = []
+		self.functions = []
+		self.model_settings = []
+		self.settings_btn = []
+
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout()
 		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
+		
+	def generateImage(self,latexString,fileName):
+		latexString="$"+latexString+"$"
+		plt.text(0.0, 0.5,latexString,fontsize=150)
+		fig = plt.gca()
+		fig.axes.get_xaxis().set_visible(False)
+		fig.axes.get_yaxis().set_visible(False)
+		plt.savefig(fileName)
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
-		function = QtGui.QCheckBox(model.getRenderedView())
+		# widget = QtGui.QWidget()
+		latexString=model.getRenderedView()
+		fileName = "resources/image"+str(len(self.models))+".png"
+		self.generateImage(latexString,fileName)
+		# function = QtGui.QCheckBox(latexString)
+		function = QtGui.QCheckBox(str(model.expression))
+		# function.setStyleSheet("background-image: url(:/"+fileName+";")
+
 		function.setStyleSheet("color: black; background-color: red; font: bold")
 		function.setChecked(True)
 		self.functions.append(function)
@@ -81,13 +100,13 @@ class Aggregator(QtGui.QWidget):
 	def setDefaultSetting(self,type):
 		if(type=="2D"):
 			set = Settings()
-			set["Color"] = QtGui.QColor("red")
+			set["Color"] = QtGui.QColor("red").name()
 			set["Width"] = 1
-			set["Line fill"] = "-"
-			set["Transparency"] = 1.0
+			set["Line Fill"] = "-"
+			set["Line Style"] = ""
 		elif(type=="3D"):
 			set = Settings()
-			set["Color"] = QtGui.QColor("red")
+			set["Color"] = QtGui.QColor("red").name()
 			set["Shade"] = False
 
 		self.model_settings.append(set)
@@ -97,11 +116,15 @@ class Aggregator(QtGui.QWidget):
 			if(self.sender()==self.settings_btn[i]):
 				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
 				self.table.exec_()
+				self.controller.updateViewport()
 
 
 	def select(self):
 		for i in range(len(self.functions)):
 			if self.functions[i].isChecked():
 				self.settings_btn[i].setEnabled(True)
+				self.models[i].visible=True
 			else:
 				self.settings_btn[i].setEnabled(False)
+				self.models[i].visible=False
+			self.controller.updateViewport()

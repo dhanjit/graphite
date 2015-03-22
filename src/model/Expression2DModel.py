@@ -1,5 +1,6 @@
 from sympy import Symbol
 from sympy import lambdify
+from sympy import latex
 from src.model.Model2D import Model2D
 from src.model.Plottable2D import Plottable2D
 
@@ -20,7 +21,7 @@ class Expression2DModel(Model2D):
 		return plottable
 
 	def getRenderedView(self):
-		return str(self.expression)
+		return latex(self.expression)
 
 	#def getPlottable(self, type, domain):
 
