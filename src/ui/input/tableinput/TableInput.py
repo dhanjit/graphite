@@ -59,13 +59,13 @@ class TableInput(QTableWidget):
 		x = float(dataQTableWidgetItem.text())
 		#self.plottable[row][column] = x
 		if column == 0 :
-			self.plottable[row].setX(x)
+			self.plottable.x[row] = x
 		elif column == 1 :
-			self.plottable[row].setY(x)
+			self.plottable.y[row] = x
 		elif column == 2 :
-			self.plottable[row].setZ(x)
+			self.plottable.z[row] = x
 
-	def updateView(self, plottable, type):
+	def updateTable(self, plottable, type):
 		self.plottable = plottable
 		self.initCustoms(type)
 		self.update()

@@ -19,8 +19,8 @@ class Aggregator(QtGui.QWidget):
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
-		widget = QtGui.QWidget()
-		function = QtGui.QCheckBox("Function")
+		# widget = QtGui.QWidget()
+		function = QtGui.QCheckBox(str(model.expression))
 		function.setStyleSheet("color: black; background-color: red; font: bold")
 		function.setChecked(True)
 		self.functions.append(function)
@@ -30,7 +30,6 @@ class Aggregator(QtGui.QWidget):
 		self.settings_btn.append(btn)
 		hbox.addWidget(function)
 		hbox.addWidget(btn)
-		groupbox = QtGui.QGroupBox()
 		self.mainLayout.addLayout(hbox)
 		self.mainLayout.addStretch(1)
 		self.setLayout(self.mainLayout)
@@ -41,7 +40,7 @@ class Aggregator(QtGui.QWidget):
 	def addModel(self, model):
 		self.models.append(model)
 		self.initUI(model)
-		self.setDefaultSetting()
+		self.setDefaultSetting(model.type)
 
 	def initDomain(self, init={}):
 		self.domain = init
@@ -80,18 +79,24 @@ class Aggregator(QtGui.QWidget):
 	def getPlottables(self):
 		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
 
-	def setDefaultSetting(self):
-		setting = Settings()
-		setting["Color"] = QtGui.QColor("red")
-		setting["Width"] = 1
-		setting["Line fill"] = "-"
-		setting["Transparency"] = 1.0
-		self.model_settings.append(setting)
+	def setDefaultSetting(self,type):
+		if(type=="2D"):
+			set = Settings()
+			set["Color"] = QtGui.QColor("red")
+			set["Width"] = 1
+			set["Line fill"] = "-"
+			set["Transparency"] = 1.0
+		elif(type=="3D"):
+			set = Settings()
+			set["Color"] = QtGui.QColor("red")
+			set["Shade"] = False
+
+		self.model_settings.append(set)
 
 	def showpop(self):
 		for i in range(len(self.settings_btn)):
 			if(self.sender()==self.settings_btn[i]):
-				self.table = ModelSettingsTable(self.model_settings[i])
+				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
 
 
 	def select(self):

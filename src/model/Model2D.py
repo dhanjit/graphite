@@ -12,5 +12,5 @@ class Model2D(Model):
 	def eval(self, domain):
 		return self.plottable2d
 
-	def getPlottable(self, type, domain):
-		return self.eval(domain)
+	def getPlottable(self, type, domain={}):
+		return self.eval(domain=domain)
