@@ -40,13 +40,13 @@ class Aggregator(QtGui.QWidget):
 		# function.setStyleSheet("background-image: url(:/"+fileName+";")
 
 		function.setStyleSheet("color: black; background-color: red; font: bold")
-		function.setChecked(True)
+		#function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton("Set")
 		btn.setMaximumWidth(30)
 		btn.setEnabled(True)
 		self.settings_btn.append(btn)
-		hbox.addWidget(function)
+		hbox.insertWidget(0,function)
 		hbox.addWidget(btn)
 		self.mainLayout.addLayout(hbox)
 		self.mainLayout.addStretch(1)
@@ -67,11 +67,14 @@ class Aggregator(QtGui.QWidget):
 		self.domain['z'] = arange(0.0, 3.0, 0.1)
 
 	def clearSelection(self):
-		for model in self.models:
-			model.visible = False
+		for i in range(len(self.models)):
+			self.models[i].visible = False
+			self.functions[i].setChecked(False)
 
 	def selectModel(self, index):
 		self.models[index].visible = True
+		self.functions[index].setChecked(True)
+
 #		self.updateCurrentType()
 
 	def updateCurrentType(self):
