@@ -26,6 +26,6 @@ class ModelCreator():
 		if isinstance(plottable, Plottable2D):
 			return Model2D(plottable, filename)
 		elif isinstance(plottable, Plottable3D) :
-			return Model3D(plottable)
+			return Model3D(plottable, filename)
 		else:
 			raise Exception(plottable)
