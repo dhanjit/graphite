@@ -14,40 +14,71 @@ class Aggregator(QtGui.QWidget):
 		self.functions = []
 		self.model_settings = []
 		self.settings_btn = []
-
+		self.filenames = []
+		self.imagelabels = []
 		self.currenttype = None
-		self.mainLayout = QtGui.QVBoxLayout()
+		self.mainLayout = None
+		self.initAgg()
+
+
 		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
-		
-	def generateImage(self,latexString,fileName):
+
+	def initAgg(self):
+#		scrollarea = QScrollArea(self)
+		self.mainLayout = QVBoxLayout()#self)
+		#self.setWidget(self.mainLayout.widget())
+#		self.mainLayout
+
+	def generateImage(self,model):
+		latexString = model.getRenderedView()
+		filename = "resources/"+str(id(model))+".png"
 		latexString="$"+latexString+"$"
-		fig = plt.figure()
+		fig = plt.figure()#figsize=(100,40))
 		ax= fig.add_subplot(111)
 		ax.text(0.0, 0.5,latexString,fontsize=150)
 		ax.set_axis_off()
-		plt.savefig(fileName)
+#		Figure()
+		fig.savefig(filename,transparent=True)
+		return filename
+
+	def getImageLabel(self, filename, hbox):
+		imagelabel = QLabel()
+		pix = QPixmap(filename)
+		#imagelabel.setMaximumHeight(100)
+		imagelabel.setMaximumSize(QSize(100,40))
+		scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
+		imagelabel.setPixmap(scaledpix)
+		#imagelabel.setFixedSize(QSize(150,30))
+		return imagelabel
+
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
 		# widget = QtGui.QWidget()
-		latexString=model.getRenderedView()
-		fileName = "resources/image"+str(len(self.models))+".png"
-		# self.generateImage(latexString,fileName)
-		# function = QtGui.QCheckBox(latexString)
-		function = QtGui.QCheckBox(str(model.expression))
-		# function.setStyleSheet("background-image: url(:/"+fileName+";")
+		filename = self.generateImage(model)
 
-		function.setStyleSheet("color: black; background-color: red; font: bold")
+		self.filenames.append(filename)
+		# function = QtGui.QCheckBox(latexString)
+		function = QtGui.QCheckBox('')#str(model.expression))
+		function.setFixedSize(QSize(30,30))
+		# function.setStyleSheet("background-image: url(:/"+fileName+";")
+		#function.setStyleSheet("color: black; background-color: red; font: bold")
 		#function.setChecked(True)
+		#olor: black; background-color: red; font: bold")
+		function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton("Set")
 		btn.setMaximumWidth(30)
 		btn.setEnabled(True)
 		self.settings_btn.append(btn)
 		hbox.insertWidget(0,function)
+		imagelabel = self.getImageLabel(filename,hbox)
+		self.imagelabels.append(imagelabel)
+		hbox.insertWidget(1,imagelabel)
 		hbox.addWidget(btn)
+#		hbox.set
 		self.mainLayout.addLayout(hbox)
 		self.mainLayout.addStretch(1)
 		self.setLayout(self.mainLayout)
@@ -75,16 +106,14 @@ class Aggregator(QtGui.QWidget):
 		self.models[index].visible = True
 		self.functions[index].setChecked(True)
 
-#		self.updateCurrentType()
+		self.updateCurrentType()
 
 	def updateCurrentType(self):
 		is2D = [ model.type == '2D' for model in self.models if model.visible ]
 		if all(is2D):
 			self.currenttype = '2D'
-		elif not any(is2D):
-			self.currenttype = '3D'
 		else:
-			self.currenttype = False
+			self.currenttype = '3D'
 
 	def getCurrentType(self, refresh=True, default=False):
 		if refresh:
@@ -121,7 +150,7 @@ class Aggregator(QtGui.QWidget):
 	def showpop(self):
 		for i in range(len(self.settings_btn)):
 			if(self.sender()==self.settings_btn[i]):
-				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
+				self.table = ModelSettingsTable(self.settings_btn[i],self.model_settings[i],self.models[i].type)
 				self.table.exec_()
 				self.controller.updateViewport()
 

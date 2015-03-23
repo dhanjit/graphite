@@ -15,11 +15,12 @@ class Expression3DModel(Model3D):
 		self.type = '3D'
 
 	def eval(self, domain):
-		domain['x'], domain['y'] = np.meshgrid(domain['x'], domain['y'])
+		#X, Y = domain['x'], domain['y']
+		X, Y = np.meshgrid(domain['x'], domain['y'])
 		x = Symbol('x')
 		y = Symbol('y')
 		f = lambdify((x, y), self.expression, "numpy")
-		plottable = Plottable3D( x=domain['x'], y=domain['y'], z=f(domain['x'], domain['y']))
+		plottable = Plottable3D( x=domain['x'], y=domain['y'], z=f(X, Y))
 		return plottable
 
 	def getRenderedView(self):
