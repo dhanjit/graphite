@@ -11,7 +11,7 @@ class Parser(object):
 
 	def parse(self, string):
 		self.checkConsistency(string)
-		print(self.type)
+		print("Expression type: ", self.type)
 		if self.type == '3D':
 			return Expression3D(self.expression)
 		else:
@@ -30,8 +30,6 @@ class Parser(object):
 				self.type = '2D'
 			elif not self.type:
 				raise Exception('Not plottable in 2d or 3d!')
-
-			print "Type here == ",self.type
 		except:
 			print('Not Parsable '+repr(e))
 

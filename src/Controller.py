@@ -3,7 +3,7 @@ from src.ui.aggregator.Aggregator import Aggregator
 from src.ui.input.Input import Input
 from src.ui.Tab import Tab
 from .model.ModelCreator import ModelCreator
-from globalSettings import Customize
+from src.globalSettings import Customize
 
 class Controller():
 	
