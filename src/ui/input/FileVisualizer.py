@@ -16,12 +16,18 @@ class FileVisualizer(QWidget):
 		layout = QVBoxLayout()
 
 		self.openbtn = QPushButton("OPEN")
-		layout.addWidget(self.openbtn)
+		self.clearbtn = QPushButton("CLEAR")
+		hlayout = QHBoxLayout()
+		hlayout.addWidget(self.openbtn)
+		hlayout.addWidget(self.clearbtn)
+		
+		layout.addLayout(hlayout)
 		layout.addWidget(self.tableinput)
 		layout.addStretch()
 		self.setLayout(layout)
 
 		self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
+		self.connect(self.clearbtn,SIGNAL("clicked()"), self.clear_btn_handler)
 
 	def setTableData(self, plottable):
 		self.tableinput.updateTable(plottable)
@@ -30,5 +36,9 @@ class FileVisualizer(QWidget):
 		filename = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")
 		filename = str(filename)
 		self.controller.plotInput(input=filename, isfile=True)
+
+	def clear_btn_handler(self):
+		raise Exception('not handled in FileVisualizer.py\n')
+
 
 
