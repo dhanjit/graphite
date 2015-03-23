@@ -9,8 +9,12 @@ class Canvas2D(Canvas):
 		self.fig = Figure()
 		super(Canvas2D, self).__init__(figure=self.fig)
 
+		# self.fig, self.axes = self.fig.subplots()
 		self.axes = self.fig.add_subplot(111)
 		self.setParent(parent)
+
+		# self.axes.xlabel('xlabel')
+		# self.axes.ylabel('ylabel')
 		
 		#FigureCanvas.setSizePolicy(self,
 			#QtGui.QSizePolicy.Expanding,
