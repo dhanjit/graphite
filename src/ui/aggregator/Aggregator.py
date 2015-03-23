@@ -23,10 +23,10 @@ class Aggregator(QtGui.QWidget):
 		
 	def generateImage(self,latexString,fileName):
 		latexString="$"+latexString+"$"
-		plt.text(0.0, 0.5,latexString,fontsize=150)
-		fig = plt.gca()
-		fig.axes.get_xaxis().set_visible(False)
-		fig.axes.get_yaxis().set_visible(False)
+		fig = plt.figure()
+		ax= fig.add_subplot(111)
+		ax.text(0.0, 0.5,latexString,fontsize=150)
+		ax.set_axis_off()
 		plt.savefig(fileName)
 
 	def initUI(self,model):
@@ -92,6 +92,7 @@ class Aggregator(QtGui.QWidget):
 		return [model for model in self.models if model.visible]
 
 	def getPlottablesSettings(self):
+#		print self.models[0].expression
 		return [ (self.models[i].getPlottable(type=self.currenttype, domain=self.domain), self.model_settings[i]) for i in range(0,len(self.models)) if self.models[i].visible ]
 
 	def getPlottables(self):

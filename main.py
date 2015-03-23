@@ -5,6 +5,7 @@ Main Application Start
 import sys
 from PyQt4 import QtGui
 from src.session.Session import Session
+
 from src.ui import *
 
 class plotterApp(QtGui.QMainWindow):
@@ -38,7 +39,7 @@ class plotterApp(QtGui.QMainWindow):
 
 	def new_tab(self):
 		self.session.add(self.tabs)
-		
+
 	def close_tab(self, index):
 		self.session.close_tab(self.tabs, index)
 
@@ -48,8 +49,15 @@ class plotterApp(QtGui.QMainWindow):
 		self.session.save_tab(index,filename)
 
 	def new_session(self):
-		self.session.close()
+		#self.session.close()
+		#del self.session
+		self.tabs.close()
 		self.session = Session(self)
+
+	def openSession(self):
+		modellist = self.session.open()
+		self.new_session()
+		self.session.makeSession(modellist,self.tabs)
 
 	def initMenuBar(self):
 		menubar = self.menuBar()
@@ -105,7 +113,7 @@ class plotterApp(QtGui.QMainWindow):
 		session_open_action = QtGui.QAction('Open Session..', self)
 		session_open_action.setShortcut('Ctrl+Shift+O')
 		session_open_action.setStatusTip('Open New Session')
-		session_open_action.triggered.connect(self.session.open)
+		session_open_action.triggered.connect(self.openSession)
 		session_menu.addAction(session_open_action)
 
 		session_recent_action = QtGui.QAction('Open Recent', self)
