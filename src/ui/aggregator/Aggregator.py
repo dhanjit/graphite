@@ -14,32 +14,60 @@ class Aggregator(QtGui.QWidget):
 		self.functions = []
 		self.model_settings = []
 		self.settings_btn = []
-
+		self.filenames = []
+		self.imagelabels = []
 		self.currenttype = None
-		self.mainLayout = QtGui.QVBoxLayout()
+		self.mainLayout = None
+		self.initAgg()
+
+
 		self.controller = controller  # Check gargbage collection. Causes problems.
 		self.settings = Settings()
 		self.initDomain()
-		
-	def generateImage(self,latexString,fileName):
+
+	def initAgg(self):
+#		scrollarea = QScrollArea(self)
+		self.mainLayout = QVBoxLayout()#self)
+		#self.setWidget(self.mainLayout.widget())
+#		self.mainLayout
+
+	def generateImage(self,model):
+		latexString = model.getRenderedView()
+		filename = "resources/"+str(id(model))+".png"
 		latexString="$"+latexString+"$"
-		fig = plt.figure()
+		fig = plt.figure()#figsize=(100,40))
 		ax= fig.add_subplot(111)
 		ax.text(0.0, 0.5,latexString,fontsize=150)
 		ax.set_axis_off()
-		plt.savefig(fileName)
+#		Figure()
+		fig.savefig(filename,transparent=True)
+		return filename
+
+	def getImageLabel(self, filename, hbox):
+		imagelabel = QLabel()
+		pix = QPixmap(filename)
+		#imagelabel.setMaximumHeight(100)
+		imagelabel.setMaximumSize(QSize(100,40))
+		scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
+		imagelabel.setPixmap(scaledpix)
+		#imagelabel.setFixedSize(QSize(150,30))
+		return imagelabel
+
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
 		# widget = QtGui.QWidget()
-		latexString=model.getRenderedView()
-		fileName = "resources/image"+str(len(self.models))+".png"
-		self.generateImage(latexString,fileName)
+
+		filename = self.generateImage(model)
+
+		self.filenames.append(filename)
+
 		# function = QtGui.QCheckBox(latexString)
-		function = QtGui.QCheckBox(str(model.expression))
+		function = QtGui.QCheckBox('')#str(model.expression))
+		function.setFixedSize(QSize(30,30))
 		# function.setStyleSheet("background-image: url(:/"+fileName+";")
 
-		function.setStyleSheet("color: black; background-color: red; font: bold")
+		#function.setStyleSheet("color: black; background-color: red; font: bold")
 		#function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton("Set")
@@ -47,7 +75,11 @@ class Aggregator(QtGui.QWidget):
 		btn.setEnabled(True)
 		self.settings_btn.append(btn)
 		hbox.insertWidget(0,function)
+		imagelabel = self.getImageLabel(filename,hbox)
+		self.imagelabels.append(imagelabel)
+		hbox.insertWidget(1,imagelabel)
 		hbox.addWidget(btn)
+#		hbox.set
 		self.mainLayout.addLayout(hbox)
 		self.mainLayout.addStretch(1)
 		self.setLayout(self.mainLayout)
