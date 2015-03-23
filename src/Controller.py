@@ -3,6 +3,7 @@ from src.ui.aggregator.Aggregator import Aggregator
 from src.ui.input.Input import Input
 from src.ui.Tab import Tab
 from .model.ModelCreator import ModelCreator
+from globalSettings import Customize
 
 class Controller():
 	
@@ -10,8 +11,10 @@ class Controller():
 		self.aggregator = Aggregator(self)
 		self.input = Input(self)
 		self.viewport = Viewport()
+		self.global_settings = {} #just for passing to Customize, will be removed 
+		self.global_settings = Customize(self.global_settings)
 
-		self.tab = Tab(self.aggregator, self.input, self.viewport )
+		self.tab = Tab(self.aggregator, self.input, self.viewport,self.global_settings)
 
 		self.inputhandler = inputhandler
 

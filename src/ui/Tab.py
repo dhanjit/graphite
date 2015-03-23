@@ -1,11 +1,11 @@
 from PyQt4 import QtGui, Qt
 
 class Tab(QtGui.QWidget):
-	def __init__(self, aggregator, input, viewport):
+	def __init__(self, aggregator, input, viewport,global_setting):
 		super(Tab,self).__init__()
-		self.initUI(aggregator, input, viewport)
+		self.initUI(aggregator, input, viewport,global_setting)
 
-	def initUI(self, aggregator, input, viewport):
+	def initUI(self, aggregator, input, viewport,global_setting):
 		# hbox_layout = QtGui.QHBoxLayout()
 		# hbox_layout.addWidget(input)
 		# hbox_layout.addWidget(aggregator)
@@ -14,12 +14,15 @@ class Tab(QtGui.QWidget):
 		# self.setLayout(hbox_layout)
 		grid_layout = QtGui.QGridLayout()
 		grid_layout.addWidget(input,0,0,2,2)
+
+
 		scrollarea = QtGui.QScrollArea()
 		scrollarea.setWidgetResizable(True)
 		scrollarea.setWidget(aggregator)
 		#scrollarea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 		aggregator.setParent(scrollarea)
 
-		grid_layout.addWidget(scrollarea,0,2,3,2)
-		grid_layout.addWidget(viewport,0,4,3,8)
+		grid_layout.addWidget(scrollarea,0,2,4,2)
+		grid_layout.addWidget(viewport,0,4,4,8)
+		grid_layout.addWidget(global_setting,2,0,2,2)
 		self.setLayout(grid_layout)
