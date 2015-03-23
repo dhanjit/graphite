@@ -12,6 +12,8 @@ class Controller():
 		self.viewport = Viewport()
 
 		self.tab = Tab(self.aggregator, self.input, self.viewport )
+		self.tabid = -1
+		self.tabs = None
 
 		self.inputhandler = inputhandler
 
@@ -31,6 +33,7 @@ class Controller():
 
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
+		self.tabs.setTabText(self.tabid, str(model.expression) or model.filename)
 		# self.aggregator.clearSelection()
 		# self.aggregator.selectModel(-1) #-1 for last model
 		print('model added to aggregator')

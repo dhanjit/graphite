@@ -16,5 +16,5 @@ class Model2D(Model):
 	def getPlottable(self, type='2D', domain={}):
 		return self.eval(domain=domain)
 
-	def getRenderedView(self):
-		return self.filename
+	# def getRenderedView(self):
+	# 	return self.filename

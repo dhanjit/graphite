@@ -27,6 +27,8 @@ class Model(object):
 		raise NotImplementedError("Subclass must implement abstract method")
 
 	def getRenderedView(self):
+		print self.filename
+		print os.path.basename(self.filename)
 		return os.path.basename(self.filename)
 
 
