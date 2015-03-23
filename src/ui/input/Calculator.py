@@ -1,20 +1,20 @@
 import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-#import dialog
 
 class Calculator(QWidget):
 
-	def __init__(self, controller):
+	def __init__(self, controller, completer=QCompleter()):
 		super(Calculator,self).__init__()
 		self.controller = controller
-		self.initUI()
+		self.initUI(completer)
 
-	def initUI(self):
+	def initUI(self, completer):
 
 		self.setStyleSheet("background-color: white")
-
 		self.lineedit = QLineEdit()
+		self.lineedit.setCompleter(completer)
+
 		self.lineedit.setPlaceholderText("Enter Expression")
 		self.lineedit.setStyleSheet("color: black; ")
 

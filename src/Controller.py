@@ -9,7 +9,7 @@ class Controller():
 	
 	def __init__(self, inputhandler):
 		self.aggregator = Aggregator(self)
-		self.input = Input(self)
+		self.input = Input(self, completer=inputhandler.completer)
 		self.viewport = Viewport()
 		self.global_settings = {} #just for passing to Customize, will be removed 
 		self.global_settings = Customize(self.global_settings)

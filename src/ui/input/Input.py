@@ -1,14 +1,14 @@
-from PyQt4.QtGui import QTabWidget, QTabBar
+from PyQt4.QtGui import QTabWidget, QTabBar, QCompleter, QStringListModel
 from PyQt4.QtCore import QSize
 from src.ui.input.Calculator import Calculator
 from src.ui.input.FileVisualizer import FileVisualizer
 
 
 class Input(QTabWidget):
-	def __init__(self, controller):
+	def __init__(self, controller, completer=QCompleter()):
 		super(Input, self).__init__()
 		self.filevisualizer = FileVisualizer(controller)
-		self.calculator = Calculator(controller)
+		self.calculator = Calculator(controller, completer)
 		self.initUI()
 
 	def initUI(self):
