@@ -16,12 +16,13 @@ class plotterApp(QtGui.QMainWindow):
 		self.initUI()
 
 	def initUI(self):
-		self.setWindowTitle('Graphite - Graph Plotter')				 	# Window Title
+		self.setWindowTitle('Graphite - The Graph Plotter')				 	# Window Title
 		self.setWindowIcon(QtGui.QIcon('icon.png')) 					# App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
 		self.initView()
+		self.showMaximized()
 
 	def initView(self):
 		self.tabs = QtGui.QTabWidget(self)
