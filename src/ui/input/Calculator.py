@@ -15,6 +15,7 @@ class Calculator(QWidget):
 		self.setStyleSheet("background-color: white")
 
 		self.lineedit = QLineEdit()
+		self.lineedit.setPlaceholderText("Enter Expression")
 		self.lineedit.setStyleSheet("color: blue; font: bold")
 
 		self.hbox_xyz = QHBoxLayout()

@@ -34,7 +34,7 @@ class Aggregator(QtGui.QWidget):
 		# widget = QtGui.QWidget()
 		latexString=model.getRenderedView()
 		fileName = "resources/image"+str(len(self.models))+".png"
-		self.generateImage(latexString,fileName)
+		# self.generateImage(latexString,fileName)
 		# function = QtGui.QCheckBox(latexString)
 		function = QtGui.QCheckBox(str(model.expression))
 		# function.setStyleSheet("background-image: url(:/"+fileName+";")
