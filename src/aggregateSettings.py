@@ -6,27 +6,17 @@ from PyQt4.QtCore import *
 
 class Customize(QWidget):
 
-    def __init__(self):
+    def __init__(self,global_setting):
         super(Customize,self).__init__()
 
-        self.axis = "x"
-        self.range_x = arange(-3.0,3.0,0.2)
-        self.range_y = arange(-3.0,3.0,0.2)
-        self.range_z = arange(-0.0,0.0,0.1)
-        self.facecolour = QColor("red")
-        self.grid = False
-        self.xscaletype = "linear"
-        self.yscaletype = "linear"
-        self.zscaletype = "linear"
-        self.autolayout = False
-        # self.display = display
-        self.setui()
+		self.global_settings = global_setting
+		self.defaultSettings()
+		self.initUI()
         # self.show()
 
 
 
-    def setui(self):
-        # self.setWindowTitle("Settings")
+    def initUI(self):
 
         self.axislbl = QLabel("Choose axis")
         self.axisbtn = QComboBox()
@@ -52,83 +42,95 @@ class Customize(QWidget):
         self.zscalebtn.addItem("Linear")
         self.exportbtn = QPushButton("Export")
         self.applybtn = QPushButton("Apply Settings")
-        self.defaultbtn = QPushButton("Deafult Settings")
+        self.defaultbtn = QPushButton("Default Settings")
         self.xrangelbl=QLabel("X Range")
-        self.xmin = QLineEdit("X MIN")
-        self.xmax = QLineEdit("X MAX")
-        self.yrangelbl=QLabel("Y Range")
-        self.ymin = QLineEdit("Y MIN")
-        self.ymax = QLineEdit("Y MAX")
-        self.zrangelbl=QLabel("Z Range")
-        self.zmin = QLineEdit("Z MIN")
-        self.zmax = QLineEdit("Z MAX")
+        self.xmin = QLineEdit()
+		self.xmin.setPlaceholderText("X MIN")
+		self.xmin.setStyleSheet("color: black; ")
+		self.xmax = QLineEdit()
+		self.xmax.setPlaceholderText("X MAX")
+		self.xmax.setStyleSheet("color: black; ")
+		self.yrangelbl=QLabel("Y Range")
+		self.ymin = QLineEdit()
+		self.ymin.setPlaceholderText("Y MIN")
+		self.ymin.setStyleSheet("color: black; ")
+		self.ymax = QLineEdit()
+		self.ymax.setPlaceholderText("Y MAX")
+		self.ymax.setStyleSheet("color: black; ")
+		self.zrangelbl=QLabel("Z Range")
+		self.zmin = QLineEdit()
+		self.zmin.setPlaceholderText("Z MIN")
+		self.zmin.setStyleSheet("color: black; ")
+		self.zmax = QLineEdit()
+		self.zmax.setPlaceholderText("Z MAX")
+		# self.zmax.setStyleSheet("color: black; ")
 
-        grid = QGridLayout()
-        grid.addWidget(self.axislbl,0,0)
-        grid.addWidget(self.axisbtn,0,1)
-        grid.addWidget(self.facecolourlbl,1,0)
-        grid.addWidget(self.facecolourbtn,1,1)
-        grid.addWidget(self.gridset,2,0)
-        grid.addWidget(self.autolayoutbox,2,1)
-        xhbox = QHBoxLayout()
-        xhbox.addWidget(self.xrangelbl)
-        xhbox.addWidget(self.xmin)
-        xhbox.addWidget(self.xmax)
-        yhbox = QHBoxLayout()
-        yhbox.addWidget(self.yrangelbl)
-        yhbox.addWidget(self.ymin)
-        yhbox.addWidget(self.ymax)
-        zhbox = QHBoxLayout()
-        zhbox.addWidget(self.zrangelbl)
-        zhbox.addWidget(self.zmin)
-        zhbox.addWidget(self.zmax)
-        scalegrid = QGridLayout()
-        scalegrid.addWidget(self.xscalelbl,0,0)
-        scalegrid.addWidget(self.xscalebtn,0,1)
-        scalegrid.addWidget(self.yscalelbl,1,0)
-        scalegrid.addWidget(self.yscalebtn,1,1)
-        scalegrid.addWidget(self.zscalelbl,2,0)
-        scalegrid.addWidget(self.zscalebtn,2,1)
-        hboxpushbtn = QHBoxLayout()
-        hboxpushbtn.addWidget(self.exportbtn)
-        hboxpushbtn.addWidget(self.defaultbtn)
-        hboxpushbtn.addWidget(self.applybtn)
-        layout = QVBoxLayout()
-        layout.addLayout(grid)
-        layout.addLayout(xhbox)
-        layout.addLayout(yhbox)
-        layout.addLayout(zhbox)
-        layout.addLayout(scalegrid)
-        layout.addLayout(hboxpushbtn)
-        # self.setLayout(layout)
+		grid = QGridLayout()
+		grid.addWidget(self.axislbl,0,0)
+		grid.addWidget(self.axisbtn,0,1)
+		grid.addWidget(self.facecolourlbl,1,0)
+		grid.addWidget(self.facecolourbtn,1,1)
+		grid.addWidget(self.gridset,2,0)
+		grid.addWidget(self.autolayoutbox,2,1)
+		xhbox = QHBoxLayout()
+		xhbox.addWidget(self.xrangelbl)
+		xhbox.addWidget(self.xmin)
+		xhbox.addWidget(self.xmax)
+		yhbox = QHBoxLayout()
+		yhbox.addWidget(self.yrangelbl)
+		yhbox.addWidget(self.ymin)
+		yhbox.addWidget(self.ymax)
+		zhbox = QHBoxLayout()
+		zhbox.addWidget(self.zrangelbl)
+		zhbox.addWidget(self.zmin)
+		zhbox.addWidget(self.zmax)
+		scalegrid = QGridLayout()
+		scalegrid.addWidget(self.xscalelbl,0,0)
+		scalegrid.addWidget(self.xscalebtn,0,1)
+		scalegrid.addWidget(self.yscalelbl,1,0)
+		scalegrid.addWidget(self.yscalebtn,1,1)
+		scalegrid.addWidget(self.zscalelbl,2,0)
+		scalegrid.addWidget(self.zscalebtn,2,1)
+		hboxpushbtn = QHBoxLayout()
+		hboxpushbtn.addWidget(self.exportbtn)
+		hboxpushbtn.addWidget(self.defaultbtn)
+		hboxpushbtn.addWidget(self.applybtn)
+		layout = QVBoxLayout()
+		layout.addLayout(grid)
+		layout.addLayout(xhbox)
+		layout.addLayout(yhbox)
+		layout.addLayout(zhbox)
+		layout.addLayout(scalegrid)
+		layout.addLayout(hboxpushbtn)
+		self.setLayout(layout)
 
-        self.connect(self.facecolourbtn,SIGNAL("clicked()"),self.setColor)
-        self.connect(self.axisbtn,SIGNAL("activated(QString)"),self.setCombo)
-        self.connect(self.gridset,SIGNAL(" stateChanged(int)"),self.setCheck)
-        self.connect(self.autolayoutbox,SIGNAL(" stateChanged(int)"),self.setCheck)
-        self.connect(self.xscalebtn,SIGNAL("activated(QString)"),self.setCombo)
-        self.connect(self.yscalebtn,SIGNAL("activated(QString)"),self.setCombo)
-        self.connect(self.zscalebtn,SIGNAL("activated(QString)"),self.setCombo)
-        self.connect(self.applybtn,SIGNAL("clicked()"),self.applySettings)
-        self.connect(self.defaultbtn,SIGNAL("clicked()"),self.defaultSettings)
+		self.connect(self.facecolourbtn,SIGNAL("clicked()"),self.setColor)
+		self.connect(self.axisbtn,SIGNAL("activated(QString)"),self.setCombo)
+		self.connect(self.gridset,SIGNAL(" stateChanged(int)"),self.setCheck)
+		self.connect(self.autolayoutbox,SIGNAL(" stateChanged(int)"),self.setCheck)
+		self.connect(self.xscalebtn,SIGNAL("activated(QString)"),self.setCombo)
+		self.connect(self.yscalebtn,SIGNAL("activated(QString)"),self.setCombo)
+		self.connect(self.zscalebtn,SIGNAL("activated(QString)"),self.setCombo)
+		self.connect(self.applybtn,SIGNAL("clicked()"),self.applySettings)
+		self.connect(self.defaultbtn,SIGNAL("clicked()"),self.defaultSettings)
 
     def setColor(self):
         colordialog = QColorDialog.getColor()
         if colordialog.isValid():
             btn = self.sender()
             btn.setStyleSheet("background-color:"+colordialog.name())
-            self.facecolour = QColor(colordialog.name())
+            self.settings["facecolour"] = QColor(colordialog.name())
 
     def setCombo(self,text):
         sender = self.sender()
         if(sender==self.axisbtn):
-            self.axis = str(text)
+            self.settings["axis"] = str(text)
         elif(sender==self.xscalebtn):
-            self.xscaletype = str(text)
+            self.settings["xscaletype"] = str(text)
         elif(sender==self.yscalebtn):
-            self.xscaletype = str(text)
+            self.settings["yscaletype"] = str(text)
         else:
-            self.xscaletype = str(text)
+            self.settings["zscaletype"] = str(text)
 
 
     def setCheck(self,state):
@@ -137,69 +139,49 @@ class Customize(QWidget):
         else:
             curr_state = False
         if(self.sender()==self.gridset):
-            self.grid = curr_state
+            self.settings["grid"] = curr_state
         else:
-            self.autolayout = curr_state
+            self.settings["autolayout"] = curr_state
             
 
 
     def applySettings(self):
-        settings={}
-        settings["axis"] = self.axis
+        self.global_settings["axis"] = self.axis
         try:
             min_x = float(str(self.xmin.text()))
             max_x = float(str(self.xmax.text()))
-            settings["xrange"] = arange(min_x,max_x)
+            self.global_settings["xrange"] = arange(min_x,max_x)
         except ValueError:
-            settings["xrange"] = self.range_x
+            self.global_settings["xrange"] = self.settings["range_x"]
         try:
             min_y = float(str(self.ymin.text()))
             max_y = float(str(self.ymax.text()))
-            settings["yrange"] = arange(min_y,max_y)
+            self.global_settings["yrange"] = arange(min_y,max_y)
         except ValueError:
-            settings["yrange"] = self.range_y
+            self.global_settings["yrange"] = self.settings["range_y"]
         try:
             min_z = float(str(self.zmin.text()))
             max_z = float(str(self.zmax.text()))
-            settings["zrange"] = arange(min_z,max_z)
+            self.global_settings["zrange"] = arange(min_z,max_z)
         except ValueError:
-            settings["zrange"] = self.range_z
-        settings["facecolour"] = self.facecolour
-        settings["grid"] = self.grid
-        settings["autolayout"] = self.autolayout
-        settings["xscale"] = self.xscaletype
-        settings["yscale"] = self.yscaletype
-        settings["zscale"] = self.zscaletype
+            self.global_settings["zrange"] = self.settings["range_z"]
+        self.global_settings["facecolour"] = self.settings["facecolour"]
+        self.global_settings["grid"] = self.settings["grid"]
+        self.global_settings["autolayout"] = self.settings["autolayout"]
+        self.global_settings["xscale"] = self.settings["xscaletype"]
+        self.global_settings["yscale"] = self.settings["yscaletype"]
+        self.global_settings["zscale"] = self.settings["zscaletype"]
 
-        # self.display.settings["axis"] = settings["axis"]
-        # self.display.settings["xrange"] = settings["xrange"]
-        # self.display.settings["yrange"] = settings["yrange"]
-        # self.display.settings["zrange"] = settings["zrange"]
-        # self.display.settings["facecolour"] = settings["facecolour"]
-        # self.display.settings["grid"] = settings["grid"]
-        # self.display.settings["autolayout"] = settings["autolayout"]
-        # self.display.settings["xscale"] = settings["xscale"]
-        # self.display.settings["yscale"] = settings["yscale"]
-        # self.display.settings["zscale"] = settings["zscale"]
-        # print self.display.settings
 
     def defaultSettings(self):
-        self.axis = "x"
-        self.range_x = arange(-3.0,3.0,0.2)
-        self.range_y = arange(-3.0,3.0,0.2)
-        self.range_z = arange(-0.0,0.0,0.1)
-        self.facecolour = QColor("red")
-        self.grid = False
-        self.xscaletype = "linear"
-        self.yscaletype = "linear"
-        self.zscaletype = "linear"
-        self.autolayout = True
+        self.settings["axis"] = "x"
+        self.settings["range_x"] = arange(-3.0,3.0,0.2)
+        self.settings["range_y"] = arange(-3.0,3.0,0.2)
+        self.settings["range_z"] = arange(-0.0,0.0,0.1)
+        self.settings["facecolour"] = QColor("red").name()
+        self.settings["grid"] = False
+        self.settings["xscaletype"] = "linear"
+        self.settings["yscaletype"] = "linear"
+        self.settings["zscaletype"] = "linear"
+        self.settings["autolayout"] = False
         self.applySettings()
-
-
-
-# app = QApplication(sys.argv)
-# setting = Customize()
-# app.exec_()
-
-
