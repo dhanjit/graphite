@@ -24,13 +24,14 @@ class Parser(object):
 			self.expression = sympy.sympify(string)
 			print("parsing ... ", str(self.expression))
 			var_num = len(self.expression.free_symbols)
-			if var_num == 2 and not self.type:
+			if var_num == 2 :
 				self.type = '3D'
-			elif var_num == 1 and not self.type:
+			elif var_num == 1 :
 				self.type = '2D'
 			elif not self.type:
-				self.type = 'NP'
 				raise Exception('Not plottable in 2d or 3d!')
+
+			print "Type here == ",self.type
 		except:
 			print('Not Parsable '+repr(e))
 

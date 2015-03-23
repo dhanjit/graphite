@@ -5,7 +5,6 @@ from numpy import arange
 from src.Settings import Settings
 from src.ui.aggregator.settingsTable import *
 import matplotlib.pyplot as plt
-
 class Aggregator(QtGui.QWidget):
 	def __init__(self, controller):
 		super(Aggregator, self).__init__()
@@ -106,7 +105,6 @@ class Aggregator(QtGui.QWidget):
 		self.models[index].visible = True
 		self.functions[index].setChecked(True)
 
-		self.updateCurrentType()
 
 	def updateCurrentType(self):
 		is2D = [ model.type == '2D' for model in self.models if model.visible ]
@@ -163,4 +161,6 @@ class Aggregator(QtGui.QWidget):
 			else:
 				self.settings_btn[i].setEnabled(False)
 				self.models[i].visible=False
+
+			self.updateCurrentType()
 			self.controller.updateViewport()
