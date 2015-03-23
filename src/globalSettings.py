@@ -7,44 +7,45 @@ from PyQt4.QtCore import *
 class Customize(QWidget):
 
     def __init__(self,global_setting):
-        super(Customize,self).__init__()
+		super(Customize,self).__init__()
 
 		self.global_settings = global_setting
-		self.defaultSettings()
 		self.initUI()
+		self.settings = {}
+		self.defaultSettings()
         # self.show()
 
 
 
     def initUI(self):
 
-        self.axislbl = QLabel("Choose axis")
-        self.axisbtn = QComboBox()
-        self.axisbtn.addItem("x")
-        self.axisbtn.addItem("y")
-        self.axisbtn.addItem("z")
-        self.facecolourlbl = QLabel("Face Colour")
-        self.facecolourbtn = QPushButton("Choose Colour")
-        self.facecolourbtn.setStyleSheet("background-color:red")
-        self.gridset = QCheckBox("Show Grid")
-        self.autolayoutbox = QCheckBox("Apply AutoLayout")
-        self.xscalelbl = QLabel("X Scale")
-        self.yscalelbl = QLabel("Y Scale")
-        self.zscalelbl = QLabel("Z Scale")
-        self.xscalebtn = QComboBox()
-        self.xscalebtn.addItem("Log")
-        self.xscalebtn.addItem("Linear")
-        self.yscalebtn = QComboBox()
-        self.yscalebtn.addItem("Log")
-        self.yscalebtn.addItem("Linear")
-        self.zscalebtn = QComboBox()
-        self.zscalebtn.addItem("Log")
-        self.zscalebtn.addItem("Linear")
-        self.exportbtn = QPushButton("Export")
-        self.applybtn = QPushButton("Apply Settings")
-        self.defaultbtn = QPushButton("Default Settings")
-        self.xrangelbl=QLabel("X Range")
-        self.xmin = QLineEdit()
+		self.axislbl = QLabel("Choose axis")
+		self.axisbtn = QComboBox()
+		self.axisbtn.addItem("x")
+		self.axisbtn.addItem("y")
+		self.axisbtn.addItem("z")
+		self.facecolourlbl = QLabel("Face Colour")
+		self.facecolourbtn = QPushButton("Choose Colour")
+		self.facecolourbtn.setStyleSheet("background-color:red")
+		self.gridset = QCheckBox("Show Grid")
+		self.autolayoutbox = QCheckBox("Apply AutoLayout")
+		self.xscalelbl = QLabel("X Scale")
+		self.yscalelbl = QLabel("Y Scale")
+		self.zscalelbl = QLabel("Z Scale")
+		self.xscalebtn = QComboBox()
+		self.xscalebtn.addItem("Log")
+		self.xscalebtn.addItem("Linear")
+		self.yscalebtn = QComboBox()
+		self.yscalebtn.addItem("Log")
+		self.yscalebtn.addItem("Linear")
+		self.zscalebtn = QComboBox()
+		self.zscalebtn.addItem("Log")
+		self.zscalebtn.addItem("Linear")
+		self.exportbtn = QPushButton("Export")
+		self.applybtn = QPushButton("Apply Settings")
+		self.defaultbtn = QPushButton("Default Settings")
+		self.xrangelbl=QLabel("X Range")
+		self.xmin = QLineEdit()
 		self.xmin.setPlaceholderText("X MIN")
 		self.xmin.setStyleSheet("color: black; ")
 		self.xmax = QLineEdit()
@@ -146,7 +147,7 @@ class Customize(QWidget):
 
 
     def applySettings(self):
-        self.global_settings["axis"] = self.axis
+        self.global_settings["axis"] = self.settings["axis"]
         try:
             min_x = float(str(self.xmin.text()))
             max_x = float(str(self.xmax.text()))
