@@ -239,3 +239,7 @@ class Calculator(QWidget):
 
 	def buttonEvent(self):
 		self.lineedit.insert(self.sender().text())
+
+	def keyPressEvent(self, QKeyEvent):
+		if QKeyEvent.key() == Qt.Key_Return:
+			self.plot_btn_handler()
