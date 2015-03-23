@@ -20,6 +20,7 @@ class Controller():
 		if isfile:
 			self.input.filevisualizer.setTableData(plottable=model.getPlottable())
 		self.addModelToAggregator(model)
+		self.aggregator.updateCurrentType()
 		self.updateViewport()
 
 	def createModel(self, input, isfile):
