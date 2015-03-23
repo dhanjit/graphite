@@ -212,6 +212,7 @@ class Calculator(QWidget):
 		self.connect(self.e, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_btn_handler)
 		self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
+		# self.connect(self.lineedit,SIGNAL("returnPressed()"), self.plotbtn, SIGNAL("clicked()"))
 
 	def open_btn_handler(self):
 		filename = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")
