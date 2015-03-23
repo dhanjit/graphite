@@ -121,7 +121,7 @@ class Aggregator(QtGui.QWidget):
 	def showpop(self):
 		for i in range(len(self.settings_btn)):
 			if(self.sender()==self.settings_btn[i]):
-				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
+				self.table = ModelSettingsTable(self.settings_btn[i],self.model_settings[i],self.models[i].type)
 				self.table.exec_()
 				self.controller.updateViewport()
 

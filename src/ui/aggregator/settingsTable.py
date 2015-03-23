@@ -5,7 +5,7 @@ import sys
 
 class ModelSettingsTable(QtGui.QDialog):
 
-	def __init__(self,model,type):
+	def __init__(self,parent,model,type):
 		super(ModelSettingsTable,self).__init__()
 		self.modelSet = model
 		self.temp = {}
@@ -13,7 +13,13 @@ class ModelSettingsTable(QtGui.QDialog):
 			self.initUI2D()
 		elif(type=="3D"):
 			self.initUI3D()
-		self.center()
+
+		point  = parent.rect().topRight()
+		anotherpoint = parent.rect().bottomLeft()
+		point = point + anotherpoint
+		global_point = parent.mapToGlobal(point)
+		self.move(global_point - QtCore.QPoint(0,0))
+
 		# self.show()
 
 	def initUI2D(self):
