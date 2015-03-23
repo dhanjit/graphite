@@ -31,16 +31,16 @@ class Aggregator(QtGui.QWidget):
 #		self.mainLayout
 
 	def generateImage(self,model):
-		print model.type
+		print (model.type)
 		latexString = model.getRenderedView()
-		filename = "resources/"+str(id(model))+".png"
+		# filename = "resources/"+str(id(model))+".png"
+		filename = "resources/image.png"
 		latexString="$"+latexString+"$"#"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
-		print latexString, 'yoyo'
-		fig = plt.figure(figsize=(2,1))#figsize=(100,40))
+		# print latexString, 'yoyo'
+		fig = plt.figure(figsize=(4,0))
 		ax= fig.add_subplot(111)
-		ax.text(0.0, 0.5,latexString,fontsize=150)
+		ax.text(0.0, 0.5,latexString,fontsize=28)
 		ax.set_axis_off()
-#		Figure()
 		fig.savefig(filename,transparent=True)
 		return filename
 

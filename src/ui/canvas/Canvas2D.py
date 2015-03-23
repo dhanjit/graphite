@@ -13,8 +13,8 @@ class Canvas2D(Canvas):
 		self.axes = self.fig.add_subplot(111)
 		self.setParent(parent)
 
-		self.axes.xlabel('xlabel')
-		self.axes.ylabel('ylabel')
+		# self.axes.xlabel('xlabel')
+		# self.axes.ylabel('ylabel')
 		
 		#FigureCanvas.setSizePolicy(self,
 			#QtGui.QSizePolicy.Expanding,
