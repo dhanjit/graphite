@@ -31,10 +31,12 @@ class Aggregator(QtGui.QWidget):
 #		self.mainLayout
 
 	def generateImage(self,model):
+		print model.type
 		latexString = model.getRenderedView()
 		filename = "resources/"+str(id(model))+".png"
-		latexString="$"+latexString+"$"
-		fig = plt.figure()#figsize=(100,40))
+		latexString="$"+latexString+"$"#"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
+		print latexString, 'yoyo'
+		fig = plt.figure(figsize=(2,1))#figsize=(100,40))
 		ax= fig.add_subplot(111)
 		ax.text(0.0, 0.5,latexString,fontsize=150)
 		ax.set_axis_off()
@@ -46,7 +48,7 @@ class Aggregator(QtGui.QWidget):
 		imagelabel = QLabel()
 		pix = QPixmap(filename)
 		#imagelabel.setMaximumHeight(100)
-		imagelabel.setMaximumSize(QSize(100,40))
+		imagelabel.setMaximumSize(QSize(200,40))
 		scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
 		imagelabel.setPixmap(scaledpix)
 		#imagelabel.setFixedSize(QSize(150,30))

@@ -2,9 +2,10 @@
 from .Model import Model
 class Model3D(Model):
 
-	def __init__(self,plottable3d=None):
+	def __init__(self,plottable3d=None,filename=''):
 		super(Model3D, self).__init__()
 		self.plottable3d = plottable3d
+		self.filename=filename
 		self.type = '3D'
 
 	def eval(self, domain):
