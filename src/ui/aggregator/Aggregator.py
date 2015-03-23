@@ -40,7 +40,7 @@ class Aggregator(QtGui.QWidget):
 		# function.setStyleSheet("background-image: url(:/"+fileName+";")
 
 		function.setStyleSheet("color: black; background-color: red; font: bold")
-		#function.setChecked(True)
+		function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton("Set")
 		btn.setMaximumWidth(30)

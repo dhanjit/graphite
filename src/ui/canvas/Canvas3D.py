@@ -16,14 +16,17 @@ class Canvas3D(Canvas):
 		# self.axes.hold(True)
 		self.setParent(parent)
 
+		self.count = 1
+
 		#FigureCanvas.setSizePolicy(self,
 		#	QtGui.QSizePolicy.Expanding,
 		#	QtGui.QSizePolicy.Expanding)
 		# FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable3D,settings):
-		# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
-		self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=settings["rstride"], cstride=settings["cstride"], cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
+		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+		self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=settings["rstride"], cstride=settings["cstride"], cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
 
 		# x = np.random.random_sample(100)
 		# y = np.random.random_sample(100)
