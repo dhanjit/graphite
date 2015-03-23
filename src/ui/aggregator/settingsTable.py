@@ -39,8 +39,7 @@ class ModelSettingsTable(QtGui.QDialog):
 		# transspin = QtGui.QDoubleSpinBox()
 		# transspin.setRange(0.0,1.0)
 		# transspin.setSingleStep(0.1)
-		linestylelbl = QtGui.QLabel("Line Style")
-		table.setCellWidget(3,0,linestylelbl)
+		table.setItem(3,0,QTableWidgetItem("Line Style"))
 		linestylecombo = QtGui.QComboBox()
 		linestylecombo.addItem("")
 		linestylecombo.addItem(".")
@@ -79,10 +78,20 @@ class ModelSettingsTable(QtGui.QDialog):
 		colorbtn = QtGui.QPushButton("Choose")
 		colorbtn.setStyleSheet("color: black; background-color: red; font: bold")
 		table.setCellWidget(0,1,colorbtn)
-		table.setItem(1,0,QtGui.QTableWidgetItem("Shade"))
+		table.setItem(1,0,QtGui.QTableWidgetItem("Width"))
+		widthspin = QtGui.QSpinBox()
+		widthspin.setValue(self.modelSet["Width"])
+		table.setCellWidget(1,1,widthspin)
+		table.setItem(2,0,QtGui.QTableWidgetItem("Shade"))
 		shadecheck = QtGui.QCheckBox("Apply")
 		shadecheck.setChecked(False)
-		table.setCellWidget(1,1,shadecheck)
+		table.setCellWidget(2,1,shadecheck)
+		table.setItem(3,0,QtGui.QTableWidgetItem("rstride"))
+		rstride = QtGui.QSpinBox()
+		table.setCellWidget(3,1,rstride)
+		table.setItem(4,0,QtGui.QTableWidgetItem("cstride"))
+		cstride = QtGui.QSpinBox()
+		table.setCellWidget(4,1,cstride)
 		table.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
 		table.verticalHeader().setVisible(False)
 		table.resizeColumnsToContents()
@@ -95,6 +104,9 @@ class ModelSettingsTable(QtGui.QDialog):
 
 		self.connect(colorbtn,QtCore.SIGNAL("clicked()"),self.setColor)
 		self.connect(shadecheck,QtCore.SIGNAL("valueChanged(int)"),self.setShade)
+		self.connect(widthspin,QtCore.SIGNAL("valueChanged(int)"),self.setWidth)
+		self.connect(rstride,QtCore.SIGNAL("valueChanged(int)"),self.setrstride)
+		self.connect(cstride,QtCore.SIGNAL("valueChanged(int)"),self.setcstride)
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.save)
 
 
@@ -108,6 +120,12 @@ class ModelSettingsTable(QtGui.QDialog):
 
 	def setWidth(self):
 		self.temp["Width"] = self.sender().value()
+
+	def setrstride(self):
+		self.temp["rstride"] = self.sender().value()
+
+	def setcstride(self):
+		self.temp["cstride"] = self.sender().value()
 
 
 	def setFill(self,text):

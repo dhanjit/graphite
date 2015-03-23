@@ -111,7 +111,10 @@ class Aggregator(QtGui.QWidget):
 		elif(type=="3D"):
 			set = Settings()
 			set["Color"] = QtGui.QColor("red").name()
+			set["Width"] = 1
 			set["Shade"] = False
+			set["rstride"] = 1
+			set["cstride"] = 1
 
 		self.model_settings.append(set)
 
