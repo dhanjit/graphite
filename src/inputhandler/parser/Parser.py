@@ -67,6 +67,10 @@ class Parser(object):
 		for c in ['s','c','e','x','y','a','t','l']:
 			if ')'+c in temp:
 				temp = temp.replace(')'+c,')*'+c)
+			if 'x'+c in temp:
+				temp = temp.replace('x'+c,'x*'+c)
+			if 'y'+c in temp:
+				temp = temp.replace('y'+c,'y*'+c)
 		'''
 		Handling cosec, sec ,cot
 		'''

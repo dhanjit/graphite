@@ -5,7 +5,7 @@ Main Application Start
 import sys
 from PyQt4 import QtGui
 from src.session.Session import Session
-
+from src.ui.AboutPopUp import AboutPopUp
 from src.ui import *
 
 class plotterApp(QtGui.QMainWindow):
@@ -151,10 +151,14 @@ class plotterApp(QtGui.QMainWindow):
 		about_action = QtGui.QAction('About', self)
 		about_action.setShortcut('') 
 		about_action.setStatusTip('About Software and Licenses')
-		#aboutaction.triggered.connect('''implement the function to create new plot''')
+		about_action.triggered.connect(self.about)
 		help_menu.addAction(about_action)
 		
 		return
+
+	def about(self):
+		self.aboutPopup = AboutPopUp(self)
+		self.aboutPopup.exec_()
 
 
 def main(args):

@@ -57,18 +57,17 @@ class Aggregator(QtGui.QWidget):
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
 		# widget = QtGui.QWidget()
-
 		filename = self.generateImage(model)
 
 		self.filenames.append(filename)
-
 		# function = QtGui.QCheckBox(latexString)
 		function = QtGui.QCheckBox('')#str(model.expression))
 		function.setFixedSize(QSize(30,30))
 		# function.setStyleSheet("background-image: url(:/"+fileName+";")
-
 		#function.setStyleSheet("color: black; background-color: red; font: bold")
 		#function.setChecked(True)
+		#olor: black; background-color: red; font: bold")
+		function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton("Set")
 		btn.setMaximumWidth(30)
@@ -153,7 +152,7 @@ class Aggregator(QtGui.QWidget):
 	def showpop(self):
 		for i in range(len(self.settings_btn)):
 			if(self.sender()==self.settings_btn[i]):
-				self.table = ModelSettingsTable(self.model_settings[i],self.models[i].type)
+				self.table = ModelSettingsTable(self.settings_btn[i],self.model_settings[i],self.models[i].type)
 				self.table.exec_()
 				self.controller.updateViewport()
 
