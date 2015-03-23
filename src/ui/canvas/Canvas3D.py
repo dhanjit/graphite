@@ -23,10 +23,11 @@ class Canvas3D(Canvas):
 
 	def plot(self, plottable3D, settings):
 		if plottable3D.getDimension() == 2 :
-			self.axes.plot(x, y, zs=0, zdir='z', label='zs=0, zdir=z')
+			print "Plottable3d Canvas ",plottable3D.x
+			self.axes.plot(plottable3D.x, plottable3D.y, zs=0, zdir='z', label='zs=0, zdir=z')
 		else:
-		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
-			self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
+			self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+			# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
 		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=settings["rstride"], cstride=settings["cstride"], cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
 
 		# x = np.random.random_sample(100)

@@ -75,16 +75,14 @@ class Aggregator(QtGui.QWidget):
 		self.models[index].visible = True
 		self.functions[index].setChecked(True)
 
-#		self.updateCurrentType()
+		self.updateCurrentType()
 
 	def updateCurrentType(self):
 		is2D = [ model.type == '2D' for model in self.models if model.visible ]
 		if all(is2D):
 			self.currenttype = '2D'
-		elif not any(is2D):
-			self.currenttype = '3D'
 		else:
-			self.currenttype = False
+			self.currenttype = '3D'
 
 	def getCurrentType(self, refresh=True, default=False):
 		if refresh:
