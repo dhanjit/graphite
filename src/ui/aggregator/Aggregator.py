@@ -164,3 +164,11 @@ class Aggregator(QtGui.QWidget):
 				self.settings_btn[i].setEnabled(False)
 				self.models[i].visible=False
 			self.controller.updateViewport()
+
+
+	def updateGlobalSettings(self):
+		self.domain["x"] = self.controller.global_settings["xrange"]
+		self.domain["y"] = self.controller.global_settings["yrange"]
+		if(self.controller.aggregator.getCurrentType()=="3D"):
+			self.domain["z"] = self.controller.global_settings["zrange"]
+		self.controller.updateViewport()

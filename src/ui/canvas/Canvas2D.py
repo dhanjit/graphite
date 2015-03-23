@@ -20,7 +20,13 @@ class Canvas2D(Canvas):
 	def plot(self, plottable2D,settings):
 		self.axes.plot(plottable2D.x, plottable2D.y,color = str(settings["Color"]),linestyle = str(settings["Line Fill"]),linewidth=int(settings["Width"]),marker = str(settings["Line Style"]))
 
-	def updateSettings(self):
-		pass
-#		self.draw()
+	def updateSettings(self,settings):
+		# print settings
+		# self.fig.set(facecolor = str(settings["facecolour"]),linewidth = float(str(settings["linewidth"])),dpi = float(str(settings["dpi"])))
+		#
+		if settings:
+			self.fig.set(facecolor = str(settings["facecolour"]))
+			# self.fig.set_animated(settings["animate"])
+		# self.fig.set_animated(settings["animated"])
+			self.draw()
 
