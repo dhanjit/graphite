@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-all: graphite/main.py
-	python graphite/main.py -style plastique
-=======
+
 all: run.py
 	python run.py -style plastique > graphite.log
->>>>>>> b04e346e0f68c199b89021cbc4312b6162bca82e
 
 test: test.py
 	python tests/test.py
