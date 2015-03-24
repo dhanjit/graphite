@@ -7,8 +7,8 @@ __pycache__/
 *.tar
 *.zip
 
+dependencies/*
 .idea/
 build/
 dist/
 *.jpg
-
