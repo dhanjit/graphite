@@ -171,10 +171,9 @@ class Graphite(QtGui.QMainWindow):
 
 	@staticmethod
 	def main(args):
+		sys.stdout = open('message.dump', 'w')
+		sys.stdout = open('error.dump', 'w')
 		app = QtGui.QApplication(args)
 		plotterview = Graphite()
 		plotterview.show()
 		sys.exit(app.exec_())
-
-if __name__ == '__main__':
-	Graphite.main(sys.argv)

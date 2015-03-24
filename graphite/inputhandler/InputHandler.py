@@ -1,6 +1,6 @@
 from graphite.inputhandler.filehandler.FileFormatHandler import *
 from graphite.inputhandler.parser.Parser import *
-from AutoCompleter import *#AutoCompleter
+from graphite.inputhandler.AutoCompleter import *
 from PyQt4.QtGui import QStringListModel, QCompleter
 
 class InputHandler:
