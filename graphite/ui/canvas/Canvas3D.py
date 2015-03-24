@@ -28,12 +28,17 @@ class Canvas3D(Canvas):
 		if plottable3D.getType() == '2D' :
 			# self.axes.plot(plottable3D.x, plottable3D.y, zs=0, zdir='z', label='zs=0, zdir=z')
 			self.axes.plot(plottable3D.x, plottable3D.y,zs=0,zdir='z',label='zs=0, zdir=z',color = str(settings["Color"]),linestyle = str(settings["Line Fill"]),linewidth=int(settings["Width"]),marker = str(settings["Line Style"]))
+			self.axes.set_xlabel('x',fontsize = 15)
+			self.axes.set_ylabel('y',fontsize = 15)
 		else:
 			if isfile:
 				self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
 			else:
 				self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, color = str(settings["Color"]),rstride=int(str(settings["rstride"])), cstride=int(str(settings["cstride"])),  linewidth=settings["Width"], antialiased=False)
 				#self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z,rstride=int(str(settings["rstride"])), cstride=int(str(settings["cstride"])), cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
+			self.axes.set_xlabel('x',fontsize = 15)
+			self.axes.set_ylabel('y',fontsize = 15)
+			self.axes.set_zlabel('z',fontsize = 15)
 
 		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=settings["rstride"], cstride=settings["cstride"], cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
 
