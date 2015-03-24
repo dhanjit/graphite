@@ -1,5 +1,5 @@
 all: run.py
-	python run.py -style plastique
+	python run.py -style plastique > graphite.log
 
 test: test.py
 	python tests/test.py

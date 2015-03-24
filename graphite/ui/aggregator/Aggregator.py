@@ -19,7 +19,6 @@ class Aggregator(QtGui.QWidget):
 		self.imagelabels = []
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout(self)
-		self.mainLayout.setAlignment(Qt.AlignTop)
 		self.mainLayout.setContentsMargins(0,0,0,0)
 		self.mainLayout.setSpacing(10)
 		self.setAutoFillBackground(True)
@@ -35,10 +34,10 @@ class Aggregator(QtGui.QWidget):
 		print (model.type)
 		latexString = model.getRenderedView()
 		# filename = "resources/"+str(id(model))+".png"
-		filename = "resources/image.png"
-		latexString="$"+latexString+"$"#"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
+		# filename = "resources/image.png"
+		latexString="$"+latexString+"$" #"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
 		canvas = LatexCanvas()
-		canvas.axes.text(-0.0, 0.5, latexString, fontsize=16)
+		canvas.axes.text(0.0, 0.5, latexString, fontsize=16)
 		#canvas.axes.title(latexString,fontsize=16,color='black')
 		canvas.axes.set_axis_off()
 		return canvas
@@ -86,7 +85,9 @@ class Aggregator(QtGui.QWidget):
 		hbox.addStretch(1)
 		_widget = QtGui.QWidget(self)
 		_widget.setLayout(hbox)
+		# _widget.setFixedHeight(self._restrictWidthToFit(_widget))
 		self.mainLayout.addWidget(_widget)
+		self.mainLayout.setAlignment(Qt.AlignTop)
 		self.setLayout(self.mainLayout)
 
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.showpop)

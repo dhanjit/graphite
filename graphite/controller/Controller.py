@@ -36,13 +36,13 @@ class Controller():
 		except Exception, e:
 			print repr(e)
 		try:
-			print "trying to update aggregator"
 			self.aggregator.updateCurrentType()
+			print "trying to update aggregator"
 		except Exception, e:
 			print repr(e)
 		try:
-			print "trying to update viewport"
 			self.updateViewport()
+			print "trying to update viewport"
 		except Exception, e:
 			print repr(e)
 
