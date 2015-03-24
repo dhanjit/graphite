@@ -8,6 +8,7 @@ __pycache__/
 *.zip
 
 dependencies/*
+resources/*
 .idea/
 build/
 dist/
