@@ -56,13 +56,8 @@ class Aggregator(QtGui.QWidget):
 		filename = self.generateImage(model)
 
 		self.filenames.append(filename)
-		# function = QtGui.QCheckBox(latexString)
-		function = QtGui.QCheckBox('')#str(model.expression))
-		# function.setFixedSize(QSize(30,30))
-		# function.setStyleSheet("background-image: url(:/"+fileName+";")
-		#function.setStyleSheet("color: black; background-color: red; font: bold")
-		#function.setChecked(True)
-		#olor: black; background-color: red; font: bold")
+		function = QtGui.QCheckBox('')
+
 		function.setChecked(True)
 		self.functions.append(function)
 		btn = QtGui.QPushButton()

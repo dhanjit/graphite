@@ -1,18 +1,58 @@
 import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+import re
+
+
+class CustomLineEdit(QLineEdit):
+	def __init__(self, parent=None):
+		super(CustomLineEdit, self).__init__(parent)
+
+	# def setCompleter(self,completer):
+		# if self.cmp:
+		# 	self.disconnect(self.cmp,0,0)
+		# self.cmp=completer
+		# if (not self.cmp):
+		# 	return
+		# self.cmp.setWidget(self)
+		# self.cmp.setCompletionMode(QCompleter.PopupCompletion)
+		# self.cmp.setCaseSensitivity(Qt.CaseInsensitive)
+		# super(CustomLineEdit,self).setCompleter(completer)
+		#self.connect(self.completer(),
+
+
+	def insertCompletion(self,string):
+		# tc=self.textCursor()
+		# tc.movePosition(QTextCursor.StartOfWord,QTextCursor.KeepAnchor)
+		print(string,'str')
+		print(self.text(),'.txt')
+		self.insert(string)
+		#self.insert(QString(str(self.text())+string))
+		# self.setTextCursor(tc)
+
+	# def keyPressEvent(self, event):
+	# 	if event.key() == Qt.Key_Tab:
+	# 		for item in self.completer.currentCompletion():
+	# 			item = str(item)
+	# 			if item.startswith(self.text()):
+	# 				self.setText(self.text() + item)
+	# 				break
+	# 		event.accept()
+	# 	else:
+	# 		QLineEdit.keyPressEvent(self, event)
+
 
 class Calculator(QWidget):
-
 	def __init__(self, controller, completer=QCompleter()):
-		super(Calculator,self).__init__()
+		super(Calculator, self).__init__()
 		self.controller = controller
 		self.initUI(completer)
 
 	def initUI(self, completer):
-
 		self.setStyleSheet("background-color: white")
-		self.lineedit = QLineEdit()
+
+		self.lineedit = CustomLineEdit(self)
+		completer.connect(completer,SIGNAL('activated(QString)'),self.lineedit.insertCompletion)
 		self.lineedit.setCompleter(completer)
 
 		self.lineedit.setPlaceholderText("Enter Expression")
@@ -54,29 +94,29 @@ class Calculator(QWidget):
 		self.divide = QPushButton("/")
 		self.power = QPushButton("^")
 		# self.unknown = QPushButton("?")
-		self.grid.addWidget(self.n1,0,0)
-		self.grid.addWidget(self.n2,0,1)
-		self.grid.addWidget(self.n3,0,2)
-		self.grid.addWidget(self.n4,0,3)
-		self.grid.addWidget(self.n5,1,0)
-		self.grid.addWidget(self.n6,1,1)
-		self.grid.addWidget(self.n7,1,2)
-		self.grid.addWidget(self.n8,1,3)
-		self.grid.addWidget(self.n9,2,0)
-		self.grid.addWidget(self.n0,2,1)
-		self.grid.addWidget(self.e,2,2)
-		self.grid.addWidget(self.back,2,3)
+		self.grid.addWidget(self.n1, 0, 0)
+		self.grid.addWidget(self.n2, 0, 1)
+		self.grid.addWidget(self.n3, 0, 2)
+		self.grid.addWidget(self.n4, 0, 3)
+		self.grid.addWidget(self.n5, 1, 0)
+		self.grid.addWidget(self.n6, 1, 1)
+		self.grid.addWidget(self.n7, 1, 2)
+		self.grid.addWidget(self.n8, 1, 3)
+		self.grid.addWidget(self.n9, 2, 0)
+		self.grid.addWidget(self.n0, 2, 1)
+		self.grid.addWidget(self.e, 2, 2)
+		self.grid.addWidget(self.back, 2, 3)
 		# self.grid.addWidget(self.greater,3,0)
 		# self.grid.addWidget(self.less,3,1)
-		self.grid.addWidget(self.point,3,0)
+		self.grid.addWidget(self.point, 3, 0)
 		# self.grid.addWidget(self.equal,3,3)
-		self.grid.addWidget(self.left_p,3,1)
-		self.grid.addWidget(self.right_p,3,2)
-		self.grid.addWidget(self.add,3,3)
-		self.grid.addWidget(self.subtract,4,0)
-		self.grid.addWidget(self.mult,4,1)
-		self.grid.addWidget(self.divide,4,2)
-		self.grid.addWidget(self.power,4,3)
+		self.grid.addWidget(self.left_p, 3, 1)
+		self.grid.addWidget(self.right_p, 3, 2)
+		self.grid.addWidget(self.add, 3, 3)
+		self.grid.addWidget(self.subtract, 4, 0)
+		self.grid.addWidget(self.mult, 4, 1)
+		self.grid.addWidget(self.divide, 4, 2)
+		self.grid.addWidget(self.power, 4, 3)
 		# self.grid.addWidget(self.unknown,5,3)
 
 		self.grid_func = QGridLayout()
@@ -177,7 +217,6 @@ class Calculator(QWidget):
 		self.plotbtn.setStyleSheet("color: black; background-color: white; ")
 		self.clrbtn.setStyleSheet("color: black; background-color: white; ")
 
-
 		self.connect(self.trbtn, SIGNAL("activated(QString)"), self.comboEvent)
 		self.connect(self.logbtn, SIGNAL("activated(QString)"), self.comboEvent)
 		self.connect(self.expbtn, SIGNAL("activated(QString)"), self.comboEvent)
@@ -210,8 +249,9 @@ class Calculator(QWidget):
 		self.connect(self.mult, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.power, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.e, SIGNAL("clicked()"), self.buttonEvent)
-		self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_btn_handler)
-		# self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
+		self.connect(self.plotbtn, SIGNAL("clicked()"), self.plot_btn_handler)
+
+	# self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
 
 	def open_btn_handler(self):
 		filename = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")
@@ -219,12 +259,12 @@ class Calculator(QWidget):
 		self.controller.plotInput(input=filename, isfile=True)
 
 	def plot_btn_handler(self):
-		function = self.lineedit.text()		
+		function = self.lineedit.text()
 		self.controller.plotInput(input=function, isfile=False)
 
-	def comboEvent(self,text):
+	def comboEvent(self, text):
 		# if(self.sender()==self.linearbtn):
-		#     try:
+		# try:
 		#         dialogbox=dialog.Dialog()
 		#         temp=dialogbox.showDialog("Enter values(a,b)",2).split(",")
 		#     except:
@@ -235,7 +275,7 @@ class Calculator(QWidget):
 		#         temp=dialogbox.showDialog("Enter value of b",1).strip("\n")
 		#     except:
 		#         return
-		curr = self.lineedit.text()+text
+		curr = self.lineedit.text() + text
 		self.lineedit.setText(curr)
 
 	def buttonEvent(self):
