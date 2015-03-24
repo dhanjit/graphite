@@ -174,6 +174,7 @@ class Graphite(QtGui.QMainWindow):
 		sys.stdout = open('message.dump', 'w')
 		sys.stdout = open('error.dump', 'w')
 		app = QtGui.QApplication(args)
+		app.setStyle('Cleanlooks')
 		plotterview = Graphite()
 		plotterview.show()
 		sys.exit(app.exec_())
