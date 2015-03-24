@@ -8,10 +8,10 @@ from graphite.session.Session import Session
 from graphite.ui.AboutPopUp import AboutPopUp
 from graphite.ui import *
 
-class plotterApp(QtGui.QMainWindow):
+class Graphite(QtGui.QMainWindow):
 
 	def __init__(self, *args):
-		super(plotterApp, self).__init__()
+		super(Graphite, self).__init__()
 		self.session = Session(self)
 		self.initUI()
 
@@ -171,7 +171,7 @@ class plotterApp(QtGui.QMainWindow):
 
 def main(args):
 	app = QtGui.QApplication(args)
-	plotterview = plotterApp()
+	plotterview = Graphite()
 	plotterview.show()
 	sys.exit(app.exec_())
 

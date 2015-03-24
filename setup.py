@@ -1,4 +1,5 @@
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
 	name='graphite',
@@ -15,5 +16,14 @@ setup(
 	license='open',
 	author='archen',
 	author_email='dhanjitdas1@gmail.com',
-	description='graphite - graph plotting application'
+	description='graphite - graph plotting application',
+	packages=find_packages(exclude=["tests",]),
+	install_requires=[
+		'numpy',
+		'matplotlib',
+	    'sympy'
+	],
+	dependency_links=[
+		'http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.3/PyQt-x11-gpl-4.11.3.tar.gz'
+	]
 )
