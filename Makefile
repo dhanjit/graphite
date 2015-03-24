@@ -1,6 +1,6 @@
 all: 
-#	cd dependencies && $(MAKE)
-	python main.py -style plastique
+	cd dependencies && $(MAKE)
+#	python main.py -style plastique
 
 test: test.py
 	python tests/test.py
