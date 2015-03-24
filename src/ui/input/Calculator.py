@@ -52,9 +52,12 @@ class Calculator(QWidget):
 		self.setStyleSheet("background-color: white")
 
 		self.lineedit = CustomLineEdit(self)
-		completer.connect(completer,SIGNAL('activated(QString)'),self.lineedit.insertCompletion)
+
+		#completer.connect(completer,SIGNAL('activated(QString)'),self.lineedit.insertCompletion)
+		completer.setCompletionMode(completer.PopupCompletion)
 		self.lineedit.setCompleter(completer)
 
+		self.lineedit.textChanged.connect(completer.setCompletionPrefix)
 		self.lineedit.setPlaceholderText("Enter Expression")
 		self.lineedit.setStyleSheet("color: black; ")
 
