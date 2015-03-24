@@ -9,4 +9,4 @@ install:
 	python setup.py install
 
 clean:
-	find . -name \*.pyc -type f -delete
+	find . -name \*.pyc -type f -delete && cd dependencies && $(MAKE) clean
