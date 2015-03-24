@@ -1,1 +1,0 @@
-{ global: initQtMultimedia; local: *; };
