@@ -52,7 +52,7 @@ class Graphite(QtGui.QMainWindow):
 		self.session.close_tab(self.tabs, index)
 
 	def save_tab(self):
-		filename = QtGui.QFileDialog.getSaveFileName(self, "Save Current Tab", "")
+		filename = QtGui.QFileDialog.getSaveFileName(self, "Save Current Plot", "")
 		index=int(self.tabs.currentIndex())
 		self.session.save_tab(index,filename)
 
@@ -92,7 +92,7 @@ class Graphite(QtGui.QMainWindow):
 		session_new_action.triggered.connect(self.new_session)
 		file_menu.addAction(session_new_action)
 
-		tab_save_action = QtGui.QAction('Save Current Tab', self)
+		tab_save_action = QtGui.QAction('Save Current Plot', self)
 		tab_save_action.setShortcut('Ctrl+S')
 		tab_save_action.setStatusTip('Save Current Plot')
 		tab_save_action.triggered.connect(self.save_tab)
@@ -169,11 +169,15 @@ class Graphite(QtGui.QMainWindow):
 		self.aboutPopup.exec_()
 
 
+
 	@staticmethod
 	def main(args):
 		sys.stdout = open('message.dump', 'w')
 		sys.stdout = open('error.dump', 'w')
 		app = QtGui.QApplication(args)
+		app.setStyle('Cleanlooks')
+		# app.setStyle(QtGui.QStyleFactory.create('cleanlooks'))
 		plotterview = Graphite()
 		plotterview.show()
 		sys.exit(app.exec_())
+
