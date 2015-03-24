@@ -19,6 +19,10 @@ class Aggregator(QtGui.QWidget):
 		self.imagelabels = []
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout(self)
+		self.mainLayout.setAlignment(Qt.AlignTop)
+		self.mainLayout.setContentsMargins(0,0,0,0)
+		self.mainLayout.setSpacing(10)
+		self.setAutoFillBackground(True)
 		# self.initAgg()
 
 
@@ -58,6 +62,8 @@ class Aggregator(QtGui.QWidget):
 
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
+		hbox.setContentsMargins(0,0,0,0)
+		hbox.setSpacing(0)
 		# widget = QtGui.QWidget()
 		imagewidget = self.generateImage(model)
 		scrollableImage = QtGui.QScrollArea()
@@ -87,7 +93,6 @@ class Aggregator(QtGui.QWidget):
 		_widget = QtGui.QWidget(self)
 		_widget.setLayout(hbox)
 		self.mainLayout.addWidget(_widget)
-		self.mainLayout.setAlignment(Qt.AlignTop)
 		self.setLayout(self.mainLayout)
 
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.showpop)
