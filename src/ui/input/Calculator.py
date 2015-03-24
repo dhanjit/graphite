@@ -1,20 +1,20 @@
 import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-#import dialog
 
 class Calculator(QWidget):
 
-	def __init__(self, controller):
+	def __init__(self, controller, completer=QCompleter()):
 		super(Calculator,self).__init__()
 		self.controller = controller
-		self.initUI()
+		self.initUI(completer)
 
-	def initUI(self):
+	def initUI(self, completer):
 
 		self.setStyleSheet("background-color: white")
-
 		self.lineedit = QLineEdit()
+		self.lineedit.setCompleter(completer)
+
 		self.lineedit.setPlaceholderText("Enter Expression")
 		self.lineedit.setStyleSheet("color: black; ")
 
@@ -122,10 +122,10 @@ class Calculator(QWidget):
 		# self.grid_func.addWidget(self.calbtn,4,1)
 
 		self.hbox_select = QHBoxLayout()
-		self.openbtn = QPushButton("OPEN")
+		# self.openbtn = QPushButton("OPEN")
 		self.plotbtn = QPushButton("PLOT")
 		self.clrbtn = QPushButton("CLEAR")
-		self.hbox_select.addWidget(self.openbtn)
+		# self.hbox_select.addWidget(self.openbtn)
 		self.hbox_select.addWidget(self.plotbtn)
 		self.hbox_select.addWidget(self.clrbtn)
 
@@ -211,8 +211,7 @@ class Calculator(QWidget):
 		self.connect(self.power, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.e, SIGNAL("clicked()"), self.buttonEvent)
 		self.connect(self.plotbtn,SIGNAL("clicked()"), self.plot_btn_handler)
-		self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
-		# self.connect(self.lineedit,SIGNAL("returnPressed()"), self.plotbtn, SIGNAL("clicked()"))
+		# self.connect(self.openbtn,SIGNAL("clicked()"), self.open_btn_handler)
 
 	def open_btn_handler(self):
 		filename = QFileDialog.getOpenFileName(self, "Open Plot Data File", "")

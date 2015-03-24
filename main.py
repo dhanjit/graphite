@@ -3,7 +3,7 @@ Main Application Start
 """
 
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from src.session.Session import Session
 from src.ui.AboutPopUp import AboutPopUp
 from src.ui import *
@@ -30,6 +30,13 @@ class plotterApp(QtGui.QMainWindow):
 		self.tabs.tabCloseRequested.connect(self.close_tab)
 		self.new_tab()
 		self.setCentralWidget(self.tabs)
+		self.tabs.setCornerWidget(self.addTabButton())
+
+	def addTabButton(self):
+		addtabbtn = QtGui.QPushButton("+",self.tabs)
+		addtabbtn.setObjectName("addButton")
+		self.connect(addtabbtn, QtCore.SIGNAL("clicked()"), self.new_tab)
+		return addtabbtn
 
 	def initToolBar(self):
 		pass

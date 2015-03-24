@@ -28,9 +28,10 @@ class Aggregator(QtGui.QWidget):
 
 
 	def generateImage(self,model):
-		print model.type
+		print (model.type)
 		latexString = model.getRenderedView()
-		filename = "resources/"+str(id(model))+".png"
+		# filename = "resources/"+str(id(model))+".png"
+		filename = "resources/image.png"
 		latexString="$"+latexString+"$"#"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
 		canvas = LatexCanvas()
 		canvas.axes.text(-0.0, 0.5, latexString, fontsize=16)
@@ -44,15 +45,15 @@ class Aggregator(QtGui.QWidget):
 		w = fw + sw + 5
 		return w
 
-	def getImageLabel(self, fig, hbox):
-		imagelabel = QLabel()
-		pix = QPixmap(fig)
-		#imagelabel.setMaximumHeight(100)
-		imagelabel.setMaximumSize(QSize(200,40))
-		# scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
-		imagelabel.setPixmap(pix)
-		#imagelabel.setFixedSize(QSize(150,30))
-		return imagelabel
+	# def getImageLabel(self, filename, hbox):
+	# 	imagelabel = QLabel()
+	# 	pix = QPixmap(fig)
+	# 	#imagelabel.setMaximumHeight(100)
+	# 	imagelabel.setMaximumSize(QSize(200,40))
+	# 	# scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
+	# 	imagelabel.setPixmap(pix)
+	# 	#imagelabel.setFixedSize(QSize(150,30))
+	# 	return imagelabel
 
 
 	def initUI(self,model):
@@ -171,3 +172,11 @@ class Aggregator(QtGui.QWidget):
 
 			self.updateCurrentType()
 			self.controller.updateViewport()
+
+
+	def updateGlobalSettings(self):
+		self.domain["x"] = self.controller.global_settings["xrange"]
+		self.domain["y"] = self.controller.global_settings["yrange"]
+		if(self.controller.aggregator.getCurrentType()=="3D"):
+			self.domain["z"] = self.controller.global_settings["zrange"]
+		self.controller.updateViewport()

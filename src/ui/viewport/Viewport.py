@@ -53,5 +53,5 @@ class Viewport(QWidget):
 			self.canvascontainer.setCurrentIndex(1)
 		self.canvascontainer.update()
 
-	def updateSettings(self):
-		self.canvas[self.canvastype].updateSettings()
+	def updateSettings(self,settings):
+		self.canvas[self.canvastype].updateSettings(settings)
