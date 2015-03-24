@@ -3,7 +3,7 @@ Main Application Start
 """
 
 import sys
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, Qt
 from graphite.session.Session import Session
 from graphite.ui.AboutPopUp import AboutPopUp
 from graphite.ui import *
@@ -30,7 +30,7 @@ class Graphite(QtGui.QMainWindow):
 		self.tabs.tabCloseRequested.connect(self.close_tab)
 		self.new_tab()
 		self.setCentralWidget(self.tabs)
-		self.tabs.setCornerWidget(self.addTabButton())
+		self.tabs.setCornerWidget(self.addTabButton(),0)
 
 	def addTabButton(self):
 		addtabbtn = QtGui.QPushButton("+",self.tabs)
@@ -169,11 +169,10 @@ class Graphite(QtGui.QMainWindow):
 		self.aboutPopup.exec_()
 
 
-
 	@staticmethod
 	def main(args):
-		sys.stdout = open('message.dump', 'w')
-		sys.stdout = open('error.dump', 'w')
+		#sys.stdout = open('message.dump', 'w')
+		#sys.stderr = open('error.dump', 'w')
 		app = QtGui.QApplication(args)
 		app.setStyle('Cleanlooks')
 		# app.setStyle(QtGui.QStyleFactory.create('cleanlooks'))

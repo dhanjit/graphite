@@ -25,15 +25,16 @@ class Viewport(QWidget):
 	def updateCanvas(self, aggregator):
 		self.canvastype = aggregator.getCurrentType(default='3D')
 		self.canvas[self.canvastype].axes.clear()
-		self.plot(plottables = aggregator.getPlottablesSettings())
+		isfile = any(model.filename for model in aggregator.models if model.visible)
+		self.plot(plottables = aggregator.getPlottablesSettings(), isfile=isfile)
 
 		self.canvas[self.canvastype].draw()
 
-	def plot(self, plottables):
+	def plot(self, plottables, isfile=False):
 		for plottable in plottables:
 			data = plottable[0]
 			settings = plottable[1]
-			self.canvas[self.canvastype].plot(data, settings)
+			self.canvas[self.canvastype].plot(data, settings, isfile)
 
 	def setCanvasType(self,type='2D'):
 		self.canvastype = type

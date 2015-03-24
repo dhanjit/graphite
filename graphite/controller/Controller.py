@@ -42,7 +42,7 @@ class Controller():
 			print repr(e)
 		try:
 			self.updateViewport()
-			print("trying to update viewport")
+			print("updated viewport")
 		except Exception, e:
 			print repr(e)
 

@@ -21,7 +21,7 @@ class Canvas2D(Canvas):
 			#QtGui.QSizePolicy.Expanding)
 		# FigureCanvas.updateGeometry(self)
 
-	def plot(self, plottable2D,settings):
+	def plot(self, plottable2D,settings,isfile=False):
 		self.axes.plot(plottable2D.x, plottable2D.y,color = str(settings["Color"]),linestyle = str(settings["Line Fill"]),linewidth=int(settings["Width"]),marker = str(settings["Line Style"]))
 
 	def updateSettings(self,settings):
