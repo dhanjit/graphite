@@ -136,7 +136,8 @@ class Aggregator(QtGui.QWidget):
 
 	def getPlottablesSettings(self):
 #		print self.models[0].expression
-		return [ (self.models[i].getPlottable(type=self.currenttype, domain=self.domain), self.model_settings[i]) for i in range(0,len(self.models)) if self.models[i].visible ]
+		# print '@@@@@@@@@@@@@@!!!!',len(self.model_settings)
+		return [ (self.models[i].getPlottable(type=self.currenttype, domain=self.domain),self.model_settings[i]) for i in range(0,len(self.models)) if self.models[i].visible ]
 
 	def getPlottables(self):
 		return [model.getPlottable(type=self.currenttype, domain=self.domain) for model in self.models if model.visible]
