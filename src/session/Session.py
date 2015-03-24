@@ -39,7 +39,8 @@ class Session(object):
 		self.controllers.append(controller)
 		index = tabs.addTab(controller.tab, "Unsaved..")
 		tabs.setCurrentIndex(index)
-
+		self.controllers[-1].tabid = index
+		self.controllers[-1].tabs = tabs
 
 	def close(self):
 		close_msg = "Save Session?"

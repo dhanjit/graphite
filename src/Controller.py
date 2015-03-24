@@ -3,16 +3,22 @@ from src.ui.aggregator.Aggregator import Aggregator
 from src.ui.input.Input import Input
 from src.ui.Tab import Tab
 from .model.ModelCreator import ModelCreator
-from globalSettings import Customize
 from PyQt4 import QtCore
+from src.globalSettings import Customize
+
+
 class Controller():
 	
 	def __init__(self, inputhandler):
 		self.aggregator = Aggregator(self)
-		self.input = Input(self)
+		self.input = Input(self, completer=inputhandler.completer)
 		self.viewport = Viewport()
-		self.global_settings = {} #just for passing to Customize, will be removed
+
+		self.global_settings = {} #just for passing to Customize, will be removed 
 		self.settings = Customize(self)
+
+		self.tabid = -1
+		self.tabs = None
 
 		self.tab = Tab(self.aggregator, self.input, self.viewport,self.settings)
 		self.inputhandler = inputhandler
@@ -22,6 +28,7 @@ class Controller():
 		if isfile:
 			self.input.filevisualizer.setTableData(plottable=model.getPlottable())
 		self.addModelToAggregator(model)
+		self.aggregator.updateCurrentType()
 		self.updateViewport()
 
 	def createModel(self, input, isfile):
@@ -33,6 +40,7 @@ class Controller():
 
 	def addModelToAggregator(self, model):
 		self.aggregator.addModel(model)
+		self.tabs.setTabText(self.tabid, str(model.expression) or model.filename)
 		# self.aggregator.clearSelection()
 		# self.aggregator.selectModel(-1) #-1 for last model
 		print('model added to aggregator')

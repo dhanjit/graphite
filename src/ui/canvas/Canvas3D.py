@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
-
+from src.model.Plottable3D import Plottable3D
 class Canvas3D(Canvas):
 	def __init__(self, parent=None, width=6.5, height=5.5, dpi=100, sharex=None, sharey=None, fig=None):
 		self.fig = Figure(figsize=(width, height), dpi=dpi, facecolor='#FFFFFF')
@@ -22,8 +22,7 @@ class Canvas3D(Canvas):
 		# FigureCanvas.updateGeometry(self)
 
 	def plot(self, plottable3D, settings):
-		if plottable3D.getDimension() == 2 :
-			print "Plottable3d Canvas ",plottable3D.x
+		if plottable3D.getType() == '2D' :
 			self.axes.plot(plottable3D.x, plottable3D.y, zs=0, zdir='z', label='zs=0, zdir=z')
 		else:
 			self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
