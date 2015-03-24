@@ -24,7 +24,9 @@ class Parser(object):
 			self.expression = sympy.sympify(string)
 			print("parsing ... ", str(self.expression))
 			var_num = len(self.expression.free_symbols)
-			if var_num == 2 :
+			if 'y' in string:
+				self.type = '3D'
+			elif var_num == 2 :
 				self.type = '3D'
 			elif var_num == 1 :
 				self.type = '2D'
@@ -41,6 +43,9 @@ class Parser(object):
 			temp = temp.split('=')[1]
 			if 'z' in z:
 				self.type = '3D'
+
+		# self.join(temp, 0, '`', 0)
+
 		for i in range(10):
 			if str(i)+'x' in temp:
 				temp = temp.replace(str(i)+"x",str(i)+"*x")
@@ -128,3 +133,16 @@ class Parser(object):
 			j = temp.find('cot(')
 
 		return temp
+
+	# def join(self, myString, index, currentChar, multiplicity):
+	# 	if (index + 1 == len(myString)):
+	# 		myString = myString[:-multiplicity]
+	# 		myString = myString.append(currentChar + '^' + str(multiplicity))
+	# 	else:
+	# 		if (myString[index + 1] != currentChar):
+	# 			firstPart = myString[]
+	# 			myString = myString[index:-multiplicity]
+	# 			myString = myString.append(currentChar + '^' + str(multiplicity))
+	# 			self.join(myString, index + 3 - multiplicity + len(str(multiplicity)), currentChar, 0)
+	# 		else:
+	# 			self.join(myString, index + 1, currentChar, multiplicity + 1)

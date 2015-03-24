@@ -169,11 +169,12 @@ class Graphite(QtGui.QMainWindow):
 		self.aboutPopup.exec_()
 
 
-def main(args):
-	app = QtGui.QApplication(args)
-	plotterview = Graphite()
-	plotterview.show()
-	sys.exit(app.exec_())
+	@staticmethod
+	def main(args):
+		app = QtGui.QApplication(args)
+		plotterview = Graphite()
+		plotterview.show()
+		sys.exit(app.exec_())
 
 if __name__ == '__main__':
-	main(sys.argv)
+	Graphite.main(sys.argv)

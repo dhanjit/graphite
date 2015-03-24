@@ -23,12 +23,28 @@ class Controller():
 		self.inputhandler = inputhandler
 
 	def plotInput(self, input, isfile):
-		model = self.createModel(input, isfile)
-		if isfile:
-			self.input.filevisualizer.setTableData(plottable=model.getPlottable())
-		self.addModelToAggregator(model)
-		self.aggregator.updateCurrentType()
-		self.updateViewport()
+		try:
+			print "trying to create model"
+			model = self.createModel(input, isfile)
+			if isfile:
+				self.input.filevisualizer.setTableData(plottable=model.getPlottable())
+		except Exception, e:
+			print repr(e)
+		try:
+			print "trying to add model"
+			self.addModelToAggregator(model)
+		except Exception, e:
+			print repr(e)
+		try:
+			self.aggregator.updateCurrentType()
+			print "trying to update aggregator"
+		except Exception, e:
+			print repr(e)
+		try:
+			self.updateViewport()
+			print "trying to update viewport"
+		except Exception, e:
+			print repr(e)
 
 	def createModel(self, input, isfile):
 		if isfile:
