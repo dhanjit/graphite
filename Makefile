@@ -1,5 +1,6 @@
 all: 
 	cd dependencies && $(MAKE)
+run:
 	python main.py
 
 test: test.py

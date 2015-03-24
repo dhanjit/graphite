@@ -1,5 +1,3 @@
-__author__ = 'batman'
-
 from PyQt4 import QtGui,QtCore
 
 class AboutPopUp(QtGui.QDialog):
@@ -25,4 +23,5 @@ class AboutPopUp(QtGui.QDialog):
 		self.layout.addWidget(self.titleLabel)
 		self.layout.addWidget(self.nameLabel)
 		self.layout.addWidget(self.licenceLabel)
+		self.layout.addWidget(self.devLabel)
 

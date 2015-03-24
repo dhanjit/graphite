@@ -1,0 +1,13 @@
+Installation:
+	$make		- Install the program
+	$make run 	- Run the program
+
+Dependencies:
+	freetype
+	postscript
+	png
+	python2.7
+	PyQt4
+	matplotlib-1.4.3
+	python-numpy
+	python-sympy
