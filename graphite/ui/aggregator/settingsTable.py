@@ -23,6 +23,7 @@ class ModelSettingsTable(QtGui.QDialog):
 		# self.show()
 
 	def initUI2D(self):
+		self.setWindowTitle("Settings")
 		table = QtGui.QTableWidget(len(self.modelSet),2)
 		table.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
 		table.setHorizontalHeaderLabels(["Attribute","Value"])

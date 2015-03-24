@@ -7,8 +7,10 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from graphite.model.Plottable3D import Plottable3D
 class Canvas3D(Canvas):
-	def __init__(self, parent=None, width=6.5, height=5.5, dpi=100, sharex=None, sharey=None, fig=None):
-		self.fig = Figure(figsize=(width, height), dpi=dpi, facecolor='#FFFFFF')
+	# def __init__(self, parent=None, width=6.5, height=5.5, dpi=100, sharex=None, sharey=None, fig=None):
+	# 	self.fig = Figure(figsize=(width, height), dpi=dpi, facecolor='#FFFFFF')
+	def __init__(self, parent=None):
+		self.fig = Figure()
 		super(Canvas3D, self).__init__(figure=self.fig)
 
 		self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
@@ -25,7 +27,7 @@ class Canvas3D(Canvas):
 		if plottable3D.getType() == '2D' :
 			self.axes.plot(plottable3D.x, plottable3D.y, zs=0, zdir='z', label='zs=0, zdir=z')
 		else:
-			self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+			self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, color = str(settings["Color"]),rstride=int(str(settings["rstride"])), cstride=int(str(settings["cstride"])), cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
 			# self.axes.scatter(plottable3D.x, plottable3D.y, plottable3D.z, c='r', marker='o')
 		# self.axes.plot_surface(plottable3D.x, plottable3D.y, plottable3D.z, rstride=settings["rstride"], cstride=settings["cstride"], cmap=cm.coolwarm, linewidth=settings["Width"], antialiased=False)
 
@@ -36,4 +38,7 @@ class Canvas3D(Canvas):
 		# self.axes.scatter(x, y, z, c='r', marker='o')
 
 	def updateSettings(self,settings):
+		if settings:
+			self.fig.set(facecolor = str(settings["facecolour"]))
+			self.draw()
 		self.axes.mouse_init()

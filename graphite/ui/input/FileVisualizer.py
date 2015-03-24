@@ -38,7 +38,8 @@ class FileVisualizer(QWidget):
 		self.controller.plotInput(input=filename, isfile=True)
 
 	def clear_btn_handler(self):
-		raise Exception('not handled in FileVisualizer.py\n')
+		self.tableinput.clear()
+		# raise Exception('not handled in FileVisualizer.py\n')
 
 
 

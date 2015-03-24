@@ -146,7 +146,7 @@ class Aggregator(QtGui.QWidget):
 		elif(type=="3D"):
 			set = Settings()
 			set["Color"] = QtGui.QColor("red").name()
-			set["Width"] = 1
+			set["Width"] = 0
 			set["Shade"] = False
 			set["rstride"] = 1
 			set["cstride"] = 1
@@ -179,4 +179,7 @@ class Aggregator(QtGui.QWidget):
 		self.domain["y"] = self.controller.global_settings["yrange"]
 		if(self.controller.aggregator.getCurrentType()=="3D"):
 			self.domain["z"] = self.controller.global_settings["zrange"]
-		self.controller.updateViewport()
+		try:
+			self.controller.updateViewport()
+		except ValueError:
+			pass

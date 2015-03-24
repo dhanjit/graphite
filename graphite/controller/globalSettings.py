@@ -20,11 +20,11 @@ class Customize(QWidget):
 
 	def initUI(self):
 
-		self.axislbl = QLabel("Choose axis")
-		self.axisbtn = QComboBox()
-		self.axisbtn.addItem("x")
-		self.axisbtn.addItem("y")
-		self.axisbtn.addItem("z")
+		# self.axislbl = QLabel("Choose axis")
+		# self.axisbtn = QComboBox()
+		# self.axisbtn.addItem("x")
+		# self.axisbtn.addItem("y")
+		# self.axisbtn.addItem("z")
 		self.facecolourlbl = QLabel("Face Colour")
 		self.facecolourbtn = QPushButton("Choose Colour")
 		self.facecolourbtn.setStyleSheet("background-color:red")
@@ -68,8 +68,8 @@ class Customize(QWidget):
 		self.zmax.setStyleSheet("color: black; ")
 
 		grid = QGridLayout()
-		grid.addWidget(self.axislbl,0,0)
-		grid.addWidget(self.axisbtn,0,1)
+		# grid.addWidget(self.axislbl,0,0)
+		# grid.addWidget(self.axisbtn,0,1)
 		grid.addWidget(self.facecolourlbl,1,0)
 		grid.addWidget(self.facecolourbtn,1,1)
 		# grid.addWidget(self.animate,2,0)
@@ -107,7 +107,7 @@ class Customize(QWidget):
 		self.setLayout(layout)
 
 		self.connect(self.facecolourbtn,SIGNAL("clicked()"),self.setColor)
-		self.connect(self.axisbtn,SIGNAL("activated(QString)"),self.setCombo)
+		# self.connect(self.axisbtn,SIGNAL("activated(QString)"),self.setCombo)
 		# self.connect(self.animate,SIGNAL(" stateChanged(int)"),self.setCheck)
 		# self.connect(self.autolayoutbox,SIGNAL(" stateChanged(int)"),self.setCheck)
 		# self.connect(self.xscalebtn,SIGNAL("activated(QString)"),self.setCombo)
@@ -115,6 +115,7 @@ class Customize(QWidget):
 		# self.connect(self.zscalebtn,SIGNAL("activated(QString)"),self.setCombo)
 		self.connect(self.applybtn,SIGNAL("clicked()"),self.applySettings)
 		self.connect(self.defaultbtn,SIGNAL("clicked()"),self.defaultSettings)
+		self.connect(self.exportbtn,SIGNAL("clicked()"),self.save_tab)
 
 	def setColor(self):
 		colordialog = QColorDialog.getColor()
@@ -123,32 +124,32 @@ class Customize(QWidget):
 			btn.setStyleSheet("background-color:"+colordialog.name())
 			self.settings["facecolour"] = QColor(colordialog).name()
 
-	def setCombo(self,text):
-		sender = self.sender()
-		if(sender==self.axisbtn):
-			self.settings["axis"] = str(text)
-		elif(sender==self.xscalebtn):
-			self.settings["xscaletype"] = str(text)
-		elif(sender==self.yscalebtn):
-			self.settings["yscaletype"] = str(text)
-		else:
-			self.settings["zscaletype"] = str(text)
-
-
-	def setCheck(self,state):
-		if(state==Qt.Checked):
-			curr_state = True
-		else:
-			curr_state = False
-		if(self.sender()==self.animate):
-			self.settings["animate"] = curr_state
-		else:
-			self.settings["autolayout"] = curr_state
+	# def setCombo(self,text):
+	# 	sender = self.sender()
+	# 	if(sender==self.axisbtn):
+	# 		self.settings["axis"] = str(text)
+	# 	elif(sender==self.xscalebtn):
+	# 		self.settings["xscaletype"] = str(text)
+	# 	elif(sender==self.yscalebtn):
+	# 		self.settings["yscaletype"] = str(text)
+	# 	else:
+	# 		self.settings["zscaletype"] = str(text)
+	#
+	#
+	# def setCheck(self,state):
+	# 	if(state==Qt.Checked):
+	# 		curr_state = True
+	# 	else:
+	# 		curr_state = False
+	# 	if(self.sender()==self.animate):
+	# 		self.settings["animate"] = curr_state
+	# 	else:
+	# 		self.settings["autolayout"] = curr_state
 
 
 
 	def applySettings(self):
-		self.global_settings["axis"] = self.settings["axis"]
+		# self.global_settings["axis"] = self.settings["axis"]
 		try:
 			min_x = float(str(self.xmin.text()))
 			max_x = float(str(self.xmax.text()))
@@ -179,18 +180,18 @@ class Customize(QWidget):
 
 
 	def defaultSettings(self):
-		self.settings["axis"] = "x"
+		# self.settings["axis"] = "x"
 		self.settings["range_x"] = arange(0.0, 3.0, 0.1)
 		self.settings["range_y"] = arange(0.0, 3.0, 0.1)
 		self.settings["range_z"] = arange(0.0, 3.0, 0.1)
 		self.settings["facecolour"] = QColor("gray").name()
 		# self.settings["animate"] = False
-		self.settings["xscaletype"] = "linear"
-		self.settings["yscaletype"] = "linear"
-		self.settings["zscaletype"] = "linear"
+		# self.settings["xscaletype"] = "linear"
+		# self.settings["yscaletype"] = "linear"
+		# self.settings["zscaletype"] = "linear"
 		# self.settings["autolayout"] = False
 		self.applySettings()
-		self.axisbtn.setCurrentIndex(0)
+		# self.axisbtn.setCurrentIndex(0)
 		self.facecolourbtn.setStyleSheet("background-color:gray")
 		# self.animate.setChecked(False)
 		# self.autolayoutbox.setChecked(False)
@@ -203,3 +204,9 @@ class Customize(QWidget):
 		# self.xscalebtn.setCurrentIndex(0)
 		# self.yscalebtn.setCurrentIndex(0)
 		# self.zscalebtn.setCurrentIndex(0)
+
+
+	def save_tab(self):
+		filename = QFileDialog.getSaveFileName(self, "Save Current Plot", "")
+		index=int(self.controller.tabs.currentIndex())
+		self.controller.viewport.canvas[self.controller.aggregator.getCurrentType(default='3D')].saveFigure(filename)
