@@ -13,7 +13,7 @@ class Canvas(FigureCanvas):
 		filename=str(filename)
 		self.fig.savefig(filename)
 
-	def plot(self,plottable, settings):
+	def plot(self,plottable, settings, isfile=False):
 		raise NotImplementedError("Subclass not implemented function")
 
 	def updateSettings(self,settings):
