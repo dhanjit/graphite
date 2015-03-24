@@ -17,9 +17,6 @@ class Canvas2D(Canvas):
 		# self.axes.spines['bottom'].set_position(('data',0))
 		# self.axes.yaxis.set_ticks_position('left')
 		# self.axes.spines['left'].set_position(('data',0))
-		#
-		# self.axes.set_xlabel('xlabel',fontsize = 20)
-		# self.axes.set_ylabel('ylabel',fontsize = 20)
 		
 		#FigureCanvas.setSizePolicy(self,
 			#QtGui.QSizePolicy.Expanding,
