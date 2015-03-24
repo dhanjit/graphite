@@ -17,7 +17,7 @@ class Graphite(QtGui.QMainWindow):
 
 	def initUI(self):
 		self.setWindowTitle('Graphite - The Graph Plotter')				 	# Window Title
-		self.setWindowIcon(QtGui.QIcon('icon.png')) 					# App Icon
+		self.setWindowIcon(QtGui.QIcon('resources/graphite-icon .png')) 					# App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
