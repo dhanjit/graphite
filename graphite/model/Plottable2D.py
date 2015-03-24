@@ -10,7 +10,7 @@ class Plottable2D(Plottable):
 
 	def addPoints(self, points):
 		for point in points:
-			self.x.append(point.getX())
+			self.x.append(point.getX)
 			self.y.append(point.getY())
 
 	def setPoints(self,x,y):
