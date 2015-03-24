@@ -2,7 +2,7 @@
 # from mathtex.fonts import UnicodeFonts
 from numpy import arange
 
-from graphite.controller import Settings
+from graphite.controller.Settings import Settings
 from graphite.ui.aggregator.settingsTable import *
 from graphite.ui.aggregator.LatexCanvas import *
 

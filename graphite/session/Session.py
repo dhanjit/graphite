@@ -4,7 +4,7 @@ import os
 from PyQt4 import QtGui
 
 from graphite.inputhandler.InputHandler import InputHandler
-from graphite.controller import Controller
+from graphite.controller.Controller import Controller
 
 
 class Session(object):

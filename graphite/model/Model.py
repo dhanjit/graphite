@@ -8,7 +8,7 @@
 # from .Model3D import Model3D
 import os
 
-from graphite.controller import Settings
+from graphite.controller.Settings import Settings
 
 
 class Model(object):
