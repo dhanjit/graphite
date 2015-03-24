@@ -5,6 +5,8 @@ from numpy import arange
 from src.Settings import Settings
 from src.ui.aggregator.settingsTable import *
 import matplotlib.pyplot as plt
+from src.ui.aggregator.LatexCanvas import *
+
 class Aggregator(QtGui.QWidget):
 	def __init__(self, controller):
 		super(Aggregator, self).__init__()
@@ -13,7 +15,7 @@ class Aggregator(QtGui.QWidget):
 		self.functions = []
 		self.model_settings = []
 		self.settings_btn = []
-		self.filenames = []
+		# self.filenames = []
 		self.imagelabels = []
 		self.currenttype = None
 		self.mainLayout = QtGui.QVBoxLayout(self)
@@ -30,22 +32,25 @@ class Aggregator(QtGui.QWidget):
 		latexString = model.getRenderedView()
 		filename = "resources/"+str(id(model))+".png"
 		latexString="$"+latexString+"$"#"$\\begin{verbatim}"+latexString+"\\end{verbatim}$"
-		print latexString, 'yoyo'
-		fig = plt.figure(figsize=(2,1))#figsize=(100,40))
-		ax= fig.add_subplot(111)
-		ax.text(0.0, 0.5,latexString,fontsize=150)
-		ax.set_axis_off()
-#		Figure()
-		fig.savefig(filename,transparent=True)
-		return filename
+		canvas = LatexCanvas()
+		canvas.axes.text(-0.0, 0.5, latexString, fontsize=16)
+		#canvas.axes.title(latexString,fontsize=16,color='black')
+		canvas.axes.set_axis_off()
+		return canvas
 
-	def getImageLabel(self, filename, hbox):
+	def _restrictWidthToFit(self,scroll):
+		fw = scroll.widget().sizeHint().height()
+		sw = scroll.horizontalScrollBar().sizeHint().height()
+		w = fw + sw + 5
+		return w
+
+	def getImageLabel(self, fig, hbox):
 		imagelabel = QLabel()
-		pix = QPixmap(filename)
+		pix = QPixmap(fig)
 		#imagelabel.setMaximumHeight(100)
 		imagelabel.setMaximumSize(QSize(200,40))
-		scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
-		imagelabel.setPixmap(scaledpix)
+		# scaledpix = pix.scaled(imagelabel.size(), Qt.KeepAspectRatio)
+		imagelabel.setPixmap(pix)
 		#imagelabel.setFixedSize(QSize(150,30))
 		return imagelabel
 
@@ -53,9 +58,11 @@ class Aggregator(QtGui.QWidget):
 	def initUI(self,model):
 		hbox = QtGui.QHBoxLayout()
 		# widget = QtGui.QWidget()
-		filename = self.generateImage(model)
-
-		self.filenames.append(filename)
+		imagewidget = self.generateImage(model)
+		scrollableImage = QtGui.QScrollArea()
+		scrollableImage.setWidget(imagewidget)
+		scrollableImage.setFixedHeight(self._restrictWidthToFit(scrollableImage))
+		# self.filenames.append(filename)
 		# function = QtGui.QCheckBox(latexString)
 		function = QtGui.QCheckBox('')#str(model.expression))
 		# function.setFixedSize(QSize(30,30))
@@ -71,14 +78,15 @@ class Aggregator(QtGui.QWidget):
 		btn.setEnabled(True)
 		self.settings_btn.append(btn)
 		hbox.addWidget(function)
-		imagelabel = self.getImageLabel(filename,hbox)
-		self.imagelabels.append(imagelabel)
-		hbox.addWidget(imagelabel)
+		# imagelabel = self.generateImage()
+		self.imagelabels.append(scrollableImage)
+		hbox.addWidget(scrollableImage)
 		hbox.addWidget(btn)
 		hbox.addStretch(1)
 		_widget = QtGui.QWidget(self)
 		_widget.setLayout(hbox)
 		self.mainLayout.addWidget(_widget)
+		self.mainLayout.setAlignment(Qt.AlignTop)
 		self.setLayout(self.mainLayout)
 
 		self.connect(btn,QtCore.SIGNAL("clicked()"),self.showpop)
