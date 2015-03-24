@@ -1,11 +1,10 @@
 all: main.py
-	python main.py -style plastique
+	python graphite/main.py -style plastique
 
 test: test.py
-	python test.py
+	python tests/test.py
 
 install:
-	
-
+	python setup.py install
 clean:
 	find . -name \*.pyc -type f -delete
