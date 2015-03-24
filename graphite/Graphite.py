@@ -17,7 +17,7 @@ class Graphite(QtGui.QMainWindow):
 
 	def initUI(self):
 		self.setWindowTitle('Graphite - The Graph Plotter')				 	# Window Title
-		self.setWindowIcon(QtGui.QIcon('icon.png')) 					# App Icon
+		self.setWindowIcon(QtGui.QIcon('resources/graphite-icon .png')) 					# App Icon
 		self.initMenuBar()
 		self.initToolBar()
 		self.initStatusBar()
@@ -169,13 +169,15 @@ class Graphite(QtGui.QMainWindow):
 		self.aboutPopup.exec_()
 
 
-def main(args):
-	print sys.getfilesystemencoding(), "aayush"
-	app = QtGui.QApplication(args)
-	app.setStyle(QtGui.QStyleFactory.create('cleanlooks'))
-	plotterview = Graphite()
-	plotterview.show()
-	sys.exit(app.exec_())
 
-if __name__ == '__main__':
-	main(sys.argv)
+	@staticmethod
+	def main(args):
+		sys.stdout = open('message.dump', 'w')
+		sys.stdout = open('error.dump', 'w')
+		app = QtGui.QApplication(args)
+		app.setStyle('Cleanlooks')
+		# app.setStyle(QtGui.QStyleFactory.create('cleanlooks'))
+		plotterview = Graphite()
+		plotterview.show()
+		sys.exit(app.exec_())
+

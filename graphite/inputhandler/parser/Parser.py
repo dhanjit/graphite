@@ -24,7 +24,9 @@ class Parser(object):
 			self.expression = sympy.sympify(string)
 			print("parsing ... ", str(self.expression))
 			var_num = len(self.expression.free_symbols)
-			if var_num == 2 :
+			if 'y' in string:
+				self.type = '3D'
+			elif var_num == 2 :
 				self.type = '3D'
 			elif var_num == 1 :
 				self.type = '2D'

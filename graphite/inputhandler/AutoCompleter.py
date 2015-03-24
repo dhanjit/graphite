@@ -1,6 +1,6 @@
-from PyQt4.QtGui import QCompleter, QStringListModel
-from PyQt4.QtCore import QString
 import re
+from PyQt4.QtGui import QCompleter, QStringListModel
+from PyQt4.QtCore import *
 
 class AutoCompleter(QCompleter):
 	def __init__(self, parent=None):
