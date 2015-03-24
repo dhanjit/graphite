@@ -4,18 +4,6 @@ class Tab(QtGui.QWidget):
 	def __init__(self, aggregator, input, viewport,global_setting):
 		super(Tab,self).__init__()
 		self.initUI(aggregator, input, viewport,global_setting)
-		p = aggregator.palette()
-		clr = self.palette().color(self.backgroundRole())
-		p.setColor(aggregator.backgroundRole(),QtGui.QColor(247,247,247))
-		print '*****************************************************'
-		print '*****************************************************'
-		print '*****************************************************'
-		print '*****************************************************'
-		print '*****************************************************'
-		print '*****************************************************'
-		print '*****************************************************'
-		print QtGui.QColor(clr)
-		aggregator.setPalette(p)
 
 	def initUI(self, aggregator, input, viewport,global_setting):
 		# hbox_layout = QtGui.QHBoxLayout()
