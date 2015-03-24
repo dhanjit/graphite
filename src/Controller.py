@@ -3,7 +3,9 @@ from src.ui.aggregator.Aggregator import Aggregator
 from src.ui.input.Input import Input
 from src.ui.Tab import Tab
 from .model.ModelCreator import ModelCreator
+from PyQt4 import QtCore
 from src.globalSettings import Customize
+
 
 class Controller():
 	
@@ -11,13 +13,14 @@ class Controller():
 		self.aggregator = Aggregator(self)
 		self.input = Input(self, completer=inputhandler.completer)
 		self.viewport = Viewport()
+
 		self.global_settings = {} #just for passing to Customize, will be removed 
-		self.global_settings = Customize(self.global_settings)
+		self.settings = Customize(self)
 
 		self.tabid = -1
 		self.tabs = None
-		self.tab = Tab(self.aggregator, self.input, self.viewport,self.global_settings)
 
+		self.tab = Tab(self.aggregator, self.input, self.viewport,self.settings)
 		self.inputhandler = inputhandler
 
 	def plotInput(self, input, isfile):
@@ -43,7 +46,7 @@ class Controller():
 		print('model added to aggregator')
 
 	def updateViewport(self):
-		self.viewport.updateSettings()
+		self.viewport.updateSettings(self.global_settings)
 		print("canvas type:", self.viewport.canvastype)
 		self.viewport.updateCanvas(self.aggregator)
 		self.viewport.showCanvas()

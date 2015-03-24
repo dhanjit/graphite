@@ -22,7 +22,7 @@ class Tab(QtGui.QWidget):
 		#scrollarea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 		aggregator.setParent(scrollarea)
 
-		grid_layout.addWidget(scrollarea,0,2,4,2)
-		grid_layout.addWidget(viewport,0,4,4,8)
-		grid_layout.addWidget(global_setting,2,0,2,2)
+		grid_layout.addWidget(scrollarea,0,2,3,2)
+		grid_layout.addWidget(viewport,0,4,3,8)
+		grid_layout.addWidget(global_setting,2,0,1,2)
 		self.setLayout(grid_layout)

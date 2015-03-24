@@ -35,5 +35,5 @@ class Canvas3D(Canvas):
 		# self.axes = self.fig.add_subplot(1, 1, 1, projection='3d')
 		# self.axes.scatter(x, y, z, c='r', marker='o')
 
-	def updateSettings(self):
+	def updateSettings(self,settings):
 		self.axes.mouse_init()

@@ -11,13 +11,13 @@ class AutoCompleter(QCompleter):
 		self.initCompleter()
 
 	def splitPath(self, qstring):
-		prefix = str(qstring)
-		prefix = str(super(AutoCompleter,self).completionPrefix())
+		string = str(qstring)
+		string = str(super(AutoCompleter,self).completionPrefix())
 		regexpattern = '|'.join(map(re.escape, ['+', '-', '/', '*']))
-		suffix = re.split(regexpattern, prefix)[-1] if prefix else prefix
-		prefix = prefix[:-len(suffix)]
+		suffix = re.split(regexpattern, string)[-1] if string else string
+		prefix = string[:-len(suffix)]
 		self.prefixifyStringListModel(prefix)
-		return [QString(prefix)]
+		return [QString(string)]
 
 	def initStringList(self):
 		trigonometric = ["sin(x)", "cos(x)", "tan(x)", "cosec(x)", "sec(x)", "cot(x)", "sin(y)", "cos(y)", "tan(y)",
@@ -35,6 +35,7 @@ class AutoCompleter(QCompleter):
 
 	def prefixifyStringListModel(self, prefix):
 		stringlist = [ str(prefix+string) for string in self.stringlist ]
+		print stringlist
 		self.setModel(QStringListModel(stringlist))
 
 	def initCompleter(self):
