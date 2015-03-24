@@ -1,5 +1,5 @@
-all: main.py
-	python graphite/main.py -style plastique
+all: run.py
+	python run.py -style plastique
 
 test: test.py
 	python tests/test.py
