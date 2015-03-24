@@ -6,3 +6,8 @@ resources/*
 build/
 dist/
 *.jpg
+
+dependencies/matplotlib-1.4.3
+dependencies/sip-4.16.6
+dependencies/qmake
+dependencies/PyQt-x11-gpl-4.11.3
